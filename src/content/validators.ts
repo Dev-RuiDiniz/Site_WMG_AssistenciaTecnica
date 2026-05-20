@@ -1,11 +1,9 @@
-type TextRecord = Record<string, string>;
-
-export function hasRequiredTextFields<T extends TextRecord>(item: T, fields: Array<keyof T>) {
-  return fields.every((field) => item[field].trim().length > 0);
+export function hasRequiredTextFields<T extends object, K extends keyof T>(item: T, fields: K[]) {
+  return fields.every((field) => String(item[field] ?? '').trim().length > 0);
 }
 
-export function findEmptyTextFields<T extends TextRecord>(item: T, fields: Array<keyof T>) {
-  return fields.filter((field) => item[field].trim().length === 0);
+export function findEmptyTextFields<T extends object, K extends keyof T>(item: T, fields: K[]) {
+  return fields.filter((field) => String(item[field] ?? '').trim().length === 0);
 }
 
 export function hasUniqueSlugs(items: Array<{ slug: string }>) {
