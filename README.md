@@ -4,7 +4,7 @@
 
 Projeto do site institucional da WMG Assistência Técnica.
 
-Esta base foi criada como fundação técnica do projeto, preparada para evoluir com páginas, componentes reutilizáveis, testes automatizados, documentação e fluxo de Pull Request.
+Esta base foi criada como fundação técnica do projeto, preparada para evoluir com páginas, componentes reutilizáveis, design system, testes automatizados, documentação e fluxo de Pull Request.
 
 ## Objetivo
 
@@ -19,15 +19,17 @@ Disponibilizar uma aplicação web moderna, testável e documentada para apresen
 - Vitest
 - Testing Library
 - ESLint
+- Prettier
 
 ## Arquitetura inicial
 
-O projeto segue uma estrutura simples de frontend, com separação entre aplicação, componentes, design system, estilos e configuração de testes.
+O projeto segue uma estrutura simples de frontend, com separação entre aplicação, componentes, design system, estilos, documentação e testes.
 
 ```text
 .
 ├── docs
-│   └── design-system.md
+│   ├── design-system.md
+│   └── quality.md
 ├── src
 │   ├── components
 │   │   └── ui
@@ -42,7 +44,8 @@ O projeto segue uma estrutura simples de frontend, com separação entre aplica�
 │   ├── styles
 │   │   └── global.css
 │   ├── test
-│   │   └── setup.ts
+│   │   ├── setup.ts
+│   │   └── quality-scripts.test.ts
 │   ├── App.test.tsx
 │   ├── App.tsx
 │   └── main.tsx
@@ -73,6 +76,35 @@ A documentação completa está em:
 
 ```text
 docs/design-system.md
+```
+
+## Qualidade de código
+
+A base de qualidade foi configurada na TASK-03 com TypeScript strict, ESLint, Prettier e scripts de validação.
+
+Comandos principais:
+
+```bash
+npm run lint
+npm run typecheck
+npm run format
+npm run format:check
+npm test
+npm run build
+npm run check
+```
+
+O comando recomendado antes de abrir PR é:
+
+```bash
+npm run check
+npm run build
+```
+
+A documentação completa está em:
+
+```text
+docs/quality.md
 ```
 
 ## Como rodar localmente
@@ -109,6 +141,24 @@ Execute lint:
 npm run lint
 ```
 
+Execute type-check:
+
+```bash
+npm run typecheck
+```
+
+Verifique formatação:
+
+```bash
+npm run format:check
+```
+
+Execute a validação completa:
+
+```bash
+npm run check
+```
+
 Execute build:
 
 ```bash
@@ -137,8 +187,9 @@ Exemplos:
 
 ```text
 feat(ui): cria componentes base do design system WMG
-test(ui): adiciona testes dos componentes base
-docs(ui): documenta design tokens da WMG
+test(quality): adiciona teste dos scripts de qualidade
+build(quality): configura prettier no projeto
+docs(quality): documenta fluxo de validacao do codigo
 ```
 
 ## TDD
@@ -149,7 +200,7 @@ Este projeto deve seguir TDD sempre que possível:
 2. Implementar o mínimo necessário para passar.
 3. Refatorar mantendo testes verdes.
 4. Atualizar documentação.
-5. Validar com testes, lint e build.
+5. Validar com testes, lint, type-check e build.
 
 ## Segurança e variáveis de ambiente
 
