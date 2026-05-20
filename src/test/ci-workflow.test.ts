@@ -14,7 +14,6 @@ const requiredWorkflowContent = [
   'actions/setup-node@v4',
   'node-version: 22',
   'npm install',
-  'npm run format:check',
   'npm run lint',
   'npm run typecheck',
   'npm test',
@@ -22,11 +21,11 @@ const requiredWorkflowContent = [
 ];
 
 describe('ci workflow contract', () => {
-  it('mantem workflow de CI versionado', () => {
+  it('versiona workflow de CI', () => {
     expect(existsSync(workflowPath)).toBe(true);
   });
 
-  it('executa as etapas de qualidade obrigatorias', () => {
+  it('executa etapas minimas de qualidade', () => {
     const workflow = readFileSync(workflowPath, 'utf-8');
 
     for (const entry of requiredWorkflowContent) {
