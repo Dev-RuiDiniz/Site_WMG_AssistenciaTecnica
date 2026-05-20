@@ -2,13 +2,13 @@
 
 ## Visão geral
 
-Projeto do site institucional da WMG Assistência Técnica.
+Projeto do site institucional da WMG Assistência Técnica, criado para apresentar serviços técnicos industriais e servir como base para evolução comercial da presença digital da empresa.
 
-Esta base foi criada como fundação técnica do projeto, preparada para evoluir com páginas, componentes reutilizáveis, design system, testes automatizados, documentação e fluxo de Pull Request.
+A aplicação atual é um frontend estático com React, Vite, TypeScript, Tailwind CSS, Vitest, Testing Library, ESLint e Prettier.
 
 ## Objetivo
 
-Disponibilizar uma aplicação web moderna, testável e documentada para apresentação dos serviços da WMG Assistência Técnica.
+Disponibilizar uma aplicação web moderna, testável, documentada e preparada para evolução com páginas institucionais, componentes reutilizáveis, design system, validações automatizadas e fluxo de Pull Request.
 
 ## Stack técnica
 
@@ -21,35 +21,39 @@ Disponibilizar uma aplicação web moderna, testável e documentada para apresen
 - ESLint
 - Prettier
 
-## Arquitetura inicial
+## Documentação disponível
 
-O projeto segue uma estrutura simples de frontend, com separação entre aplicação, componentes, design system, estilos, documentação e testes.
+| Documento | Finalidade |
+| --- | --- |
+| `docs/arquitetura.md` | Arquitetura inicial, estrutura, decisões técnicas e limites atuais |
+| `docs/deploy.md` | Processo inicial de build, publicação, variáveis e rollback |
+| `docs/design-system.md` | Tokens visuais, componentes base e regras de uso do design system |
+| `docs/quality.md` | Scripts de qualidade, lint, type-check, Prettier e fluxo antes de PR |
+
+## Estrutura de pastas
 
 ```text
 .
 ├── docs
+│   ├── arquitetura.md
+│   ├── deploy.md
 │   ├── design-system.md
 │   └── quality.md
 ├── src
 │   ├── components
 │   │   └── ui
-│   │       ├── Button.tsx
-│   │       ├── Button.test.tsx
-│   │       ├── Card.tsx
-│   │       ├── Card.test.tsx
-│   │       ├── Container.tsx
-│   │       └── SectionTitle.tsx
 │   ├── design-system
 │   │   └── tokens.ts
 │   ├── styles
 │   │   └── global.css
 │   ├── test
-│   │   ├── setup.ts
-│   │   └── quality-scripts.test.ts
+│   │   ├── documentation.test.ts
+│   │   ├── quality-scripts.test.ts
+│   │   └── setup.ts
 │   ├── App.test.tsx
 │   ├── App.tsx
 │   └── main.tsx
-├── index.html
+├── .env.example
 ├── package.json
 ├── postcss.config.js
 ├── tailwind.config.ts
@@ -57,54 +61,6 @@ O projeto segue uma estrutura simples de frontend, com separação entre aplica�
 ├── tsconfig.app.json
 ├── tsconfig.node.json
 └── vite.config.ts
-```
-
-## Design System WMG
-
-A identidade visual inicial foi baseada no banner WMG usado na TASK-02.
-
-Principais decisões visuais:
-
-- fundo principal em navy escuro;
-- azul e ciano para tecnologia, circuitos e detalhes;
-- verde-limão para CTAs e destaques comerciais;
-- texto branco em fundos escuros;
-- cards e botões reutilizáveis;
-- foco em visual industrial, tecnológico e de alto contraste.
-
-A documentação completa está em:
-
-```text
-docs/design-system.md
-```
-
-## Qualidade de código
-
-A base de qualidade foi configurada na TASK-03 com TypeScript strict, ESLint, Prettier e scripts de validação.
-
-Comandos principais:
-
-```bash
-npm run lint
-npm run typecheck
-npm run format
-npm run format:check
-npm test
-npm run build
-npm run check
-```
-
-O comando recomendado antes de abrir PR é:
-
-```bash
-npm run check
-npm run build
-```
-
-A documentação completa está em:
-
-```text
-docs/quality.md
 ```
 
 ## Como rodar localmente
@@ -121,49 +77,124 @@ Execute o ambiente de desenvolvimento:
 npm run dev
 ```
 
-## Como executar testes
+Abra o endereço informado pelo Vite no navegador.
 
-```bash
-npm test
+## Variáveis de ambiente
+
+O projeto possui um arquivo de referência:
+
+```text
+.env.example
 ```
 
-Para execução em modo observação:
+Para sobrescrever valores localmente:
 
 ```bash
-npm run test:watch
+cp .env.example .env.local
 ```
 
-## Como validar qualidade
+As variáveis públicas do Vite devem usar prefixo `VITE_`.
 
-Execute lint:
+Não versionar secrets, tokens, senhas, chaves privadas ou credenciais reais.
 
-```bash
-npm run lint
-```
+## Scripts disponíveis
 
-Execute type-check:
+| Comando | Finalidade |
+| --- | --- |
+| `npm run dev` | Inicia o servidor local de desenvolvimento |
+| `npm test` | Executa os testes automatizados com Vitest |
+| `npm run test:watch` | Executa testes em modo observação |
+| `npm run lint` | Executa ESLint |
+| `npm run typecheck` | Executa TypeScript sem emitir arquivos |
+| `npm run format` | Formata arquivos com Prettier |
+| `npm run format:check` | Verifica formatação sem alterar arquivos |
+| `npm run check` | Executa format check, lint, type-check e testes |
+| `npm run build` | Gera build de produção |
+| `npm run preview` | Executa preview local do build |
 
-```bash
-npm run typecheck
-```
+## Qualidade de código
 
-Verifique formatação:
-
-```bash
-npm run format:check
-```
-
-Execute a validação completa:
+Antes de abrir ou atualizar uma PR, execute:
 
 ```bash
 npm run check
-```
-
-Execute build:
-
-```bash
 npm run build
 ```
+
+A documentação completa está em:
+
+```text
+docs/quality.md
+```
+
+## Design system WMG
+
+A identidade visual inicial foi baseada no banner WMG usado na TASK-02.
+
+Princípios visuais:
+
+- fundo principal em navy escuro;
+- azul e ciano para tecnologia, circuitos e detalhes;
+- verde-limão para CTAs e destaques comerciais;
+- texto branco em fundos escuros;
+- componentes reutilizáveis para evitar estilos soltos.
+
+A documentação completa está em:
+
+```text
+docs/design-system.md
+```
+
+## Arquitetura
+
+O projeto atual é uma SPA estática com React + Vite.
+
+Não há backend, banco de dados, autenticação, autorização ou APIs internas nesta fase.
+
+A documentação completa está em:
+
+```text
+docs/arquitetura.md
+```
+
+## Deploy
+
+O build de produção gera arquivos estáticos na pasta:
+
+```text
+dist/
+```
+
+Comandos base:
+
+```bash
+npm install
+npm run check
+npm run build
+```
+
+A documentação completa está em:
+
+```text
+docs/deploy.md
+```
+
+## TDD
+
+Este projeto deve seguir TDD sempre que possível:
+
+1. Criar ou ajustar teste primeiro.
+2. Implementar o mínimo necessário para passar.
+3. Refatorar mantendo testes verdes.
+4. Atualizar documentação.
+5. Validar com scripts de qualidade.
+6. Abrir Pull Request para revisão.
+
+## Segurança
+
+Secrets, tokens, senhas, chaves de API e credenciais reais nunca devem ser versionados.
+
+Quando houver backend, APIs, autenticação, uploads, dados pessoais ou integrações externas, a documentação deve ser atualizada com análise de segurança, autorização, logs, retenção e LGPD.
 
 ## Fluxo de desenvolvimento
 
@@ -187,26 +218,10 @@ Exemplos:
 
 ```text
 feat(ui): cria componentes base do design system WMG
-test(quality): adiciona teste dos scripts de qualidade
+test(docs): adiciona teste de contrato da documentacao
+docs(readme): consolida documentacao inicial do projeto
 build(quality): configura prettier no projeto
-docs(quality): documenta fluxo de validacao do codigo
 ```
-
-## TDD
-
-Este projeto deve seguir TDD sempre que possível:
-
-1. Criar ou ajustar teste primeiro.
-2. Implementar o mínimo necessário para passar.
-3. Refatorar mantendo testes verdes.
-4. Atualizar documentação.
-5. Validar com testes, lint, type-check e build.
-
-## Segurança e variáveis de ambiente
-
-Não há variáveis de ambiente obrigatórias nesta entrega inicial.
-
-Secrets, tokens, senhas e chaves de API nunca devem ser versionados. Quando necessários, devem ser documentados em `.env.example` sem valores reais.
 
 ## Pull Requests
 
@@ -214,8 +229,10 @@ Cada tarefa deve gerar um Pull Request com:
 
 - resumo da alteração;
 - contexto e motivação;
-- arquivos alterados;
+- arquivos modificados;
+- commits realizados;
 - como testar;
 - evidências de validação;
 - riscos;
+- estratégia de rollback;
 - checklist.
