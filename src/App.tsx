@@ -2,6 +2,7 @@ import { Card } from './components/ui/Card';
 import { Button } from './components/ui/Button';
 import { Container } from './components/ui/Container';
 import { SectionTitle } from './components/ui/SectionTitle';
+import { SiteLayout } from './components/layout/SiteLayout';
 
 const services = [
   {
@@ -20,8 +21,9 @@ const services = [
 
 function App() {
   return (
-    <main className="min-h-screen bg-slate-50 text-wmg-graphite-900">
+    <SiteLayout>
       <section
+        id="inicio"
         className="relative overflow-hidden bg-wmg-hero text-white"
         aria-labelledby="hero-title"
       >
@@ -49,9 +51,7 @@ function App() {
           </div>
 
           <div className="flex flex-wrap gap-4" aria-label="Ações principais">
-            <Button href="mailto:suporte@wmgassistenciatecnica.com.br">
-              Solicitar avaliação técnica agora
-            </Button>
+            <Button href="#contato">Solicitar avaliação técnica agora</Button>
             <Button href="#servicos" variant="secondary">
               Ver serviços
             </Button>
@@ -60,7 +60,7 @@ function App() {
       </section>
 
       <Container className="py-16 md:py-24">
-        <section id="servicos" className="grid gap-10" aria-labelledby="services-title">
+        <section id="servicos" className="grid gap-10 scroll-mt-24" aria-labelledby="services-title">
           <SectionTitle
             eyebrow="Serviços"
             title="Componentes reutilizáveis com identidade visual WMG"
@@ -76,8 +76,36 @@ function App() {
             ))}
           </div>
         </section>
+
+        <section id="sobre" className="mt-20 scroll-mt-24" aria-labelledby="about-title">
+          <SectionTitle
+            eyebrow="Sobre"
+            title="Base preparada para páginas comerciais"
+            description="O layout global organiza a experiência institucional para evoluir com novas seções, campanhas e páginas de serviço sem duplicar navegação ou estrutura."
+          />
+        </section>
+
+        <section id="contato" className="mt-20 scroll-mt-24" aria-labelledby="contact-title">
+          <Card variant="highlight">
+            <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.18em] text-wmg-lime-500">
+              Contato
+            </p>
+            <h2 id="contact-title" className="text-3xl font-black text-white md:text-4xl">
+              Solicite uma avaliação técnica
+            </h2>
+            <p className="mt-4 max-w-3xl leading-8 text-slate-200">
+              Entre em contato para diagnóstico, manutenção preventiva e suporte especializado para
+              equipamentos industriais.
+            </p>
+            <div className="mt-6">
+              <Button href="mailto:suporte@wmgassistenciatecnica.com.br">
+                Falar com suporte
+              </Button>
+            </div>
+          </Card>
+        </section>
       </Container>
-    </main>
+    </SiteLayout>
   );
 }
 
