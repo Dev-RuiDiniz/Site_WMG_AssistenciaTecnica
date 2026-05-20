@@ -18,6 +18,7 @@ Projeto do site institucional da WMG Assistência Técnica, criado para apresent
 | Documento | Finalidade |
 | --- | --- |
 | `docs/arquitetura.md` | Arquitetura inicial, estrutura e decisões técnicas |
+| `docs/content.md` | Conteúdo versionado, contratos, serviços, equipamentos e CTAs |
 | `docs/deploy.md` | Build, publicação, variáveis e rollback |
 | `docs/design-system.md` | Tokens visuais e componentes base |
 | `docs/layout.md` | Header, footer, layout global, navegação e mobile |
@@ -29,6 +30,7 @@ Projeto do site institucional da WMG Assistência Técnica, criado para apresent
 .
 ├── docs
 │   ├── arquitetura.md
+│   ├── content.md
 │   ├── deploy.md
 │   ├── design-system.md
 │   ├── layout.md
@@ -37,6 +39,7 @@ Projeto do site institucional da WMG Assistência Técnica, criado para apresent
 │   ├── components
 │   │   ├── layout
 │   │   └── ui
+│   ├── content
 │   ├── design-system
 │   ├── styles
 │   ├── test
@@ -83,6 +86,21 @@ Variáveis públicas do Vite devem usar prefixo `VITE_`. Não versionar secrets,
 | `npm run build` | Gera build de produção |
 | `npm run preview` | Executa preview local do build |
 
+## Conteúdo versionado
+
+Textos comerciais e institucionais ficam em `src/content`.
+
+Conteúdos centralizados:
+
+- dados da empresa;
+- serviços;
+- equipamentos;
+- CTAs;
+- mensagens da página inicial;
+- navegação.
+
+Documentação completa: `docs/content.md`.
+
 ## Layout e navegação
 
 A aplicação possui layout global com header, navegação principal, menu mobile, conteúdo principal e footer institucional.
@@ -93,8 +111,6 @@ Seções base:
 - `#servicos`
 - `#sobre`
 - `#contato`
-
-O link `Serviços` aponta para `#servicos`.
 
 Documentação completa: `docs/layout.md`.
 
@@ -146,14 +162,6 @@ Documentação completa: `docs/deploy.md`.
 
 Secrets, tokens, senhas, chaves de API e credenciais reais nunca devem ser versionados.
 
-## Fluxo de desenvolvimento
-
-Use branches por tarefa e evite commits diretos na `main`.
-
-```bash
-git checkout -b feature/nome-da-tarefa
-```
-
 ## Commits
 
 Usar Conventional Commits em português do Brasil:
@@ -165,11 +173,7 @@ tipo(escopo): descrição curta em português
 Exemplos:
 
 ```text
-feat(layout): cria header responsivo com navegacao
-test(layout): adiciona testes de navegacao e estrutura base
-docs(layout): documenta layout base e navegacao
+feat(content): adiciona conteudo versionado da WMG
+test(content): valida campos obrigatorios dos servicos
+docs(content): documenta estrutura de conteudo versionado
 ```
-
-## Pull Requests
-
-Cada tarefa deve gerar PR com resumo, contexto, arquivos modificados, commits, como testar, evidências, riscos, rollback e checklist.

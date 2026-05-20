@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { ctaContent, navigationItems } from '../../content';
 import { Button } from '../ui/Button';
 import { Container } from '../ui/Container';
-import { navigationItems } from './navigation';
+
+const requestEvaluationCta = ctaContent.find((cta) => cta.id === 'request-evaluation');
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,7 +40,7 @@ export function Header() {
         </nav>
 
         <div className="hidden md:block">
-          <Button href="#contato">Solicitar avaliação</Button>
+          {requestEvaluationCta ? <Button href={requestEvaluationCta.href}>{requestEvaluationCta.label}</Button> : null}
         </div>
 
         <button
@@ -70,9 +72,11 @@ export function Header() {
                 {item.label}
               </a>
             ))}
-            <Button href="#contato" className="mt-2">
-              Solicitar avaliação
-            </Button>
+            {requestEvaluationCta ? (
+              <Button href={requestEvaluationCta.href} className="mt-2">
+                {requestEvaluationCta.label}
+              </Button>
+            ) : null}
           </Container>
         </nav>
       ) : null}

@@ -1,16 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
+import { homeContent, servicesContent } from './content';
 
 describe('App', () => {
   it('renderiza a identidade principal da WMG Assistência Técnica', () => {
     render(<App />);
 
     expect(
-      screen.getByRole('heading', { name: /wmg assistência técnica/i }),
+      screen.getByRole('heading', { name: new RegExp(homeContent.hero.title, 'i') }),
     ).toBeInTheDocument();
-    expect(
-      screen.getByText(/a wmg coloca sua produção de volta em operação/i),
-    ).toBeInTheDocument();
+    expect(screen.getByText(homeContent.hero.subtitle)).toBeInTheDocument();
     expect(
       screen.getAllByRole('link', { name: /solicitar avaliação técnica agora/i })[0],
     ).toBeInTheDocument();
@@ -30,6 +29,19 @@ describe('App', () => {
     expect(document.querySelector('#contato')).toBeInTheDocument();
   });
 
+  it('renderiza servicos a partir do conteudo versionado', () => {
+    render(<App />);
+
+    expect(
+      screen.getByRole('heading', { name: homeContent.servicesSection.title }),
+    ).toBeInTheDocument();
+
+    for (const service of servicesContent) {
+      expect(screen.getByRole('heading', { name: service.title })).toBeInTheDocument();
+      expect(screen.getByText(service.description)).toBeInTheDocument();
+    }
+  });
+
   it('aplica tokens visuais WMG nos elementos principais', () => {
     render(<App />);
 
@@ -37,7 +49,7 @@ describe('App', () => {
       name: /solicitar avaliação técnica agora/i,
     })[0];
     const servicesSection = screen.getByRole('heading', {
-      name: /componentes reutilizáveis com identidade visual wmg/i,
+      name: homeContent.servicesSection.title,
     });
 
     expect(primaryAction).toHaveClass('bg-wmg-lime-500');
