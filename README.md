@@ -18,6 +18,7 @@ Projeto do site institucional da WMG Assistência Técnica, criado para apresent
 | Documento | Finalidade |
 | --- | --- |
 | `docs/arquitetura.md` | Arquitetura inicial, estrutura e decisões técnicas |
+| `docs/ci.md` | Pipeline inicial de GitHub Actions para PRs e push na main |
 | `docs/content.md` | Conteúdo versionado, contratos, serviços, equipamentos e CTAs |
 | `docs/deploy.md` | Build, publicação, variáveis e rollback |
 | `docs/design-system.md` | Tokens visuais e componentes base |
@@ -30,6 +31,7 @@ Projeto do site institucional da WMG Assistência Técnica, criado para apresent
 .
 ├── docs
 │   ├── arquitetura.md
+│   ├── ci.md
 │   ├── content.md
 │   ├── deploy.md
 │   ├── design-system.md
@@ -113,6 +115,23 @@ Seções base:
 - `#contato`
 
 Documentação completa: `docs/layout.md`.
+
+## CI/CD
+
+O projeto possui workflow inicial em `.github/workflows/ci.yml`, executado em Pull Requests e push na `main`.
+
+Etapas do CI:
+
+```bash
+npm install
+npm run format:check
+npm run lint
+npm run typecheck
+npm test
+npm run build
+```
+
+Documentação completa: `docs/ci.md`.
 
 ## Qualidade
 
