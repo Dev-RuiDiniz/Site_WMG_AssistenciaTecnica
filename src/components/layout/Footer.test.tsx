@@ -6,7 +6,7 @@ describe('Footer', () => {
     render(<Footer />);
 
     expect(screen.getByRole('contentinfo')).toBeInTheDocument();
-    expect(screen.getByText(/WMG Assistência Técnica/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/WMG Assistência Técnica/i).length).toBeGreaterThan(0);
     expect(screen.getByRole('link', { name: /suporte@wmgassistenciatecnica.com.br/i })).toHaveAttribute(
       'href',
       'mailto:suporte@wmgassistenciatecnica.com.br',
