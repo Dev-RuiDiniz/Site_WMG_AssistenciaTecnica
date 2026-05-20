@@ -15,19 +15,30 @@ Disponibilizar uma aplicação web moderna, testável e documentada para apresen
 - React
 - Vite
 - TypeScript
+- Tailwind CSS
 - Vitest
 - Testing Library
 - ESLint
 
 ## Arquitetura inicial
 
-O projeto segue uma estrutura simples de frontend, com separação entre aplicação, componentes, estilos e configuração de testes.
+O projeto segue uma estrutura simples de frontend, com separação entre aplicação, componentes, design system, estilos e configuração de testes.
 
 ```text
 .
+├── docs
+│   └── design-system.md
 ├── src
 │   ├── components
-│   │   └── FeatureCard.tsx
+│   │   └── ui
+│   │       ├── Button.tsx
+│   │       ├── Button.test.tsx
+│   │       ├── Card.tsx
+│   │       ├── Card.test.tsx
+│   │       ├── Container.tsx
+│   │       └── SectionTitle.tsx
+│   ├── design-system
+│   │   └── tokens.ts
 │   ├── styles
 │   │   └── global.css
 │   ├── test
@@ -37,11 +48,31 @@ O projeto segue uma estrutura simples de frontend, com separação entre aplica�
 │   └── main.tsx
 ├── index.html
 ├── package.json
+├── postcss.config.js
+├── tailwind.config.ts
 ├── tsconfig.json
 ├── tsconfig.app.json
 ├── tsconfig.node.json
-├── vite.config.ts
-└── eslint.config.js
+└── vite.config.ts
+```
+
+## Design System WMG
+
+A identidade visual inicial foi baseada no banner WMG usado na TASK-02.
+
+Principais decisões visuais:
+
+- fundo principal em navy escuro;
+- azul e ciano para tecnologia, circuitos e detalhes;
+- verde-limão para CTAs e destaques comerciais;
+- texto branco em fundos escuros;
+- cards e botões reutilizáveis;
+- foco em visual industrial, tecnológico e de alto contraste.
+
+A documentação completa está em:
+
+```text
+docs/design-system.md
 ```
 
 ## Como rodar localmente
@@ -105,9 +136,9 @@ tipo(escopo): descrição curta em português
 Exemplos:
 
 ```text
-feat(app): cria estrutura inicial do site institucional
-test(app): adiciona teste inicial da pagina principal
-docs(readme): atualiza documentacao inicial do projeto
+feat(ui): cria componentes base do design system WMG
+test(ui): adiciona testes dos componentes base
+docs(ui): documenta design tokens da WMG
 ```
 
 ## TDD
@@ -130,10 +161,10 @@ Secrets, tokens, senhas e chaves de API nunca devem ser versionados. Quando nece
 
 Cada tarefa deve gerar um Pull Request com:
 
-- Resumo da alteração.
-- Contexto e motivação.
-- Arquivos alterados.
-- Como testar.
-- Evidências de validação.
-- Riscos.
-- Checklist.
+- resumo da alteração;
+- contexto e motivação;
+- arquivos alterados;
+- como testar;
+- evidências de validação;
+- riscos;
+- checklist.
