@@ -1,7 +1,9 @@
 import { existsSync, readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const projectRoot = resolve(__dirname, '../..');
+const currentFile = fileURLToPath(import.meta.url);
+const projectRoot = resolve(dirname(currentFile), '../..');
 
 const requiredFiles = [
   'README.md',
