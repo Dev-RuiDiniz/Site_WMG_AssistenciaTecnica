@@ -51,16 +51,19 @@ describe('versioned content', () => {
     }
 
     for (const item of navigationItems) {
-      expect(findEmptyTextFields(item, ['label', href'])).toEqual([]);
+      expect(findEmptyTextFields(item, ['label', 'href'])).toEqual([]);
     }
   });
 
-  it('mantem conteudo da pagina inicial conectado a CTAs existentes', () => {
-    const ctaIds = ctaContent.map((cta) => cta.id);
+  it(
+    'mantem conteudo da pagina inicial conectado a CTAs existentes',
+    () => {
+      const ctaIds = ctaContent.map((cta) => cta.id);
 
-    expect(homeContent.hero.title).toBe(companyContent.name);
-    expect(ctaIds).toContain(homeContent.hero.primaryCtaId);
-    expect(ctaIds).toContain(homeContent.hero.secondaryCtaId);
-    expect(ctaIds).toContain(homeContent.contactSection.ctaId);
-  });
+      expect(homeContent.hero.title).toBe(companyContent.name);
+      expect(ctaIds).toContain(homeContent.hero.primaryCtaId);
+      expect(ctaIds).toContain(homeContent.hero.secondaryCtaId);
+      expect(ctaIds).toContain(homeContent.contactSection.ctaId);
+    },
+  );
 });

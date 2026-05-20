@@ -47,7 +47,8 @@ export default {
         'wmg-card': '0 24px 80px rgba(3, 17, 31, 0.28)',
       },
       backgroundImage: {
-        'wmg-radial': 'radial-gradient(circle at top right, rgba(32, 215, 255, 0.24), transparent 32%)',
+        'wmg-radial':
+          'radial-gradient(circle at top right, rgba(32, 215, 255, 0.24), transparent 32%)',
         'wmg-hero': 'linear-gradient(135deg, #03111f 0%, #061a2e 52%, #082744 100%)',
       },
     },
