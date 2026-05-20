@@ -1,16 +1,15 @@
+import { companyContent, ctaContent, navigationItems } from '../../content';
 import { Container } from '../ui/Container';
-import { contactLinks, navigationItems } from './navigation';
+
+const supportCta = ctaContent.find((cta) => cta.id === 'talk-to-support');
 
 export function Footer() {
   return (
     <footer className="bg-wmg-navy-950 text-white" aria-label="Rodapé institucional">
       <Container className="grid gap-10 py-12 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
-          <p className="text-xl font-black">WMG Assistência Técnica</p>
-          <p className="mt-4 max-w-md leading-7 text-slate-300">
-            Especialistas em manutenção industrial, inversores, placas eletrônicas, servo drives,
-            IHMs, CLPs e painéis elétricos industriais.
-          </p>
+          <p className="text-xl font-black">{companyContent.name}</p>
+          <p className="mt-4 max-w-md leading-7 text-slate-300">{companyContent.description}</p>
         </div>
 
         <nav aria-label="Links rápidos do rodapé">
@@ -34,26 +33,27 @@ export function Footer() {
           </p>
           <ul className="grid gap-3 text-slate-300">
             <li>
-              <a className="transition hover:text-wmg-lime-500" href={`mailto:${contactLinks.email}`}>
-                {contactLinks.email}
+              <a className="transition hover:text-wmg-lime-500" href={supportCta?.href ?? `mailto:${companyContent.email}`}>
+                {companyContent.email}
               </a>
             </li>
             <li>
               <a
                 className="transition hover:text-wmg-lime-500"
-                href={`tel:${contactLinks.phone.replace(/\D/g, '')}`}
+                href={`tel:${companyContent.phone.replace(/\D/g, '')}`}
               >
-                {contactLinks.phone}
+                {companyContent.phone}
               </a>
             </li>
-            <li>{contactLinks.location}</li>
+            <li>{companyContent.location}</li>
+            <li>{companyContent.website}</li>
           </ul>
         </address>
       </Container>
 
       <div className="border-t border-wmg-cyan-400/20">
         <Container className="py-5 text-sm text-slate-400">
-          © WMG Assistência Técnica. Documentação, qualidade e evolução contínua do site.
+          © {companyContent.name}. Documentação, qualidade e evolução contínua do site.
         </Container>
       </div>
     </footer>
