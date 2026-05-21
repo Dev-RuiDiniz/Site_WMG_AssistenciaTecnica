@@ -27,7 +27,7 @@ describe('App', () => {
     expect(document.querySelector('#contato')).toBeInTheDocument();
   });
 
-  it('renderiza servicos a partir do conteudo versionado', () => {
+  it('renderiza cards de servicos com demanda, resposta e CTA', () => {
     render(<App />);
 
     expect(
@@ -35,8 +35,23 @@ describe('App', () => {
     ).toBeInTheDocument();
 
     for (const service of servicesContent) {
+      const serviceCta = ctaContent.find((cta) => cta.id === service.ctaId);
+
       expect(screen.getByRole('heading', { name: service.title })).toBeInTheDocument();
       expect(screen.getByText(service.description)).toBeInTheDocument();
+      expect(screen.getByText(service.demand)).toBeInTheDocument();
+      expect(screen.getByText(service.response)).toBeInTheDocument();
+      expect(serviceCta).toBeDefined();
+
+      const serviceCard = screen.getByText(service.description).closest('article');
+      expect(serviceCard).toBeInTheDocument();
+
+      if (serviceCard && serviceCta) {
+        expect(within(serviceCard).getByRole('link', { name: serviceCta.label })).toHaveAttribute(
+          'href',
+          serviceCta.href,
+        );
+      }
     }
   });
 
