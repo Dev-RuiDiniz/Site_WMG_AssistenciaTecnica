@@ -26,13 +26,30 @@ describe('versioned content', () => {
     ).toBe(true);
   });
 
-  it('mantem servicos com campos obrigatorios e slugs unicos', () => {
-    expect(servicesContent.length).toBeGreaterThan(0);
+  it('mantem servicos com contratos comerciais, CTAs validos e slugs unicos', () => {
+    const ctaIds = ctaContent.map((cta) => cta.id);
+    const expectedServiceSlugs = [
+      'diagnostico-tecnico',
+      'manutencao-corretiva',
+      'manutencao-preventiva',
+      'placas-eletronicas',
+      'drives-inversores-servos',
+      'campo-laboratorio',
+    ];
+
+    expect(servicesContent.length).toBeGreaterThanOrEqual(expectedServiceSlugs.length);
     expect(hasUniqueSlugs(servicesContent)).toBe(true);
     expect(findDuplicateSlugs(servicesContent)).toEqual([]);
 
+    for (const slug of expectedServiceSlugs) {
+      expect(servicesContent.map((service) => service.slug)).toContain(slug);
+    }
+
     for (const service of servicesContent) {
-      expect(findEmptyTextFields(service, ['slug', 'title', 'description'])).toEqual([]);
+      expect(
+        findEmptyTextFields(service, ['slug', 'title', 'description', 'demand', 'response', 'ctaId']),
+      ).toEqual([]);
+      expect(ctaIds).toContain(service.ctaId);
     }
   });
 
@@ -55,15 +72,14 @@ describe('versioned content', () => {
     }
   });
 
-  it(
-    'mantem conteudo da pagina inicial conectado a CTAs existentes',
-    () => {
-      const ctaIds = ctaContent.map((cta) => cta.id);
+  it('mantem conteudo da pagina inicial conectado a CTAs existentes', () => {
+    const ctaIds = ctaContent.map((cta) => cta.id);
 
-      expect(homeContent.hero.title).toBe(companyContent.name);
-      expect(ctaIds).toContain(homeContent.hero.primaryCtaId);
-      expect(ctaIds).toContain(homeContent.hero.secondaryCtaId);
-      expect(ctaIds).toContain(homeContent.contactSection.ctaId);
-    },
-  );
+    expect(homeContent.hero.title).toBe(companyContent.name);
+    expect(ctaIds).toContain(homeContent.hero.primaryCtaId);
+    expect(ctaIds).toContain(homeContent.hero.secondaryCtaId);
+    expect(ctaIds).toContain(homeContent.contactSection.ctaId);
+    expect(ctaIds).toContain(homeContent.finalCtaSection.primaryCtaId);
+    expect(ctaIds).toContain(homeContent.finalCtaSection.secondaryCtaId);
+  });
 });
