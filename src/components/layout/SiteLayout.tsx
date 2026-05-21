@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { FloatingWhatsAppButton } from '../whatsapp/FloatingWhatsAppButton';
 import { Footer } from './Footer';
 import { Header } from './Header';
 
@@ -12,6 +13,7 @@ export function SiteLayout({ children }: SiteLayoutProps) {
       <Header />
       <main>{children}</main>
       <Footer />
+      <FloatingWhatsAppButton />
     </div>
   );
 }
