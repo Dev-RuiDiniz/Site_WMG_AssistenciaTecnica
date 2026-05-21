@@ -1,4 +1,5 @@
 import type { CTAContent } from './types';
+import { buildWhatsAppLink, defaultWhatsAppMessage } from '../components/whatsapp/whatsappLink';
 import { companyContent } from './company';
 
 export const ctaContent: CTAContent[] = [
@@ -11,8 +12,8 @@ export const ctaContent: CTAContent[] = [
   {
     id: 'talk-to-support',
     label: 'Falar com suporte',
-    href: `mailto:${companyContent.email}`,
-    purpose: 'Abrir contato por e-mail com a equipe de suporte.',
+    href: buildWhatsAppLink(companyContent.phone, defaultWhatsAppMessage),
+    purpose: 'Abrir conversa no WhatsApp com mensagem pré-preenchida para a equipe de suporte.',
   },
   {
     id: 'view-services',
