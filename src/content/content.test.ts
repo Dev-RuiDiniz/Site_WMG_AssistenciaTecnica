@@ -53,12 +53,29 @@ describe('versioned content', () => {
     }
   });
 
-  it('mantem equipamentos com campos obrigatorios e slugs unicos', () => {
-    expect(equipmentContent.length).toBeGreaterThan(0);
+  it('mantem equipamentos atendidos com categorias obrigatorias e descricoes claras', () => {
+    const expectedEquipmentSlugs = [
+      'placas-eletronicas',
+      'inversores',
+      'servo-drives',
+      'plcs-clps',
+      'ihms',
+      'cncs',
+      'fontes',
+      'paineis-eletricos',
+    ];
+
+    expect(equipmentContent.length).toBeGreaterThanOrEqual(expectedEquipmentSlugs.length);
     expect(hasUniqueSlugs(equipmentContent)).toBe(true);
+    expect(findDuplicateSlugs(equipmentContent)).toEqual([]);
+
+    for (const slug of expectedEquipmentSlugs) {
+      expect(equipmentContent.map((equipment) => equipment.slug)).toContain(slug);
+    }
 
     for (const equipment of equipmentContent) {
       expect(findEmptyTextFields(equipment, ['slug', 'title', 'description'])).toEqual([]);
+      expect(equipment.description.length).toBeGreaterThan(40);
     }
   });
 
@@ -70,6 +87,8 @@ describe('versioned content', () => {
     for (const item of navigationItems) {
       expect(findEmptyTextFields(item, ['label', 'href'])).toEqual([]);
     }
+
+    expect(navigationItems.map((item) => item.href)).toContain('#equipamentos');
   });
 
   it('mantem conteudo da pagina inicial conectado a CTAs existentes', () => {

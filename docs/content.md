@@ -2,7 +2,7 @@
 
 ## Visão geral
 
-A camada `src/content` centraliza textos comerciais e institucionais, evitando que mensagens, contatos, CTAs, serviços e equipamentos fiquem espalhados dentro dos componentes React.
+A camada `src/content` centraliza textos comerciais e institucionais para evitar copy espalhada nos componentes React.
 
 ## Estrutura
 
@@ -22,73 +22,60 @@ src/content
 
 ## Página inicial
 
-A Home contém hero, dor, serviços, benefícios, sobre, credibilidade, contato e CTA final. Os textos ficam em `src/content/home.ts` e os CTAs são referenciados por ID a partir de `src/content/ctas.ts`.
+A Home contém hero, dor, serviços, equipamentos, benefícios, sobre, credibilidade, contato e CTA final. Os textos ficam em `home.ts`, `services.ts`, `equipment.ts` e `ctas.ts`.
 
 ## Serviços
 
-A TASK-09 evoluiu `services.ts` para sustentar cards técnicos/comerciais com CTA por demanda.
+Cada serviço em `services.ts` deve conter:
 
-Cada serviço deve conter:
+- `slug`
+- `title`
+- `description`
+- `demand`
+- `response`
+- `ctaId`
+
+O `ctaId` deve existir em `ctas.ts`.
+
+## Equipamentos atendidos
+
+A TASK-10 evoluiu `equipment.ts` para listar categorias técnicas atendidas pela WMG.
+
+Cada equipamento deve conter:
 
 - `slug`: identificador único, em minúsculas, sem acentos e com hífens.
 - `title`: nome exibido no card.
-- `description`: resumo comercial/técnico do serviço.
-- `demand`: situação em que o cliente deve acionar a WMG.
-- `response`: como a WMG ajuda naquela demanda.
-- `ctaId`: identificador de CTA existente em `ctas.ts`.
+- `description`: descrição clara, técnica/comercial, sem prometer atendimento fora do escopo.
+
+Categorias obrigatórias:
+
+- placas eletrônicas;
+- inversores;
+- servo drives;
+- PLCs / CLPs;
+- IHMs;
+- CNCs;
+- fontes industriais;
+- painéis elétricos industriais.
 
 Exemplo:
 
 ```ts
 {
-  slug: 'diagnostico-tecnico',
-  title: 'Diagnóstico técnico',
-  description: 'Avaliação objetiva para identificar a causa da falha.',
-  demand: 'Quando o equipamento apresenta falha sem causa clara.',
-  response: 'A WMG analisa sintomas, histórico e criticidade para orientar a decisão.',
-  ctaId: 'request-evaluation',
+  slug: 'fontes',
+  title: 'Fontes industriais',
+  description:
+    'Fontes de alimentação e módulos de energia usados em painéis, máquinas, comandos e sistemas de automação que dependem de tensão estável.',
 }
 ```
 
-## Como adicionar um novo serviço
+## Como adicionar uma nova categoria de equipamento
 
-1. Abrir `src/content/services.ts`.
-2. Adicionar um novo item com `slug`, `title`, `description`, `demand`, `response` e `ctaId`.
-3. Usar slug único, em minúsculas, sem acentos e com hífens.
-4. Confirmar que o `ctaId` existe em `src/content/ctas.ts`.
-5. Executar os testes de conteúdo.
-6. Revisar a renderização da seção `#servicos`.
-
-## Campos obrigatórios
-
-Serviços e equipamentos devem conter:
-
-- `slug`
-- `title`
-- `description`
-
-Serviços também devem conter:
-
-- `demand`
-- `response`
-- `ctaId`
-
-CTAs devem conter:
-
-- `id`
-- `label`
-- `href`
-- `purpose`
-
-Dados institucionais devem conter:
-
-- `name`
-- `segment`
-- `email`
-- `phone`
-- `location`
-- `website`
-- `description`
+1. Abra `src/content/equipment.ts`.
+2. Adicione um item com `slug`, `title` e `description`.
+3. Use descrição clara e dentro do escopo técnico da WMG.
+4. Evite marcas, promessas de prazo ou números não validados.
+5. Execute os testes de conteúdo e componente.
 
 ## Validações
 
@@ -100,7 +87,7 @@ npm run typecheck
 npm run check
 ```
 
-O teste `src/content/content.test.ts` garante dados obrigatórios, slugs únicos, CTAs válidos e a relação entre serviços e chamadas de ação.
+O teste `src/content/content.test.ts` valida campos obrigatórios, slugs únicos e presença das categorias mínimas da TASK-10.
 
 ## Segurança
 

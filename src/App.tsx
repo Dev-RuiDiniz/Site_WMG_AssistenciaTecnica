@@ -1,4 +1,4 @@
-import { ctaContent, homeContent, servicesContent } from './content';
+import { ctaContent, equipmentContent, homeContent, servicesContent } from './content';
 import { SiteLayout } from './components/layout/SiteLayout';
 import { Button } from './components/ui/Button';
 import { Card } from './components/ui/Card';
@@ -31,9 +31,7 @@ function App() {
             <p className="mt-6 max-w-3xl text-xl font-semibold leading-9 text-slate-100 md:text-2xl">
               {homeContent.hero.subtitle}
             </p>
-            <p className="mt-4 max-w-3xl text-base leading-8 text-slate-300 md:text-lg">
-              {homeContent.hero.description}
-            </p>
+            <p className="mt-4 max-w-3xl text-base leading-8 text-slate-300 md:text-lg">{homeContent.hero.description}</p>
             <div className="mt-8 flex flex-wrap gap-4" aria-label="Ações principais">
               {primaryHeroCta ? <Button href={primaryHeroCta.href}>{primaryHeroCta.label}</Button> : null}
               {secondaryHeroCta ? (
@@ -118,6 +116,23 @@ function App() {
                 </Card>
               );
             })}
+          </div>
+        </section>
+
+        <section id="equipamentos" className="mt-20 grid gap-10 scroll-mt-24" aria-labelledby="equipamentos-title">
+          <SectionTitle
+            eyebrow="Equipamentos atendidos"
+            title="Categorias técnicas atendidas pela WMG"
+            description="A lista ajuda a qualificar rapidamente se a demanda está dentro do escopo técnico antes do contato comercial."
+          />
+
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {equipmentContent.map((equipment) => (
+              <Card key={equipment.slug}>
+                <h3 className="text-xl font-black text-wmg-navy-950">{equipment.title}</h3>
+                <p className="mt-3 leading-7 text-slate-600">{equipment.description}</p>
+              </Card>
+            ))}
           </div>
         </section>
 
