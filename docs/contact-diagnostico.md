@@ -2,7 +2,13 @@
 
 ## Objetivo
 
-A TASK-11 adiciona o formulário de contato/diagnóstico como mecanismo principal de captação de lead além dos fallbacks por e-mail e WhatsApp.
+O formulário de contato/diagnóstico é o principal mecanismo de captação de lead da página, além dos fallbacks por e-mail e WhatsApp.
+
+A TASK-12 adiciona envio real via FormSubmit para:
+
+```text
+suporte@wmgassistenciatecnica.com.br
+```
 
 ## Campos do formulário
 
@@ -30,22 +36,47 @@ A validação fica em `src/components/contact/diagnosticForm.ts` e cobre:
 - descrição mínima;
 - consentimento obrigatório.
 
-## Envio e fallback
+## Envio
 
-Como ainda não há backend, o formulário valida os dados no cliente e exibe confirmação clara.
+A integração fica em `src/components/contact/diagnosticSubmit.ts`.
 
-Também são gerados links de fallback:
+O provider configurado é FormSubmit, usando endpoint AJAX:
 
-- `mailto:` com assunto e corpo preenchidos;
+```text
+https://formsubmit.co/ajax/suporte@wmgassistenciatecnica.com.br
+```
+
+Campos técnicos enviados:
+
+- `_subject`: `Novo diagnóstico técnico - WMG`;
+- `_template`: `table`;
+- `_captcha`: `false`;
+- `Origem`: `Site WMG Assistência Técnica`.
+
+## Estados
+
+O componente `DiagnosticContactForm` trabalha com:
+
+- `idle`;
+- `submitting`;
+- `success`;
+- `error`.
+
+Em caso de erro do provider ou rede, o formulário exibe mensagem clara e mantém os fallbacks visíveis.
+
+## Fallback
+
+Mesmo com envio real configurado, continuam disponíveis:
+
+- `mailto:` com corpo preenchido;
 - WhatsApp com resumo da solicitação.
 
 ## LGPD e segurança
 
-Nesta etapa, o formulário:
+- O site não persiste dados em `localStorage`.
+- O site não registra dados pessoais em console.
+- O envio usa provider externo.
+- O consentimento continua obrigatório.
+- A documentação do provider e validação manual ficam em `docs/formulario-envio.md`.
 
-- não persiste dados em localStorage;
-- não envia dados para backend;
-- não registra dados pessoais em console;
-- informa o uso dos dados para retorno comercial/técnico.
-
-Uma integração real futura deve definir base legal, retenção, segurança de transporte, controle de acesso e canal de exclusão/atualização de dados.
+Uma integração futura própria deve avaliar retenção, base legal, controle de acesso, segurança de transporte e processo de exclusão/atualização dos dados.
