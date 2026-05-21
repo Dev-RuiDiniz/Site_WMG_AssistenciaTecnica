@@ -4,6 +4,12 @@ export type ContentItem = {
   description: string;
 };
 
+export type ServiceContent = ContentItem & {
+  demand: string;
+  response: string;
+  ctaId: string;
+};
+
 export type CTAContent = {
   id: string;
   label: string;
