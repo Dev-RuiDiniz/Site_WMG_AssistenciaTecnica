@@ -5,10 +5,16 @@ export const contactContent = {
   title: 'Solicite uma avaliação técnica',
   description:
     'Preencha os dados principais do equipamento, falha e urgência para que a WMG entenda o cenário e indique o próximo passo de atendimento.',
+  loadingTitle: 'Enviando solicitação',
+  loadingMessage: 'Estamos encaminhando seu diagnóstico para a equipe WMG. Isso pode levar alguns segundos.',
+  successTitle: 'Solicitação enviada',
   successMessage:
-    'Diagnóstico foi enviado com sucesso. A equipe WMG recebeu sua solicitação e retornará pelos canais informados.',
-  errorMessage: 'Não foi possível enviar agora. Use o fallback por e-mail ou WhatsApp.',
-  validationErrorMessage: 'Revise os campos destacados antes de enviar.',
+    'Recebemos seu diagnóstico. A equipe WMG retornará pelos canais informados.',
+  errorTitle: 'Não foi possível enviar agora',
+  errorMessage:
+    'Use o WhatsApp ou e-mail abaixo para falar com a equipe WMG sem perder o atendimento.',
+  validationErrorTitle: 'Revise os dados do formulário',
+  validationErrorMessage: 'Alguns campos precisam de ajuste antes do envio.',
   privacyNote:
     'Os dados informados são usados para retorno comercial/técnico e encaminhados ao e-mail de atendimento da WMG por provedor externo seguro. O site não armazena os dados localmente.',
   mailtoLabel: 'Enviar dados por e-mail',
