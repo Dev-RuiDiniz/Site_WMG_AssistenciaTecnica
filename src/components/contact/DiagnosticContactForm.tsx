@@ -1,5 +1,6 @@
 import { FormEvent, useMemo, useState } from 'react';
 import { companyContent, contactContent, equipmentContent, failureTypeOptions, urgencyOptions } from '../../content';
+import { FormFeedback } from '../ui/FormFeedback';
 import {
   buildDiagnosticMailto,
   buildWhatsAppFallback,
@@ -16,6 +17,13 @@ type DiagnosticStatus = 'idle' | 'submitting' | 'success' | 'error';
 const inputClassName =
   'min-h-12 w-full rounded-2xl px-4 py-3 text-base text-wmg-navy-950 outline-none ring-1 ring-transparent transition focus:ring-2 focus:ring-wmg-cyan-300 disabled:cursor-not-allowed disabled:opacity-70';
 
+const feedbackStatusByFormStatus: Record<DiagnosticStatus, 'idle' | 'loading' | 'success' | 'error'> = {
+  idle: 'idle',
+  submitting: 'loading',
+  success: 'success',
+  error: 'error',
+};
+
 function ErrorText({ message }: { message?: string }) {
   return message ? <p className="mt-2 text-sm font-semibold text-red-200">{message}</p> : null;
 }
@@ -24,7 +32,7 @@ export function DiagnosticContactForm() {
   const [values, setValues] = useState<DiagnosticFormValues>(initialDiagnosticFormValues);
   const [errors, setErrors] = useState<DiagnosticFormErrors>({});
   const [status, setStatus] = useState<DiagnosticStatus>('idle');
-  const [submitError, setSubmitError] = useState<string>('');
+  const [submitError, setSubmitError] = useState('');
 
   const mailtoHref = useMemo(() => buildDiagnosticMailto(values, companyContent.email), [values]);
   const whatsappHref = useMemo(() => buildWhatsAppFallback(values, companyContent.phone), [values]);
@@ -63,9 +71,48 @@ export function DiagnosticContactForm() {
   }
 
   const isSubmitting = status === 'submitting';
+  const feedbackStatus = feedbackStatusByFormStatus[status];
+  const feedbackTitle =
+    status === 'submitting'
+      ? contactContent.loadingTitle
+      : status === 'success'
+        ? contactContent.successTitle
+        : hasDiagnosticFormErrors(errors)
+          ? contactContent.validationErrorTitle
+          : contactContent.errorTitle;
+  const feedbackMessage =
+    status === 'submitting'
+      ? contactContent.loadingMessage
+      : status === 'success'
+        ? contactContent.successMessage
+        : submitError || contactContent.errorMessage;
+
+  const fallbackActions = (
+    <>
+      <a
+        className="inline-flex min-h-12 items-center justify-center rounded-full border border-wmg-cyan-400 px-5 py-3 text-center text-sm font-extrabold uppercase text-white"
+        href={mailtoHref}
+      >
+        {contactContent.mailtoLabel}
+      </a>
+      <a
+        className="inline-flex min-h-12 items-center justify-center rounded-full px-5 py-3 text-center text-sm font-extrabold uppercase text-wmg-cyan-300"
+        href={whatsappHref}
+      >
+        {contactContent.whatsappLabel}
+      </a>
+    </>
+  );
 
   return (
     <form className="mt-8 grid gap-6" noValidate onSubmit={handleSubmit}>
+      <FormFeedback
+        status={feedbackStatus}
+        title={feedbackTitle}
+        message={feedbackMessage}
+        actions={status === 'error' ? fallbackActions : undefined}
+      />
+
       <div className="grid gap-5 md:grid-cols-2">
         <label className="grid gap-2 text-sm font-bold text-white">
           Nome *
@@ -167,15 +214,6 @@ export function DiagnosticContactForm() {
         <a className="inline-flex min-h-12 items-center justify-center rounded-full px-6 py-3 text-center text-sm font-extrabold uppercase text-wmg-cyan-300" href={whatsappHref}>
           {contactContent.whatsappLabel}
         </a>
-      </div>
-
-      <div role="status" aria-live="polite">
-        {status === 'success' ? (
-          <p className="rounded-2xl bg-wmg-lime-500/20 p-4 font-semibold text-wmg-lime-500">{contactContent.successMessage}</p>
-        ) : null}
-        {status === 'error' ? (
-          <p className="rounded-2xl bg-red-500/20 p-4 font-semibold text-red-100">{submitError || contactContent.errorMessage}</p>
-        ) : null}
       </div>
     </form>
   );
