@@ -41,4 +41,18 @@ describe('App routes', () => {
 
     expect(screen.getByRole('heading', { name: /solicite uma avaliacao tecnica/i })).toBeInTheDocument();
   });
+
+  it('mantem home enxuta e concentra provas comerciais na pagina sobre', () => {
+    renderAtRoute('/');
+
+    expect(screen.queryByRole('heading', { name: homeContent.painSection.title })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: homeContent.benefitsSection.title })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: homeContent.credibilitySection.title })).not.toBeInTheDocument();
+
+    renderAtRoute('/sobre');
+
+    expect(screen.getByRole('heading', { name: homeContent.painSection.title })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: homeContent.benefitsSection.title })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: homeContent.credibilitySection.title })).toBeInTheDocument();
+  });
 });

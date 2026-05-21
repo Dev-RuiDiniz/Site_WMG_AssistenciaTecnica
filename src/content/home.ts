@@ -93,7 +93,7 @@ export const homeContent: HomeContent = {
       },
       {
         title: 'Evolução segura',
-        description: 'A Home mantém SPA por âncoras, testes e documentação para reduzir risco de regressão.',
+        description: 'Estrutura multipagina com rotas reais, testes e documentacao para reduzir risco de regressao.',
       },
     ],
   },
@@ -113,3 +113,4 @@ export const homeContent: HomeContent = {
     secondaryCtaId: 'view-services',
   },
 };
+
