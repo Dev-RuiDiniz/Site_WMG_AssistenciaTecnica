@@ -1,47 +1,39 @@
-# Layout e navegação
+# Layout e navegacao
 
-## Visão geral
+## Visao geral
 
-O projeto usa uma SPA institucional com navegação por âncoras internas. O layout global é composto por `SiteLayout`, `Header`, conteúdo principal, `Footer` e botão flutuante global do WhatsApp.
+O projeto usa layout global com `SiteLayout`, `Header`, area principal, `Footer` e botao flutuante de WhatsApp.
 
-## Estrutura principal
+A navegacao principal foi convertida para rotas reais:
 
-- `#inicio`: Hero e proposta principal.
-- `#servicos`: cards de serviços técnicos/comerciais.
-- `#equipamentos`: categorias de equipamentos atendidos.
-- `#sobre`: bloco institucional.
-- `#contato`: formulário de diagnóstico e contato.
+- `/`
+- `/servicos`
+- `/equipamentos`
+- `/sobre`
+- `/contato`
+
+## Estrutura das paginas
+
+- `/`: home resumida com hero e CTAs para paginas internas.
+- `/servicos`: cards comerciais e tecnicos dos servicos.
+- `/equipamentos`: categorias de equipamentos atendidos.
+- `/sobre`: contexto institucional e blocos de dor, beneficios e credibilidade.
+- `/contato`: formulario de diagnostico tecnico.
 
 ## Responsividade
 
-A TASK-14 consolida o comportamento mobile-first:
-
-- mobile usa 1 coluna por padrão;
-- tablet passa a usar grids de 2 colunas quando há espaço;
-- desktop usa grids de 3 ou 4 colunas conforme a seção;
-- CTAs usam altura mínima adequada para toque;
-- formulário usa campos em largura total no mobile;
-- menu mobile fica disponível abaixo de `md`;
-- header desktop preserva navegação horizontal;
-- testes E2E validam ausência de overflow horizontal.
+- mobile-first com grids progressivos para tablet e desktop;
+- menu mobile disponivel abaixo de `md`;
+- validacao E2E de ausencia de overflow horizontal nas rotas principais;
+- formulario de contato validado em viewport responsiva.
 
 ## WhatsApp global
 
-O botão flutuante fica no canto inferior direito com área mínima de toque e link externo para `wa.me`.
+O botao flutuante fica no canto inferior direito e abre `wa.me` com mensagem pre-preenchida.
 
 Comportamento:
 
-- número centralizado em `companyContent.phone`;
-- mensagem pré-preenchida;
-- `target="_blank"`;
-- `rel="noopener noreferrer"`;
-- label acessível para leitores de tela.
-
-## Acessibilidade
-
-- Seções usam IDs estáveis.
-- CTAs usam texto visível.
-- Cards mantêm headings internos.
-- Header e footer expõem navegação por links.
-- Formulário possui labels associados.
-- WhatsApp flutuante possui `aria-label`.
+- numero centralizado em `companyContent.phone`;
+- link externo com `target="_blank"` e `rel="noopener noreferrer"`;
+- icone-only (sem texto visivel);
+- `aria-label` para acessibilidade.

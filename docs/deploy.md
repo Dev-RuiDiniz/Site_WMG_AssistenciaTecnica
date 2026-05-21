@@ -1,128 +1,71 @@
 # Deploy
 
-## Visão geral
+## Visao geral
 
-Este documento descreve o processo inicial de build e publicação do site WMG Assistência Técnica.
+Este documento descreve o fluxo de build e publicacao do site WMG Assistencia Tecnica.
 
-A aplicação atual é um frontend estático com React, Vite e TypeScript. O build de produção gera arquivos estáticos na pasta `dist/`.
+Aplicacao: frontend estatico com React, Vite e TypeScript.
+Artefato final: `dist/`.
 
-## Pré-requisitos
+## Pre-requisitos
 
-- Node.js compatível com as dependências do projeto.
-- npm disponível no ambiente.
-- Dependências instaladas com `npm install`.
-- Variáveis públicas configuradas quando necessário.
+- Node.js compativel com o projeto.
+- npm instalado.
+- Dependencias instaladas com `npm install`.
+- Variaveis publicas configuradas quando necessario.
 
-## Instalação
+## Instalacao e validacao
 
 ```bash
 npm install
-```
-
-## Validação antes do deploy
-
-Antes de publicar uma versão, execute:
-
-```bash
 npm run check
 npm run build
 ```
 
-O comando `npm run check` executa:
-
-```bash
-npm run format:check && npm run lint && npm run typecheck && npm test
-```
-
-## Build de produção
+## Build e preview local
 
 ```bash
 npm run build
-```
-
-Resultado esperado:
-
-```text
-dist/
-```
-
-A pasta `dist/` contém o artefato estático que deve ser publicado no provedor de hospedagem escolhido.
-
-## Preview local do build
-
-Após gerar o build:
-
-```bash
 npm run preview
 ```
 
-Use o endereço exibido pelo Vite para validar manualmente a versão de produção local.
+## Rotas diretas e fallback SPA
 
-## Variáveis de ambiente
+Como o app usa rotas reais (`/servicos`, `/equipamentos`, `/sobre`, `/contato`), o provedor precisa redirecionar rotas nao encontradas para `index.html`.
 
-Use `.env.example` como referência.
+Sem esse fallback, abrir uma rota direta no navegador pode retornar 404.
 
-Para ambiente local, crie um arquivo `.env.local` quando precisar sobrescrever valores:
+Resumo recomendado no host:
+
+- servir arquivos estaticos de `dist/`;
+- manter fallback de navegacao para `index.html`;
+- preservar cache adequado para assets versionados.
+
+## Variaveis de ambiente
+
+Use `.env.example` como referencia.
+
+Para ambiente local:
 
 ```bash
 cp .env.example .env.local
 ```
 
-Variáveis públicas usadas pelo Vite devem começar com `VITE_`.
+Variaveis publicas no Vite devem iniciar com `VITE_`.
 
-Não versionar:
+Nao versionar secrets, tokens, senhas ou chaves privadas.
 
-- tokens;
-- senhas;
-- chaves privadas;
-- secrets;
-- credenciais de serviços externos.
+## Checklist
 
-## Estratégia de publicação
-
-Como o projeto gera arquivos estáticos, ele pode ser hospedado em plataformas compatíveis com SPA/static hosting.
-
-Configuração base esperada:
-
-- comando de instalação: `npm install`;
-- comando de build: `npm run build`;
-- diretório de publicação: `dist`.
-
-Não há servidor backend próprio nesta fase.
-
-## Checklist de deploy
-
-Antes de publicar:
-
-- [ ] `npm install` executou sem erro.
-- [ ] `npm run check` executou sem erro.
-- [ ] `npm run build` executou sem erro.
-- [ ] `.env.example` está atualizado.
-- [ ] Variáveis do ambiente de destino foram revisadas.
-- [ ] Não há secrets versionados.
-- [ ] Build foi validado com `npm run preview`.
-- [ ] PR foi revisada antes do merge.
+- [ ] `npm install` sem erro
+- [ ] `npm run check` sem erro
+- [ ] `npm run build` sem erro
+- [ ] fallback para `index.html` configurado no host
+- [ ] build validado via `npm run preview`
 
 ## Rollback
 
-Como o build é estático, o rollback recomendado é republicar a versão anterior estável ou reverter a PR responsável pela alteração.
-
-Fluxo sugerido:
-
-1. Identificar a PR ou commit que causou o problema.
-2. Reverter a alteração no GitHub.
+1. Identificar commit/PR com problema.
+2. Reverter no Git.
 3. Executar `npm run check` e `npm run build`.
-4. Publicar novamente o artefato `dist/`.
-
-## Observações
-
-Este documento deve ser atualizado quando houver:
-
-- CI/CD;
-- domínio final;
-- provedor oficial de hospedagem;
-- variáveis obrigatórias;
-- backend;
-- APIs;
-- autenticação;
-- integrações externas.
+4. Republicar `dist/`.
