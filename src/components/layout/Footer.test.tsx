@@ -12,5 +12,6 @@ describe('Footer', () => {
       'mailto:suporte@wmgassistenciatecnica.com.br',
     );
     expect(screen.getAllByRole('link', { name: /serviços/i })[0]).toHaveAttribute('href', '#servicos');
+    expect(screen.getAllByRole('link', { name: /equipamentos/i })[0]).toHaveAttribute('href', '#equipamentos');
   });
 });
