@@ -21,6 +21,11 @@ export type CompanyContent = {
   description: string;
 };
 
+export type HomeHighlightItem = {
+  title: string;
+  description: string;
+};
+
 export type HomeContent = {
   hero: {
     eyebrow: string;
@@ -29,22 +34,48 @@ export type HomeContent = {
     description: string;
     primaryCtaId: string;
     secondaryCtaId: string;
+    highlights: HomeHighlightItem[];
+  };
+  painSection: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    points: HomeHighlightItem[];
   };
   servicesSection: {
     eyebrow: string;
     title: string;
     description: string;
   };
+  benefitsSection: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    benefits: HomeHighlightItem[];
+  };
   aboutSection: {
     eyebrow: string;
     title: string;
     description: string;
+  };
+  credibilitySection: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    items: HomeHighlightItem[];
   };
   contactSection: {
     eyebrow: string;
     title: string;
     description: string;
     ctaId: string;
+  };
+  finalCtaSection: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    primaryCtaId: string;
+    secondaryCtaId: string;
   };
 };
 
