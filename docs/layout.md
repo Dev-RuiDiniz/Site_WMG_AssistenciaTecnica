@@ -12,40 +12,36 @@ O projeto usa uma SPA institucional com navegação por âncoras internas. O lay
 - `#sobre`: bloco institucional.
 - `#contato`: formulário de diagnóstico e contato.
 
+## Responsividade
+
+A TASK-14 consolida o comportamento mobile-first:
+
+- mobile usa 1 coluna por padrão;
+- tablet passa a usar grids de 2 colunas quando há espaço;
+- desktop usa grids de 3 ou 4 colunas conforme a seção;
+- CTAs usam altura mínima adequada para toque;
+- formulário usa campos em largura total no mobile;
+- menu mobile fica disponível abaixo de `md`;
+- header desktop preserva navegação horizontal;
+- testes E2E validam ausência de overflow horizontal.
+
 ## WhatsApp global
 
-A TASK-13 adicionou um botão flutuante global de WhatsApp em todas as seções da SPA.
+O botão flutuante fica no canto inferior direito com área mínima de toque e link externo para `wa.me`.
 
 Comportamento:
 
-- canto inferior direito;
-- link externo para `wa.me`;
 - número centralizado em `companyContent.phone`;
 - mensagem pré-preenchida;
 - `target="_blank"`;
 - `rel="noopener noreferrer"`;
 - label acessível para leitores de tela.
 
-## Navegação
-
-Os links principais ficam em `src/content/navigation.ts` e são usados no header e no footer.
-
-Itens atuais:
-
-```ts
-[
-  { label: 'Início', href: '#inicio' },
-  { label: 'Serviços', href: '#servicos' },
-  { label: 'Equipamentos', href: '#equipamentos' },
-  { label: 'Sobre', href: '#sobre' },
-  { label: 'Contato', href: '#contato' },
-]
-```
-
 ## Acessibilidade
 
 - Seções usam IDs estáveis.
-- CTAs usam links com texto visível.
+- CTAs usam texto visível.
 - Cards mantêm headings internos.
 - Header e footer expõem navegação por links.
+- Formulário possui labels associados.
 - WhatsApp flutuante possui `aria-label`.
