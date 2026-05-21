@@ -2,27 +2,33 @@
 
 ## Visão geral
 
-A camada `src/content` centraliza textos comerciais e institucionais para evitar copy espalhada nos componentes React.
+A camada `src/content` centraliza textos comerciais, institucionais, contatos, CTAs, serviços e equipamentos.
 
-## Estrutura
+## Empresa
+
+O cadastro da empresa fica em:
 
 ```text
-src/content
-├── company.ts
-├── ctas.ts
-├── equipment.ts
-├── home.ts
-├── index.ts
-├── navigation.ts
-├── services.ts
-├── types.ts
-├── validators.ts
-└── content.test.ts
+src/content/company.ts
 ```
 
-## Página inicial
+O telefone `companyContent.phone` é a fonte única para o WhatsApp global:
 
-A Home contém hero, dor, serviços, equipamentos, benefícios, sobre, credibilidade, contato e CTA final. Os textos ficam em `home.ts`, `services.ts`, `equipment.ts` e `ctas.ts`.
+```text
++55 12 99158-8460
+```
+
+Para trocar o número do WhatsApp, altere apenas esse campo e execute os testes.
+
+## CTAs
+
+Os CTAs ficam em:
+
+```text
+src/content/ctas.ts
+```
+
+O CTA `talk-to-support` usa o helper global de WhatsApp para gerar link `wa.me` com mensagem pré-preenchida.
 
 ## Serviços
 
@@ -39,13 +45,11 @@ O `ctaId` deve existir em `ctas.ts`.
 
 ## Equipamentos atendidos
 
-A TASK-10 evoluiu `equipment.ts` para listar categorias técnicas atendidas pela WMG.
+Cada equipamento em `equipment.ts` deve conter:
 
-Cada equipamento deve conter:
-
-- `slug`: identificador único, em minúsculas, sem acentos e com hífens.
-- `title`: nome exibido no card.
-- `description`: descrição clara, técnica/comercial, sem prometer atendimento fora do escopo.
+- `slug`
+- `title`
+- `description`
 
 Categorias obrigatórias:
 
@@ -58,25 +62,6 @@ Categorias obrigatórias:
 - fontes industriais;
 - painéis elétricos industriais.
 
-Exemplo:
-
-```ts
-{
-  slug: 'fontes',
-  title: 'Fontes industriais',
-  description:
-    'Fontes de alimentação e módulos de energia usados em painéis, máquinas, comandos e sistemas de automação que dependem de tensão estável.',
-}
-```
-
-## Como adicionar uma nova categoria de equipamento
-
-1. Abra `src/content/equipment.ts`.
-2. Adicione um item com `slug`, `title` e `description`.
-3. Use descrição clara e dentro do escopo técnico da WMG.
-4. Evite marcas, promessas de prazo ou números não validados.
-5. Execute os testes de conteúdo e componente.
-
 ## Validações
 
 Execute:
@@ -87,7 +72,7 @@ npm run typecheck
 npm run check
 ```
 
-O teste `src/content/content.test.ts` valida campos obrigatórios, slugs únicos e presença das categorias mínimas da TASK-10.
+O teste `src/content/content.test.ts` valida campos obrigatórios, slugs únicos, CTAs existentes e configuração global de WhatsApp.
 
 ## Segurança
 
