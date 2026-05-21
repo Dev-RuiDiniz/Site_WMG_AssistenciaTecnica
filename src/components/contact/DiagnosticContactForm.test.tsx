@@ -59,7 +59,12 @@ describe('DiagnosticContactForm', () => {
   });
 
   it('envia dados validos e exibe confirmacao do provider', async () => {
-    submitMock.mockResolvedValue({ status: 'success' });
+    let resolveSubmit: (value: { status: 'success' }) => void = () => undefined;
+    submitMock.mockReturnValue(
+      new Promise((resolve) => {
+        resolveSubmit = resolve;
+      }),
+    );
 
     render(<DiagnosticContactForm />);
     fillValidForm();
@@ -67,6 +72,8 @@ describe('DiagnosticContactForm', () => {
     fireEvent.click(screen.getByRole('button', { name: /enviar diagnóstico/i }));
 
     expect(await screen.findByRole('button', { name: /enviando diagnóstico/i })).toBeDisabled();
+
+    resolveSubmit({ status: 'success' });
 
     await waitFor(() => expect(submitMock).toHaveBeenCalledTimes(1));
     expect(await screen.findByText(/diagnóstico foi enviado com sucesso/i)).toBeInTheDocument();
