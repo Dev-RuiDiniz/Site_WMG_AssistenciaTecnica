@@ -15,7 +15,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-wmg-cyan-400/20 bg-wmg-navy-950/95 text-white shadow-wmg-card backdrop-blur">
       <Container className="flex min-h-20 items-center justify-between gap-6 py-4">
-        <a href="#inicio" className="group inline-flex items-center gap-3" aria-label="Ir para o início">
+        <a href="/" className="group inline-flex items-center gap-3" aria-label="Ir para o início">
           <span className="flex size-11 items-center justify-center rounded-full border border-wmg-cyan-400/40 bg-wmg-blue-700/30 text-sm font-black text-wmg-lime-500 shadow-wmg-glow">
             W
           </span>
@@ -83,3 +83,4 @@ export function Header() {
     </header>
   );
 }
+
