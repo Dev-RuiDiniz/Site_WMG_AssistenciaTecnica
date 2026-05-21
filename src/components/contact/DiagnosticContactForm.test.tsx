@@ -10,13 +10,17 @@ vi.mock('./diagnosticSubmit', () => ({
 const submitMock = vi.mocked(submitDiagnosticForm);
 
 function fillValidForm() {
-  fireEvent.change(screen.getByLabelText(/nome/i), { target: { value: 'Rui Diniz' } });
-  fireEvent.change(screen.getByLabelText(/e-mail/i), { target: { value: 'cliente@example.com' } });
-  fireEvent.change(screen.getByLabelText(/telefone/i), { target: { value: '(11) 99999-9999' } });
-  fireEvent.change(screen.getByLabelText(/equipamento/i), { target: { value: 'Placas eletrônicas' } });
-  fireEvent.change(screen.getByLabelText(/tipo de falha/i), { target: { value: 'Equipamento parado' } });
-  fireEvent.change(screen.getByLabelText(/urgência/i), { target: { value: 'Alta' } });
-  fireEvent.change(screen.getByLabelText(/descrição do problema/i), {
+  fireEvent.change(screen.getByRole('textbox', { name: /nome/i }), { target: { value: 'Rui Diniz' } });
+  fireEvent.change(screen.getByRole('textbox', { name: /e-mail/i }), { target: { value: 'cliente@example.com' } });
+  fireEvent.change(screen.getByRole('textbox', { name: /telefone/i }), { target: { value: '(11) 99999-9999' } });
+  fireEvent.change(screen.getByRole('combobox', { name: /equipamento/i }), {
+    target: { value: 'Placas eletrônicas' },
+  });
+  fireEvent.change(screen.getByRole('combobox', { name: /tipo de falha/i }), {
+    target: { value: 'Equipamento parado' },
+  });
+  fireEvent.change(screen.getByRole('combobox', { name: /urgência/i }), { target: { value: 'Alta' } });
+  fireEvent.change(screen.getByRole('textbox', { name: /descrição do problema/i }), {
     target: { value: 'Placa eletrônica apresenta falha e impede funcionamento da máquina.' },
   });
   fireEvent.click(screen.getByLabelText(/dados informados são usados/i));
@@ -30,13 +34,13 @@ describe('DiagnosticContactForm', () => {
   it('renderiza campos minimos e fallbacks', () => {
     render(<DiagnosticContactForm />);
 
-    expect(screen.getByLabelText(/nome/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/e-mail/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/telefone/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/equipamento/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/tipo de falha/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/urgência/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/descrição do problema/i)).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /nome/i })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /e-mail/i })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /telefone/i })).toBeInTheDocument();
+    expect(screen.getByRole('combobox', { name: /equipamento/i })).toBeInTheDocument();
+    expect(screen.getByRole('combobox', { name: /tipo de falha/i })).toBeInTheDocument();
+    expect(screen.getByRole('combobox', { name: /urgência/i })).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: /descrição do problema/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /enviar dados por e-mail/i })).toHaveAttribute(
       'href',
       expect.stringContaining('mailto:'),
@@ -64,7 +68,7 @@ describe('DiagnosticContactForm', () => {
     fireEvent.click(screen.getByRole('button', { name: /enviar diagnóstico/i }));
     expect(screen.getByRole('alert')).toBeInTheDocument();
 
-    fireEvent.change(screen.getByLabelText(/nome/i), { target: { value: 'Rui Diniz' } });
+    fireEvent.change(screen.getByRole('textbox', { name: /nome/i }), { target: { value: 'Rui Diniz' } });
 
     expect(screen.queryByRole('alert')).not.toBeInTheDocument();
   });
