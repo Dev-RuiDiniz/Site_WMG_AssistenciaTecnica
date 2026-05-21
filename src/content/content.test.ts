@@ -93,7 +93,7 @@ describe('versioned content', () => {
       expect(findEmptyTextFields(item, ['label', 'href'])).toEqual([]);
     }
 
-    expect(navigationItems.map((item) => item.href)).toContain('#equipamentos');
+    expect(navigationItems.map((item) => item.href)).toContain('/equipamentos');
   });
 
   it('configura CTA de suporte para WhatsApp com mensagem preenchida', () => {
@@ -102,7 +102,7 @@ describe('versioned content', () => {
     expect(supportCta).toBeDefined();
     expect(supportCta?.href).toContain('https://wa.me/5512991588460');
     expect(supportCta?.href).toContain('text=');
-    expect(decodeURIComponent(supportCta?.href ?  '')).toContain('Olá, equipe WMG');
+    expect(decodeURIComponent(supportCta?.href ?? '')).toContain('Olá, equipe WMG');
   });
 
   it('mantem conteudo da pagina inicial conectado a CTAs existentes', () => {
@@ -116,3 +116,4 @@ describe('versioned content', () => {
     expect(ctaIds).toContain(homeContent.finalCtaSection.secondaryCtaId);
   });
 });
+

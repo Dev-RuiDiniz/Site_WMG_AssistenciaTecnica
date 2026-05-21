@@ -6,7 +6,7 @@ export const ctaContent: CTAContent[] = [
   {
     id: 'request-evaluation',
     label: 'Solicitar avaliação técnica agora',
-    href: '#contato',
+    href: '/contato',
     purpose: 'Direcionar o visitante para o contato comercial principal.',
   },
   {
@@ -18,7 +18,8 @@ export const ctaContent: CTAContent[] = [
   {
     id: 'view-services',
     label: 'Ver serviços',
-    href: '#servicos',
+    href: '/servicos',
     purpose: 'Levar o visitante para a seção de serviços.',
   },
 ];
+

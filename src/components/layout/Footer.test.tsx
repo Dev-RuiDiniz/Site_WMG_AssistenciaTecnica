@@ -9,9 +9,11 @@ describe('Footer', () => {
     expect(screen.getAllByText(/WMG Assistência Técnica/i).length).toBeGreaterThan(0);
     expect(screen.getByRole('link', { name: /suporte@wmgassistenciatecnica.com.br/i })).toHaveAttribute(
       'href',
-      'mailto:suporte@wmgassistenciatecnica.com.br',
+      expect.stringContaining('https://wa.me/'),
     );
-    expect(screen.getAllByRole('link', { name: /serviços/i })[0]).toHaveAttribute('href', '#servicos');
-    expect(screen.getAllByRole('link', { name: /equipamentos/i })[0]).toHaveAttribute('href', '#equipamentos');
+    expect(screen.getAllByRole('link', { name: /serviços/i })[0]).toHaveAttribute('href', '/servicos');
+    expect(screen.getAllByRole('link', { name: /equipamentos/i })[0]).toHaveAttribute('href', '/equipamentos');
   });
 });
+
+
