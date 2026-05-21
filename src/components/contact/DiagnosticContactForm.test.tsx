@@ -47,18 +47,29 @@ describe('DiagnosticContactForm', () => {
     );
   });
 
-  it('valida campos antes de chamar o provider', () => {
+  it('exibe erro de validacao antes de chamar o provider', () => {
     render(<DiagnosticContactForm />);
 
     fireEvent.click(screen.getByRole('button', { name: /enviar diagnóstico/i }));
 
     expect(screen.getByText(/informe seu nome/i)).toBeInTheDocument();
-    expect(screen.getByText(/selecione o equipamento/i)).toBeInTheDocument();
-    expect(screen.getByText(/revise os campos destacados/i)).toBeInTheDocument();
+    expect(screen.getByRole('alert')).toHaveTextContent('Revise os dados do formulário');
+    expect(screen.getByRole('alert')).toHaveTextContent('Alguns campos precisam de ajuste');
     expect(submitMock).not.toHaveBeenCalled();
   });
 
-  it('envia dados validos e exibe confirmacao do provider', async () => {
+  it('limpa erro visual ao editar campo depois de falha de validacao', () => {
+    render(<DiagnosticContactForm />);
+
+    fireEvent.click(screen.getByRole('button', { name: /enviar diagnóstico/i }));
+    expect(screen.getByRole('alert')).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText(/nome/i), { target: { value: 'Rui Diniz' } });
+
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  });
+
+  it('exibe loading e confirmacao ao enviar dados validos', async () => {
     let resolveSubmit: (value: { status: 'success' }) => void = () => undefined;
     submitMock.mockReturnValue(
       new Promise((resolve) => {
@@ -72,17 +83,21 @@ describe('DiagnosticContactForm', () => {
     fireEvent.click(screen.getByRole('button', { name: /enviar diagnóstico/i }));
 
     expect(await screen.findByRole('button', { name: /enviando diagnóstico/i })).toBeDisabled();
+    expect(screen.getByRole('status')).toHaveTextContent('Enviando solicitação');
+    expect(screen.getByRole('status')).toHaveTextContent('Estamos encaminhando seu diagnóstico');
 
     resolveSubmit({ status: 'success' });
 
     await waitFor(() => expect(submitMock).toHaveBeenCalledTimes(1));
-    expect(await screen.findByText(/diagnóstico foi enviado com sucesso/i)).toBeInTheDocument();
+    expect(await screen.findByRole('status')).toHaveTextContent('Solicitação enviada');
+    expect(screen.getByRole('status')).toHaveTextContent('Recebemos seu diagnóstico');
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
   });
 
-  it('exibe erro do provider e mantem fallback disponivel', async () => {
+  it('exibe erro comercial do provider e mantem fallback disponivel', async () => {
     submitMock.mockResolvedValue({
       status: 'error',
-      message: 'Não foi possível enviar o diagnóstico agora. Use o e-mail ou WhatsApp de fallback.',
+      message: 'Não conseguimos enviar agora. Use WhatsApp ou e-mail abaixo.',
     });
 
     render(<DiagnosticContactForm />);
@@ -90,8 +105,9 @@ describe('DiagnosticContactForm', () => {
 
     fireEvent.click(screen.getByRole('button', { name: /enviar diagnóstico/i }));
 
-    expect(await screen.findByText(/não foi possível enviar o diagnóstico/i)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /enviar dados por e-mail/i })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /enviar resumo por whatsapp/i })).toBeInTheDocument();
+    expect(await screen.findByRole('alert')).toHaveTextContent('Não foi possível enviar agora');
+    expect(screen.getByRole('alert')).toHaveTextContent('Use WhatsApp ou e-mail');
+    expect(screen.getAllByRole('link', { name: /enviar dados por e-mail/i }).length).toBeGreaterThan(0);
+    expect(screen.getAllByRole('link', { name: /enviar resumo por whatsapp/i }).length).toBeGreaterThan(0);
   });
 });
