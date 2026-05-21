@@ -4,57 +4,57 @@
 
 O formulário de contato/diagnóstico é o principal mecanismo de captação de lead da página, além dos fallbacks por e-mail e WhatsApp.
 
-## WhatsApp
+## Estados de feedback
 
-A TASK-13 centralizou o fallback de WhatsApp usando o helper global:
+A TASK-15 adiciona feedback visual padronizado para:
 
-```text
-src/components/whatsapp/whatsappLink.ts
-```
+- envio em andamento;
+- envio concluído;
+- falha de envio;
+- erro de validação.
 
-O formulário continua criando uma mensagem contextual com:
-
-- nome;
-- equipamento;
-- tipo de falha;
-- urgência.
-
-A URL final usa o número centralizado em `companyContent.phone`.
-
-## Campos do formulário
-
-- Nome.
-- Empresa.
-- E-mail.
-- Telefone / WhatsApp.
-- Equipamento.
-- Tipo de falha.
-- Urgência.
-- Descrição do problema.
-- Consentimento para contato.
-
-## Envio
-
-A integração de envio real fica em:
+O componente usado é:
 
 ```text
-src/components/contact/diagnosticSubmit.ts
+src/components/ui/FormFeedback.tsx
 ```
 
-Provider atual:
+## Loading
+
+Quando o usuário envia dados válidos, o formulário exibe:
 
 ```text
-FormSubmit
+Enviando solicitação
+Estamos encaminhando seu diagnóstico para a equipe WMG.
 ```
 
-## Fallbacks
+Durante esse estado, campos e botão principal ficam desabilitados.
 
-Mesmo com envio real configurado, continuam disponíveis:
+## Sucesso
 
-- `mailto:` com corpo preenchido;
-- WhatsApp com mensagem contextual pré-preenchida.
+Quando o provider responde com sucesso, o formulário exibe:
 
-## LGPD e segurança
+```text
+Solicitação enviada
+Recebemos seu diagnóstico. A equipe WMG retornará pelos canais informados.
+```
+
+## Erro
+
+Quando o provider falha, o formulário exibe orientação alternativa:
+
+```text
+Não foi possível enviar agora
+Use o WhatsApp ou e-mail abaixo para falar com a equipe WMG sem perder o atendimento.
+```
+
+Os links de fallback permanecem visíveis.
+
+## Validação
+
+Erros de preenchimento continuam aparecendo por campo e também exibem feedback geral com `role="alert"`.
+
+## Segurança e LGPD
 
 - O site não persiste dados em `localStorage`.
 - O site não registra dados pessoais em console.
