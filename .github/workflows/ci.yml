@@ -26,14 +26,20 @@ jobs:
       - name: Instalar dependencias
         run: npm install
 
+      - name: Instalar browsers do Playwright
+        run: npx playwright install --with-deps chromium
+
       - name: Executar lint
         run: npm run lint
 
       - name: Executar type-check
         run: npm run typecheck
 
-      - name: Executar testes
+      - name: Executar testes unitarios
         run: npm test
+
+      - name: Executar testes E2E responsivos
+        run: npm run test:e2e
 
       - name: Gerar build
         run: npm run build
