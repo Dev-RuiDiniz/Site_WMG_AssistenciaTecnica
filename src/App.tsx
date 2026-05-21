@@ -1,4 +1,5 @@
 import { ctaContent, equipmentContent, homeContent, servicesContent } from './content';
+import { DiagnosticContactForm } from './components/contact/DiagnosticContactForm';
 import { SiteLayout } from './components/layout/SiteLayout';
 import { Button } from './components/ui/Button';
 import { Card } from './components/ui/Card';
@@ -12,15 +13,13 @@ function getCtaById(id: string) {
 function App() {
   const primaryHeroCta = getCtaById(homeContent.hero.primaryCtaId);
   const secondaryHeroCta = getCtaById(homeContent.hero.secondaryCtaId);
-  const contactCta = getCtaById(homeContent.contactSection.ctaId);
   const finalPrimaryCta = getCtaById(homeContent.finalCtaSection.primaryCtaId);
   const finalSecondaryCta = getCtaById(homeContent.finalCtaSection.secondaryCtaId);
 
   return (
     <SiteLayout>
-      <section id="inicio" className="relative overflow-hidden bg-wmg-hero text-white" aria-labelledby="hero-title">
-        <div className="absolute inset-0 bg-wmg-radial" aria-hidden="true" />
-        <Container className="relative grid gap-10 py-20 md:grid-cols-[1.15fr_0.85fr] md:items-center md:py-28">
+      <section id="inicio" className="bg-wmg-hero text-white" aria-labelledby="hero-title">
+        <Container className="grid gap-10 py-20 md:grid-cols-[1.15fr_0.85fr] md:items-center md:py-28">
           <div>
             <p className="mb-5 text-sm font-extrabold uppercase tracking-[0.22em] text-wmg-lime-500">
               {homeContent.hero.eyebrow}
@@ -41,8 +40,7 @@ function App() {
               ) : null}
             </div>
           </div>
-
-          <div className="grid gap-4 rounded-3xl border border-white/10 bg-white/10 p-5 shadow-2xl backdrop-blur">
+          <div className="grid gap-4 rounded-3xl border border-white/10 bg-white/10 p-5">
             {homeContent.hero.highlights.map((highlight) => (
               <div key={highlight.title} className="rounded-2xl bg-wmg-navy-950/70 p-5">
                 <h2 className="text-lg font-black text-wmg-lime-500">{highlight.title}</h2>
@@ -54,16 +52,9 @@ function App() {
       </section>
 
       <Container className="py-16 md:py-24">
-        <section
-          className="grid gap-8 rounded-3xl bg-slate-100 p-6 md:grid-cols-[0.9fr_1.1fr] md:p-10"
-          aria-labelledby="pain-title"
-        >
-          <SectionTitle
-            eyebrow={homeContent.painSection.eyebrow}
-            title={homeContent.painSection.title}
-            description={homeContent.painSection.description}
-          />
-          <div className="grid gap-4">
+        <section aria-labelledby="pain-title" className="grid gap-8 rounded-3xl bg-slate-100 p-6 md:p-10">
+          <SectionTitle eyebrow={homeContent.painSection.eyebrow} title={homeContent.painSection.title} description={homeContent.painSection.description} />
+          <div className="grid gap-4 md:grid-cols-3">
             {homeContent.painSection.points.map((point) => (
               <Card key={point.title}>
                 <h3 className="text-xl font-black text-wmg-navy-950">{point.title}</h3>
@@ -74,45 +65,17 @@ function App() {
         </section>
 
         <section id="servicos" className="mt-20 grid gap-10 scroll-mt-24" aria-labelledby="servicos-title">
-          <SectionTitle
-            eyebrow={homeContent.servicesSection.eyebrow}
-            title={homeContent.servicesSection.title}
-            description={homeContent.servicesSection.description}
-          />
-
+          <SectionTitle eyebrow={homeContent.servicesSection.eyebrow} title={homeContent.servicesSection.title} description={homeContent.servicesSection.description} />
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {servicesContent.map((service) => {
               const serviceCta = getCtaById(service.ctaId);
-
               return (
                 <Card key={service.slug} variant="service">
-                  <div className="flex h-full flex-col gap-5">
-                    <div>
-                      <p className="mb-3 text-xs font-extrabold uppercase tracking-[0.18em] text-wmg-cyan-300">
-                        Demanda atendida
-                      </p>
-                      <h3 className="text-2xl font-black text-wmg-lime-500">{service.title}</h3>
-                      <p className="mt-4 leading-7 text-slate-200">{service.description}</p>
-                    </div>
-
-                    <div className="rounded-2xl bg-wmg-navy-950/60 p-4">
-                      <h4 className="font-black text-white">Quando acionar</h4>
-                      <p className="mt-2 leading-7 text-slate-300">{service.demand}</p>
-                    </div>
-
-                    <div className="rounded-2xl border border-white/10 p-4">
-                      <h4 className="font-black text-white">Como a WMG ajuda</h4>
-                      <p className="mt-2 leading-7 text-slate-300">{service.response}</p>
-                    </div>
-
-                    <div className="mt-auto pt-2">
-                      {serviceCta ? (
-                        <Button href={serviceCta.href} variant="secondary">
-                          {serviceCta.label}
-                        </Button>
-                      ) : null}
-                    </div>
-                  </div>
+                  <h3 className="text-2xl font-black text-wmg-lime-500">{service.title}</h3>
+                  <p className="mt-4 leading-7 text-slate-200">{service.description}</p>
+                  <p className="mt-4 leading-7 text-slate-300">{service.demand}</p>
+                  <p className="mt-4 leading-7 text-slate-300">{service.response}</p>
+                  {serviceCta ? <Button href={serviceCta.href} variant="secondary" className="mt-5">{serviceCta.label}</Button> : null}
                 </Card>
               );
             })}
@@ -120,12 +83,7 @@ function App() {
         </section>
 
         <section id="equipamentos" className="mt-20 grid gap-10 scroll-mt-24" aria-labelledby="equipamentos-title">
-          <SectionTitle
-            eyebrow="Equipamentos atendidos"
-            title="Categorias técnicas atendidas pela WMG"
-            description="A lista ajuda a qualificar rapidamente se a demanda está dentro do escopo técnico antes do contato comercial."
-          />
-
+          <SectionTitle eyebrow="Equipamentos atendidos" title="Categorias técnicas atendidas pela WMG" description="A lista ajuda a qualificar rapidamente se a demanda está dentro do escopo técnico." />
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {equipmentContent.map((equipment) => (
               <Card key={equipment.slug}>
@@ -137,11 +95,7 @@ function App() {
         </section>
 
         <section className="mt-20 grid gap-10" aria-labelledby="benefits-title">
-          <SectionTitle
-            eyebrow={homeContent.benefitsSection.eyebrow}
-            title={homeContent.benefitsSection.title}
-            description={homeContent.benefitsSection.description}
-          />
+          <SectionTitle eyebrow={homeContent.benefitsSection.eyebrow} title={homeContent.benefitsSection.title} description={homeContent.benefitsSection.description} />
           <div className="grid gap-6 md:grid-cols-3">
             {homeContent.benefitsSection.benefits.map((benefit) => (
               <Card key={benefit.title}>
@@ -153,22 +107,11 @@ function App() {
         </section>
 
         <section id="sobre" className="mt-20 scroll-mt-24" aria-labelledby="about-title">
-          <SectionTitle
-            eyebrow={homeContent.aboutSection.eyebrow}
-            title={homeContent.aboutSection.title}
-            description={homeContent.aboutSection.description}
-          />
+          <SectionTitle eyebrow={homeContent.aboutSection.eyebrow} title={homeContent.aboutSection.title} description={homeContent.aboutSection.description} />
         </section>
 
-        <section
-          className="mt-20 grid gap-10 rounded-3xl bg-wmg-navy-950 p-6 text-white md:p-10"
-          aria-labelledby="credibility-title"
-        >
-          <SectionTitle
-            eyebrow={homeContent.credibilitySection.eyebrow}
-            title={homeContent.credibilitySection.title}
-            description={homeContent.credibilitySection.description}
-          />
+        <section className="mt-20 grid gap-10 rounded-3xl bg-wmg-navy-950 p-6 text-white md:p-10" aria-labelledby="credibility-title">
+          <SectionTitle eyebrow={homeContent.credibilitySection.eyebrow} title={homeContent.credibilitySection.title} description={homeContent.credibilitySection.description} />
           <div className="grid gap-6 md:grid-cols-3">
             {homeContent.credibilitySection.items.map((item) => (
               <div key={item.title} className="rounded-2xl border border-white/10 bg-white/5 p-6">
@@ -181,35 +124,20 @@ function App() {
 
         <section id="contato" className="mt-20 scroll-mt-24" aria-labelledby="contact-title">
           <Card variant="highlight">
-            <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.18em] text-wmg-lime-500">
-              {homeContent.contactSection.eyebrow}
-            </p>
-            <h2 id="contact-title" className="text-3xl font-black text-white md:text-4xl">
-              {homeContent.contactSection.title}
-            </h2>
-            <p className="mt-4 max-w-3xl leading-8 text-slate-200">{homeContent.contactSection.description}</p>
-            <div className="mt-6">{contactCta ? <Button href={contactCta.href}>{contactCta.label}</Button> : null}</div>
+            <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.18em] text-wmg-lime-500">Contato / diagnóstico</p>
+            <h2 id="contact-title" className="text-3xl font-black text-white md:text-4xl">Solicite uma avaliação técnica</h2>
+            <p className="mt-4 max-w-3xl leading-8 text-slate-200">Informe os dados do lead, equipamento, falha e urgência para facilitar a triagem técnica da WMG.</p>
+            <DiagnosticContactForm />
           </Card>
         </section>
 
-        <section
-          className="mt-20 rounded-3xl border border-slate-200 bg-white p-6 shadow-xl md:p-10"
-          aria-label="Chamada final da página inicial"
-        >
-          <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.18em] text-wmg-cyan-700">
-            {homeContent.finalCtaSection.eyebrow}
-          </p>
-          <h2 className="max-w-4xl text-3xl font-black text-wmg-navy-950 md:text-5xl">
-            {homeContent.finalCtaSection.title}
-          </h2>
+        <section className="mt-20 rounded-3xl border border-slate-200 bg-white p-6 shadow-xl md:p-10" aria-label="Chamada final da página inicial">
+          <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.18em] text-wmg-cyan-700">{homeContent.finalCtaSection.eyebrow}</p>
+          <h2 className="max-w-4xl text-3xl font-black text-wmg-navy-950 md:text-5xl">{homeContent.finalCtaSection.title}</h2>
           <p className="mt-4 max-w-3xl leading-8 text-slate-600">{homeContent.finalCtaSection.description}</p>
           <div className="mt-8 flex flex-wrap gap-4">
             {finalPrimaryCta ? <Button href={finalPrimaryCta.href}>{finalPrimaryCta.label}</Button> : null}
-            {finalSecondaryCta ? (
-              <Button href={finalSecondaryCta.href} variant="secondary">
-                {finalSecondaryCta.label}
-              </Button>
-            ) : null}
+            {finalSecondaryCta ? <Button href={finalSecondaryCta.href} variant="secondary">{finalSecondaryCta.label}</Button> : null}
           </div>
         </section>
       </Container>
