@@ -1,6 +1,6 @@
 import { render, screen, within } from '@testing-library/react';
 import App from './App';
-import { ctaContent, homeContent, servicesContent } from './content';
+import { ctaContent, equipmentContent, homeContent, servicesContent } from './content';
 
 describe('App', () => {
   it('renderiza hero comercial com CTA principal visivel', () => {
@@ -23,6 +23,7 @@ describe('App', () => {
     expect(screen.getByRole('contentinfo')).toBeInTheDocument();
     expect(document.querySelector('#inicio')).toBeInTheDocument();
     expect(document.querySelector('#servicos')).toBeInTheDocument();
+    expect(document.querySelector('#equipamentos')).toBeInTheDocument();
     expect(document.querySelector('#sobre')).toBeInTheDocument();
     expect(document.querySelector('#contato')).toBeInTheDocument();
   });
@@ -53,6 +54,22 @@ describe('App', () => {
         );
       }
     }
+  });
+
+  it('renderiza equipamentos atendidos com categorias obrigatorias', () => {
+    render(<App />);
+
+    expect(screen.getByRole('heading', { name: 'Categorias técnicas atendidas pela WMG' })).toBeInTheDocument();
+    expect(document.querySelector('#equipamentos')).toBeInTheDocument();
+
+    for (const equipment of equipmentContent) {
+      expect(screen.getByRole('heading', { name: equipment.title })).toBeInTheDocument();
+      expect(screen.getByText(equipment.description)).toBeInTheDocument();
+    }
+
+    expect(screen.getByRole('heading', { name: 'Placas eletrônicas' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'CNCs' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Fontes industriais' })).toBeInTheDocument();
   });
 
   it('renderiza dor, beneficios, credibilidade e CTA final da landing', () => {
