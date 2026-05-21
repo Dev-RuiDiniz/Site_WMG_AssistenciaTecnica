@@ -13,6 +13,9 @@ import { submitDiagnosticForm } from './diagnosticSubmit';
 
 type DiagnosticStatus = 'idle' | 'submitting' | 'success' | 'error';
 
+const inputClassName =
+  'min-h-12 w-full rounded-2xl px-4 py-3 text-base text-wmg-navy-950 outline-none ring-1 ring-transparent transition focus:ring-2 focus:ring-wmg-cyan-300 disabled:cursor-not-allowed disabled:opacity-70';
+
 function ErrorText({ message }: { message?: string }) {
   return message ? <p className="mt-2 text-sm font-semibold text-red-200">{message}</p> : null;
 }
@@ -67,7 +70,7 @@ export function DiagnosticContactForm() {
         <label className="grid gap-2 text-sm font-bold text-white">
           Nome *
           <input
-            className="rounded-2xl px-4 py-3 text-wmg-navy-950"
+            className={inputClassName}
             value={values.name}
             onChange={(event) => update('name', event.target.value)}
             disabled={isSubmitting}
@@ -77,45 +80,24 @@ export function DiagnosticContactForm() {
 
         <label className="grid gap-2 text-sm font-bold text-white">
           Empresa
-          <input
-            className="rounded-2xl px-4 py-3 text-wmg-navy-950"
-            value={values.company}
-            onChange={(event) => update('company', event.target.value)}
-            disabled={isSubmitting}
-          />
+          <input className={inputClassName} value={values.company} onChange={(event) => update('company', event.target.value)} disabled={isSubmitting} />
         </label>
 
         <label className="grid gap-2 text-sm font-bold text-white">
           E-mail
-          <input
-            className="rounded-2xl px-4 py-3 text-wmg-navy-950"
-            type="email"
-            value={values.email}
-            onChange={(event) => update('email', event.target.value)}
-            disabled={isSubmitting}
-          />
+          <input className={inputClassName} type="email" value={values.email} onChange={(event) => update('email', event.target.value)} disabled={isSubmitting} />
           <ErrorText message={errors.email} />
         </label>
 
         <label className="grid gap-2 text-sm font-bold text-white">
           Telefone / WhatsApp
-          <input
-            className="rounded-2xl px-4 py-3 text-wmg-navy-950"
-            value={values.phone}
-            onChange={(event) => update('phone', event.target.value)}
-            disabled={isSubmitting}
-          />
+          <input className={inputClassName} value={values.phone} onChange={(event) => update('phone', event.target.value)} disabled={isSubmitting} />
           <ErrorText message={errors.phone} />
         </label>
 
         <label className="grid gap-2 text-sm font-bold text-white">
           Equipamento *
-          <select
-            className="rounded-2xl px-4 py-3 text-wmg-navy-950"
-            value={values.equipment}
-            onChange={(event) => update('equipment', event.target.value)}
-            disabled={isSubmitting}
-          >
+          <select className={inputClassName} value={values.equipment} onChange={(event) => update('equipment', event.target.value)} disabled={isSubmitting}>
             <option value="">Selecione uma categoria</option>
             {equipmentContent.map((equipment) => (
               <option key={equipment.slug} value={equipment.title}>
@@ -128,13 +110,8 @@ export function DiagnosticContactForm() {
 
         <label className="grid gap-2 text-sm font-bold text-white">
           Tipo de falha *
-          <select
-            className="rounded-2xl px-4 py-3 text-wmg-navy-950"
-            value={values.failureType}
-            onChange={(event) => update('failureType', event.target.value)}
-            disabled={isSubmitting}
-          >
-            <option value="">Selecione o tipo de falha</option>
+          <select className={inputClassName} value={values.failureType} onChange={(event) => update('failureType', event.target.value)} disabled={isSubmitting}>
+            <option value="">Selecione tipo de falha</option>
             {failureTypeOptions.map((option) => (
               <option key={option.slug} value={option.title}>
                 {option.title}
@@ -146,12 +123,7 @@ export function DiagnosticContactForm() {
 
         <label className="grid gap-2 text-sm font-bold text-white md:col-span-2">
           Urgência *
-          <select
-            className="rounded-2xl px-4 py-3 text-wmg-navy-950"
-            value={values.urgency}
-            onChange={(event) => update('urgency', event.target.value)}
-            disabled={isSubmitting}
-          >
+          <select className={inputClassName} value={values.urgency} onChange={(event) => update('urgency', event.target.value)} disabled={isSubmitting}>
             <option value="">Selecione a urgência</option>
             {urgencyOptions.map((option) => (
               <option key={option.slug} value={option.title}>
@@ -164,18 +136,14 @@ export function DiagnosticContactForm() {
 
         <label className="grid gap-2 text-sm font-bold text-white md:col-span-2">
           Descrição do problema *
-          <textarea
-            className="min-h-36 rounded-2xl px-4 py-3 text-wmg-navy-950"
-            value={values.description}
-            onChange={(event) => update('description', event.target.value)}
-            disabled={isSubmitting}
-          />
+          <textarea className={`${inputClassName} min-h-40 resize-y`} value={values.description} onChange={(event) => update('description', event.target.value)} disabled={isSubmitting} />
           <ErrorText message={errors.description} />
         </label>
       </div>
 
       <label className="flex gap-3 rounded-2xl bg-white/10 p-4 text-sm leading-6 text-slate-100">
         <input
+          className="mt-1 size-5 shrink-0"
           type="checkbox"
           checked={values.consent}
           onChange={(event) => update('consent', event.target.checked)}
@@ -185,18 +153,18 @@ export function DiagnosticContactForm() {
       </label>
       <ErrorText message={errors.consent} />
 
-      <div className="flex flex-wrap gap-4">
+      <div className="grid gap-3 sm:flex sm:flex-wrap">
         <button
           type="submit"
-          className="rounded-full bg-wmg-lime-500 px-6 py-3 font-extrabold uppercase text-wmg-navy-950 disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex min-h-12 items-center justify-center rounded-full bg-wmg-lime-500 px-6 py-3 text-sm font-extrabold uppercase text-wmg-navy-950 disabled:cursor-not-allowed disabled:opacity-60"
           disabled={isSubmitting}
         >
           {isSubmitting ? 'Enviando diagnóstico...' : 'Enviar diagnóstico'}
         </button>
-        <a className="rounded-full border border-wmg-cyan-400 px-6 py-3 font-extrabold uppercase text-white" href={mailtoHref}>
+        <a className="inline-flex min-h-12 items-center justify-center rounded-full border border-wmg-cyan-400 px-6 py-3 text-center text-sm font-extrabold uppercase text-white" href={mailtoHref}>
           {contactContent.mailtoLabel}
         </a>
-        <a className="rounded-full px-6 py-3 font-extrabold uppercase text-wmg-cyan-300" href={whatsappHref}>
+        <a className="inline-flex min-h-12 items-center justify-center rounded-full px-6 py-3 text-center text-sm font-extrabold uppercase text-wmg-cyan-300" href={whatsappHref}>
           {contactContent.whatsappLabel}
         </a>
       </div>
