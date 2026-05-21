@@ -13,5 +13,7 @@ describe('FloatingWhatsAppButton', () => {
     expect(link).toHaveAttribute('href', expect.stringContaining('text='));
     expect(link).toHaveAttribute('target', '_blank');
     expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+    expect(screen.queryByText(/^whatsapp$/i)).not.toBeInTheDocument();
+    expect(screen.getByTestId('whatsapp-icon')).toBeInTheDocument();
   });
 });
