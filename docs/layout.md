@@ -2,7 +2,7 @@
 
 ## Visão geral
 
-O projeto usa uma SPA institucional com navegação por âncoras internas. O layout global é composto por `SiteLayout`, `Header`, conteúdo principal e `Footer`.
+O projeto usa uma SPA institucional com navegação por âncoras internas. O layout global é composto por `SiteLayout`, `Header`, conteúdo principal, `Footer` e botão flutuante global do WhatsApp.
 
 ## Estrutura principal
 
@@ -10,28 +10,21 @@ O projeto usa uma SPA institucional com navegação por âncoras internas. O lay
 - `#servicos`: cards de serviços técnicos/comerciais.
 - `#equipamentos`: categorias de equipamentos atendidos.
 - `#sobre`: bloco institucional.
-- `#contato`: chamada de contato.
+- `#contato`: formulário de diagnóstico e contato.
 
-## Seção de serviços
+## WhatsApp global
 
-A seção `#servicos` apresenta cards com nome do serviço, descrição, demanda atendida, resposta da WMG e CTA.
+A TASK-13 adicionou um botão flutuante global de WhatsApp em todas as seções da SPA.
 
-## Seção de equipamentos
+Comportamento:
 
-A TASK-10 adicionou `#equipamentos` à navegação principal.
-
-Cada card de equipamento apresenta:
-
-- categoria técnica;
-- descrição clara;
-- linguagem técnica/comercial;
-- escopo sem prometer atendimento fora da lista.
-
-A grade é responsiva:
-
-- 1 coluna em telas menores;
-- 2 colunas em telas médias;
-- 4 colunas em telas grandes.
+- canto inferior direito;
+- link externo para `wa.me`;
+- número centralizado em `companyContent.phone`;
+- mensagem pré-preenchida;
+- `target="_blank"`;
+- `rel="noopener noreferrer"`;
+- label acessível para leitores de tela.
 
 ## Navegação
 
@@ -55,7 +48,4 @@ Itens atuais:
 - CTAs usam links com texto visível.
 - Cards mantêm headings internos.
 - Header e footer expõem navegação por links.
-
-## Evolução futura
-
-Adicionar rota dedicada `/equipamentos` apenas se o projeto deixar de ser uma landing SPA por âncoras.
+- WhatsApp flutuante possui `aria-label`.

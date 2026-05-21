@@ -26,6 +26,11 @@ describe('versioned content', () => {
     ).toBe(true);
   });
 
+  it('mantem telefone de WhatsApp centralizado no cadastro da empresa', () => {
+    expect(companyContent.phone).toBe('+55 12 99158-8460');
+    expect(companyContent.phone.replace(/\D/g, '')).toBe('5512991588460');
+  });
+
   it('mantem servicos com contratos comerciais, CTAs validos e slugs unicos', () => {
     const ctaIds = ctaContent.map((cta) => cta.id);
     const expectedServiceSlugs = [
@@ -89,6 +94,15 @@ describe('versioned content', () => {
     }
 
     expect(navigationItems.map((item) => item.href)).toContain('#equipamentos');
+  });
+
+  it('configura CTA de suporte para WhatsApp com mensagem preenchida', () => {
+    const supportCta = ctaContent.find((cta) => cta.id === 'talk-to-support');
+
+    expect(supportCta).toBeDefined();
+    expect(supportCta?.href).toContain('https://wa.me/5512991588460');
+    expect(supportCta?.href).toContain('text=');
+    expect(decodeURIComponent(supportCta?.href ?  '')).toContain('Olá, equipe WMG');
   });
 
   it('mantem conteudo da pagina inicial conectado a CTAs existentes', () => {

@@ -1,17 +1,21 @@
 import { render, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 import { SiteLayout } from './SiteLayout';
 
 describe('SiteLayout', () => {
-  it('renderiza header, conteudo principal e footer', () => {
+  it('renderiza layout global com header, main, footer e WhatsApp flutuante', () => {
     render(
       <SiteLayout>
-        <section aria-label="Conteúdo de teste">Conteúdo principal</section>
+        <p>Conteúdo da página</p>
       </SiteLayout>,
     );
 
     expect(screen.getByRole('banner')).toBeInTheDocument();
-    expect(screen.getByRole('main')).toBeInTheDocument();
-    expect(screen.getByText(/conteúdo principal/i)).toBeInTheDocument();
+    expect(screen.getByRole('main')).toHaveTextContent('Conteúdo da página');
     expect(screen.getByRole('contentinfo')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /abrir conversa no whatsapp da wmg/i })).toHaveAttribute(
+      'href',
+      expect.stringContaining('https://wa.me/5512991588460'),
+    );
   });
 });

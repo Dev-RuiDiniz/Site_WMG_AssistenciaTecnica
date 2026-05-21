@@ -1,3 +1,5 @@
+import { buildWhatsAppLink } from '../whatsapp/whatsappLink';
+
 export type DiagnosticFormValues = {
   name: string;
   company: string;
@@ -112,7 +114,5 @@ export function buildWhatsAppFallback(values: DiagnosticFormValues, phone: strin
     `Urgência: ${normalizeText(values.urgency) || 'Não informado'}`,
   ].join('\n');
 
-  const digits = phone.replace(/\D/g, '');
-
-  return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
+  return buildWhatsAppLink(phone, message);
 }
