@@ -56,7 +56,10 @@ function App() {
       </section>
 
       <Container className="py-16 md:py-24">
-        <section className="grid gap-8 rounded-3xl bg-slate-100 p-6 md:grid-cols-[0.9fr_1.1fr] md:p-10" aria-labelledby="pain-title">
+        <section
+          className="grid gap-8 rounded-3xl bg-slate-100 p-6 md:grid-cols-[0.9fr_1.1fr] md:p-10"
+          aria-labelledby="pain-title"
+        >
           <SectionTitle
             eyebrow={homeContent.painSection.eyebrow}
             title={homeContent.painSection.title}
@@ -78,13 +81,43 @@ function App() {
             title={homeContent.servicesSection.title}
             description={homeContent.servicesSection.description}
           />
-          <div className="grid gap-6 md:grid-cols-3">
-            {servicesContent.map((service) => (
-              <Card key={service.slug} variant="service">
-                <h3 className="mb-4 text-xl font-black text-wmg-lime-500">{service.title}</h3>
-                <p className="leading-7 text-slate-200">{service.description}</p>
-              </Card>
-            ))}
+
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {servicesContent.map((service) => {
+              const serviceCta = getCtaById(service.ctaId);
+
+              return (
+                <Card key={service.slug} variant="service">
+                  <div className="flex h-full flex-col gap-5">
+                    <div>
+                      <p className="mb-3 text-xs font-extrabold uppercase tracking-[0.18em] text-wmg-cyan-300">
+                        Demanda atendida
+                      </p>
+                      <h3 className="text-2xl font-black text-wmg-lime-500">{service.title}</h3>
+                      <p className="mt-4 leading-7 text-slate-200">{service.description}</p>
+                    </div>
+
+                    <div className="rounded-2xl bg-wmg-navy-950/60 p-4">
+                      <h4 className="font-black text-white">Quando acionar</h4>
+                      <p className="mt-2 leading-7 text-slate-300">{service.demand}</p>
+                    </div>
+
+                    <div className="rounded-2xl border border-white/10 p-4">
+                      <h4 className="font-black text-white">Como a WMG ajuda</h4>
+                      <p className="mt-2 leading-7 text-slate-300">{service.response}</p>
+                    </div>
+
+                    <div className="mt-auto pt-2">
+                      {serviceCta ? (
+                        <Button href={serviceCta.href} variant="secondary">
+                          {serviceCta.label}
+                        </Button>
+                      ) : null}
+                    </div>
+                  </div>
+                </Card>
+              );
+            })}
           </div>
         </section>
 
@@ -112,7 +145,10 @@ function App() {
           />
         </section>
 
-        <section className="mt-20 grid gap-10 rounded-3xl bg-wmg-navy-950 p-6 text-white md:p-10" aria-labelledby="credibility-title">
+        <section
+          className="mt-20 grid gap-10 rounded-3xl bg-wmg-navy-950 p-6 text-white md:p-10"
+          aria-labelledby="credibility-title"
+        >
           <SectionTitle
             eyebrow={homeContent.credibilitySection.eyebrow}
             title={homeContent.credibilitySection.title}
@@ -136,23 +172,22 @@ function App() {
             <h2 id="contact-title" className="text-3xl font-black text-white md:text-4xl">
               {homeContent.contactSection.title}
             </h2>
-            <p className="mt-4 max-w-3xl leading-8 text-slate-200">
-              {homeContent.contactSection.description}
-            </p>
+            <p className="mt-4 max-w-3xl leading-8 text-slate-200">{homeContent.contactSection.description}</p>
             <div className="mt-6">{contactCta ? <Button href={contactCta.href}>{contactCta.label}</Button> : null}</div>
           </Card>
         </section>
 
-        <section className="mt-20 rounded-3xl border border-slate-200 bg-white p-6 shadow-xl md:p-10" aria-label="Chamada final da página inicial">
+        <section
+          className="mt-20 rounded-3xl border border-slate-200 bg-white p-6 shadow-xl md:p-10"
+          aria-label="Chamada final da página inicial"
+        >
           <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.18em] text-wmg-cyan-700">
             {homeContent.finalCtaSection.eyebrow}
           </p>
           <h2 className="max-w-4xl text-3xl font-black text-wmg-navy-950 md:text-5xl">
             {homeContent.finalCtaSection.title}
           </h2>
-          <p className="mt-4 max-w-3xl leading-8 text-slate-600">
-            {homeContent.finalCtaSection.description}
-          </p>
+          <p className="mt-4 max-w-3xl leading-8 text-slate-600">{homeContent.finalCtaSection.description}</p>
           <div className="mt-8 flex flex-wrap gap-4">
             {finalPrimaryCta ? <Button href={finalPrimaryCta.href}>{finalPrimaryCta.label}</Button> : null}
             {finalSecondaryCta ? (
