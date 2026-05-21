@@ -2,8 +2,8 @@ import { expect, test } from '@playwright/test';
 
 const expectedPhone = '5512991588460';
 
-test.describe('WhatsApp responsivo', () => {
-  test('botão flutuante mantém numero e mensagem pre-preenchida', async ({ page }) => {
+test.describe('WhatsApp global', () => {
+  test('botao flutuante mantem numero, mensagem e icone sem texto', async ({ page }) => {
     await page.goto('/');
 
     const whatsapp = page.getByRole('link', { name: /abrir conversa no whatsapp da wmg/i });
@@ -13,10 +13,13 @@ test.describe('WhatsApp responsivo', () => {
     expect(href).toContain(`https://wa.me/${expectedPhone}`);
     expect(href).toContain('text=');
     expect(decodeURIComponent(href ?? '')).toContain('Olá, equipe WMG');
+
+    await expect(whatsapp.locator('svg')).toBeVisible();
+    await expect(whatsapp).not.toContainText(/whatsapp/i);
   });
 
-  test('CTA falar com suporte mantém link global do WhatsApp', async ({ page }) => {
-    await page.goto('/#servicos');
+  test('CTA falar com suporte mantem link global do WhatsApp', async ({ page }) => {
+    await page.goto('/servicos');
 
     const supportLinks = page.getByRole('link', { name: /falar com suporte/i });
     const firstHref = await supportLinks.first().getAttribute('href');

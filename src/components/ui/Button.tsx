@@ -36,15 +36,18 @@ export function Button({ children, variant = 'primary', className = '', ...props
   const classes = `${baseClasses} ${variantClasses[variant]} ${className}`.trim();
 
   if ('href' in props && props.href) {
+    const anchorProps = props as ButtonAsAnchor;
     return (
-      <a className={classes} {...props}>
+      <a className={classes} {...anchorProps}>
         {children}
       </a>
     );
   }
 
+  const buttonProps = props as ButtonAsButton;
+
   return (
-    <button className={classes} type="button" {...props}>
+    <button className={classes} type={buttonProps.type ?? 'button'} {...buttonProps}>
       {children}
     </button>
   );
