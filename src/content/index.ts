@@ -1,4 +1,5 @@
 export { companyContent } from './company';
+export { contactContent, failureTypeOptions, urgencyOptions } from './contact';
 export { ctaContent } from './ctas';
 export { equipmentContent } from './equipment';
 export { homeContent } from './home';
