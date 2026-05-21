@@ -2,7 +2,7 @@
 
 ## Visão geral
 
-A TASK-06 centraliza textos comerciais e institucionais em `src/content`, evitando que mensagens, contatos, CTAs, serviços e equipamentos fiquem espalhados dentro dos componentes React.
+A camada `src/content` centraliza textos comerciais e institucionais, evitando que mensagens, contatos, CTAs, serviços e equipamentos fiquem espalhados dentro dos componentes React.
 
 Essa camada é versionada junto com o código e deve ser atualizada sempre que houver mudança de escopo comercial, contato público ou mensagem institucional.
 
@@ -30,11 +30,26 @@ src/content
 | `services.ts` | Serviços comerciais exibidos no site |
 | `equipment.ts` | Equipamentos e áreas técnicas atendidas |
 | `ctas.ts` | Chamadas de ação reutilizáveis |
-| `home.ts` | Textos da página inicial |
+| `home.ts` | Textos e blocos da página inicial |
 | `navigation.ts` | Itens de navegação por âncoras internas |
 | `types.ts` | Contratos TypeScript dos conteúdos |
 | `validators.ts` | Validadores reutilizados pelos testes |
 | `content.test.ts` | Teste de contrato do conteúdo versionado |
+
+## Página inicial
+
+A TASK-08 expandiu `home.ts` para sustentar uma landing pública com foco em conversão.
+
+A Home é composta por:
+
+- `hero`: título principal, subtítulo, descrição, CTAs e destaques de apoio.
+- `painSection`: dor do usuário, impacto de máquina parada e pontos de problema.
+- `servicesSection`: apresentação da seção de serviços.
+- `benefitsSection`: benefícios comerciais da página inicial.
+- `aboutSection`: bloco institucional.
+- `credibilitySection`: argumentos de confiança sem promessas não validadas.
+- `contactSection`: chamada de contato.
+- `finalCtaSection`: bloco final de conversão.
 
 ## Campos obrigatórios
 
@@ -61,48 +76,22 @@ Dados institucionais devem conter:
 - `website`
 - `description`
 
-## Como adicionar um novo serviço
+Itens comerciais da Home devem conter:
 
-1. Abrir `src/content/services.ts`.
-2. Adicionar um novo item com `slug`, `title` e `description`.
-3. Usar slug único, em minúsculas, sem acentos e com hífens.
-4. Executar os testes de conteúdo.
-5. Revisar a renderização da página inicial.
+- `title`
+- `description`
 
-Exemplo:
+## Como atualizar a Home
 
-```ts
-{
-  slug: 'bancada-teste-eletronica',
-  title: 'Bancada de teste eletrônica',
-  description: 'Validação técnica de módulos e placas em bancada especializada.',
-}
-```
-
-## Como atualizar contatos
-
-Atualize primeiro `src/content/company.ts`.
-
-Depois revise:
-
-- `.env.example`
-- `docs/deploy.md`
-- footer renderizado
-- CTAs de contato em `src/content/ctas.ts`
-
-Não versionar secrets, tokens, senhas, chaves privadas ou credenciais reais.
+1. Abra `src/content/home.ts`.
+2. Atualize textos nos blocos existentes.
+3. Não insira copy fixa diretamente em `src/App.tsx`.
+4. Ao adicionar novo CTA, cadastre antes em `src/content/ctas.ts`.
+5. Atualize o contrato em `src/content/types.ts` quando criar novos campos.
+6. Atualize `src/content/content.test.ts`.
+7. Execute testes e validações.
 
 ## Validações
-
-O teste `src/content/content.test.ts` garante:
-
-- dados institucionais preenchidos;
-- serviços com campos obrigatórios;
-- equipamentos com campos obrigatórios;
-- CTAs com campos críticos preenchidos;
-- navegação preenchida;
-- slugs únicos;
-- página inicial conectada a CTAs existentes.
 
 Execute:
 
@@ -112,6 +101,16 @@ npm run typecheck
 npm run check
 ```
 
-## Evolução futura
+O teste `src/content/content.test.ts` garante:
 
-Se o projeto virar monorepo, a pasta `src/content` pode ser extraída para `packages/content`, preservando os contratos e testes existentes.
+- dados institucionais preenchidos;
+- serviços com campos obrigatórios;
+- equipamentos com campos obrigatórios;
+- CTAs com campos críticos preenchidos;
+- navegação preenchida;
+- página inicial conectada a CTAs existentes;
+- blocos comerciais da Home com conteúdo escaneável.
+
+## Segurança
+
+Não versionar secrets, tokens, senhas, chaves privadas ou credenciais reais.

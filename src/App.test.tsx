@@ -1,9 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import App from './App';
-import { homeContent, servicesContent } from './content';
+import { ctaContent, homeContent, servicesContent } from './content';
 
 describe('App', () => {
-  it('renderiza a identidade principal da WMG Assistência Técnica', () => {
+  it('renderiza hero comercial com CTA principal visivel', () => {
     render(<App />);
 
     expect(
@@ -12,18 +12,16 @@ describe('App', () => {
     expect(screen.getByText(homeContent.hero.subtitle)).toBeInTheDocument();
     expect(
       screen.getAllByRole('link', { name: /solicitar avaliação técnica agora/i })[0],
-    ).toBeInTheDocument();
+    ).toHaveAttribute('href', '#contato');
   });
 
-  it('aplica layout global com navegacao e secoes base', () => {
+  it('mantem layout global e navegacao por ancoras', () => {
     render(<App />);
 
     expect(screen.getByRole('banner')).toBeInTheDocument();
     expect(screen.getByRole('main')).toBeInTheDocument();
     expect(screen.getByRole('contentinfo')).toBeInTheDocument();
-
-    const serviceLinks = screen.getAllByRole('link', { name: /serviços/i });
-    expect(serviceLinks.some((link) => link.getAttribute('href') === '#servicos')).toBe(true);
+    expect(document.querySelector('#inicio')).toBeInTheDocument();
     expect(document.querySelector('#servicos')).toBeInTheDocument();
     expect(document.querySelector('#sobre')).toBeInTheDocument();
     expect(document.querySelector('#contato')).toBeInTheDocument();
@@ -40,6 +38,34 @@ describe('App', () => {
       expect(screen.getByRole('heading', { name: service.title })).toBeInTheDocument();
       expect(screen.getByText(service.description)).toBeInTheDocument();
     }
+  });
+
+  it('renderiza dor, beneficios, credibilidade e CTA final da landing', () => {
+    render(<App />);
+
+    expect(screen.getByRole('heading', { name: homeContent.painSection.title })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: homeContent.benefitsSection.title })).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: homeContent.credibilitySection.title }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: homeContent.finalCtaSection.title })).toBeInTheDocument();
+
+    for (const benefit of homeContent.benefitsSection.benefits) {
+      expect(screen.getByRole('heading', { name: benefit.title })).toBeInTheDocument();
+    }
+  });
+
+  it('mantem CTAs finais conectados a destinos validos', () => {
+    render(<App />);
+
+    const primaryCta = ctaContent.find((cta) => cta.id === homeContent.finalCtaSection.primaryCtaId);
+    const finalCta = screen.getByLabelText('Chamada final da página inicial');
+
+    expect(primaryCta).toBeDefined();
+    expect(within(finalCta).getByRole('link', { name: primaryCta?.label ?? '' })).toHaveAttribute(
+      'href',
+      '#contato',
+    );
   });
 
   it('aplica tokens visuais WMG nos elementos principais', () => {
