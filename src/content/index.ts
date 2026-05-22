@@ -5,6 +5,7 @@ export { equipmentContent } from './equipment';
 export { homeContent } from './home';
 export { navigationItems } from './navigation';
 export { servicesContent } from './services';
+export { visualAssets } from './visualAssets';
 export {
   findDuplicateSlugs,
   findEmptyTextFields,

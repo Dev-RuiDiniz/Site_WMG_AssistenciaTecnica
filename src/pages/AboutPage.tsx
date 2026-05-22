@@ -1,30 +1,45 @@
-import { homeContent } from '../content';
+import { homeContent, visualAssets } from '../content';
 import { Card } from '../components/ui/Card';
 import { Container } from '../components/ui/Container';
+import { MediaFrame } from '../components/ui/MediaFrame';
 import { SectionTitle } from '../components/ui/SectionTitle';
 
 export function AboutPage() {
   return (
     <Container className="grid gap-20 py-16 md:py-24">
-      <section aria-labelledby="about-title">
-        <SectionTitle
-          eyebrow={homeContent.aboutSection.eyebrow}
-          title={homeContent.aboutSection.title}
-          description={homeContent.aboutSection.description}
+      <section
+        className="grid gap-10 md:grid-cols-[1fr_0.82fr] md:items-center"
+        aria-labelledby="about-title"
+      >
+        <div>
+          <SectionTitle
+            eyebrow={homeContent.aboutSection.eyebrow}
+            title="Assistencia tecnica para operacoes que dependem de continuidade"
+            description={homeContent.aboutSection.description}
+          />
+        </div>
+        <MediaFrame
+          asset={visualAssets.maintenance}
+          label="Diagnostico em bancada e campo"
+          className="min-h-96"
         />
       </section>
 
-      <section aria-labelledby="pain-title" className="grid gap-8 rounded-3xl bg-slate-100 p-6 md:p-10">
+      <section
+        aria-labelledby="pain-title"
+        className="grid gap-8 rounded-3xl border border-wmg-cyan-400/20 bg-wmg-hero p-6 text-white shadow-wmg-card md:p-10"
+      >
         <SectionTitle
           eyebrow={homeContent.painSection.eyebrow}
           title={homeContent.painSection.title}
           description={homeContent.painSection.description}
+          tone="dark"
         />
         <div className="grid gap-4 md:grid-cols-3">
           {homeContent.painSection.points.map((point) => (
-            <Card key={point.title}>
-              <h2 className="text-xl font-black text-wmg-navy-950">{point.title}</h2>
-              <p className="mt-3 leading-7 text-slate-600">{point.description}</p>
+            <Card key={point.title} variant="service" className="bg-white/[0.06]">
+              <h2 className="text-xl font-black text-wmg-lime-500">{point.title}</h2>
+              <p className="mt-3 leading-7 text-slate-200">{point.description}</p>
             </Card>
           ))}
         </div>
@@ -47,13 +62,14 @@ export function AboutPage() {
       </section>
 
       <section
-        className="grid gap-10 rounded-3xl bg-wmg-navy-950 p-6 text-white md:p-10"
+        className="grid gap-10 rounded-3xl border border-wmg-lime-500/20 bg-wmg-navy-950 p-6 text-white shadow-wmg-card md:p-10"
         aria-labelledby="credibility-title"
       >
         <SectionTitle
           eyebrow={homeContent.credibilitySection.eyebrow}
           title={homeContent.credibilitySection.title}
           description={homeContent.credibilitySection.description}
+          tone="dark"
         />
         <div className="grid gap-6 md:grid-cols-3">
           {homeContent.credibilitySection.items.map((item) => (

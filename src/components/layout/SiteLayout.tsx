@@ -9,7 +9,7 @@ type SiteLayoutProps = {
 
 export function SiteLayout({ children }: SiteLayoutProps) {
   return (
-    <div className="min-h-screen bg-slate-50 text-wmg-graphite-900">
+    <div className="min-h-screen bg-transparent text-wmg-graphite-900">
       <Header />
       <main>{children}</main>
       <Footer />

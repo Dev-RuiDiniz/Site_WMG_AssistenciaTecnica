@@ -9,6 +9,7 @@ import {
   homeContent,
   navigationItems,
   servicesContent,
+  visualAssets,
 } from '.';
 
 describe('versioned content', () => {
@@ -52,7 +53,14 @@ describe('versioned content', () => {
 
     for (const service of servicesContent) {
       expect(
-        findEmptyTextFields(service, ['slug', 'title', 'description', 'demand', 'response', 'ctaId']),
+        findEmptyTextFields(service, [
+          'slug',
+          'title',
+          'description',
+          'demand',
+          'response',
+          'ctaId',
+        ]),
       ).toEqual([]);
       expect(ctaIds).toContain(service.ctaId);
     }
@@ -115,5 +123,12 @@ describe('versioned content', () => {
     expect(ctaIds).toContain(homeContent.finalCtaSection.primaryCtaId);
     expect(ctaIds).toContain(homeContent.finalCtaSection.secondaryCtaId);
   });
-});
 
+  it('mantem assets visuais de campanha com metadados acessiveis', () => {
+    for (const asset of Object.values(visualAssets)) {
+      expect(asset.src).toMatch(/^\/assets\/campaign\/.+\.png$/);
+      expect(asset.alt.length).toBeGreaterThan(24);
+      expect(asset.title.length).toBeGreaterThan(8);
+    }
+  });
+});
