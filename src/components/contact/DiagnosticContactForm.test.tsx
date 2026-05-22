@@ -10,16 +10,24 @@ vi.mock('./diagnosticSubmit', () => ({
 const submitMock = vi.mocked(submitDiagnosticForm);
 
 function fillValidForm() {
-  fireEvent.change(screen.getByRole('textbox', { name: /nome/i }), { target: { value: 'Rui Diniz' } });
-  fireEvent.change(screen.getByRole('textbox', { name: /e-mail/i }), { target: { value: 'cliente@example.com' } });
-  fireEvent.change(screen.getByRole('textbox', { name: /telefone/i }), { target: { value: '(11) 99999-9999' } });
+  fireEvent.change(screen.getByRole('textbox', { name: /nome/i }), {
+    target: { value: 'Rui Diniz' },
+  });
+  fireEvent.change(screen.getByRole('textbox', { name: /e-mail/i }), {
+    target: { value: 'cliente@example.com' },
+  });
+  fireEvent.change(screen.getByRole('textbox', { name: /telefone/i }), {
+    target: { value: '(11) 99999-9999' },
+  });
   fireEvent.change(screen.getByRole('combobox', { name: /equipamento/i }), {
     target: { value: 'Placas eletrônicas' },
   });
   fireEvent.change(screen.getByRole('combobox', { name: /tipo de falha/i }), {
     target: { value: 'Equipamento parado' },
   });
-  fireEvent.change(screen.getByRole('combobox', { name: /urgência/i }), { target: { value: 'Alta' } });
+  fireEvent.change(screen.getByRole('combobox', { name: /urgência/i }), {
+    target: { value: 'Alta' },
+  });
   fireEvent.change(screen.getByRole('textbox', { name: /descrição do problema/i }), {
     target: { value: 'Placa eletrônica apresenta falha e impede funcionamento da máquina.' },
   });
@@ -29,6 +37,8 @@ function fillValidForm() {
 describe('DiagnosticContactForm', () => {
   beforeEach(() => {
     submitMock.mockReset();
+    localStorage.clear();
+    sessionStorage.clear();
   });
 
   it('renderiza campos minimos e fallbacks', () => {
@@ -68,7 +78,9 @@ describe('DiagnosticContactForm', () => {
     fireEvent.click(screen.getByRole('button', { name: /enviar diagnóstico/i }));
     expect(screen.getByRole('alert')).toBeInTheDocument();
 
-    fireEvent.change(screen.getByRole('textbox', { name: /nome/i }), { target: { value: 'Rui Diniz' } });
+    fireEvent.change(screen.getByRole('textbox', { name: /nome/i }), {
+      target: { value: 'Rui Diniz' },
+    });
 
     expect(screen.queryByRole('alert')).not.toBeInTheDocument();
   });
@@ -111,7 +123,11 @@ describe('DiagnosticContactForm', () => {
 
     expect(await screen.findByRole('alert')).toHaveTextContent('Não foi possível enviar agora');
     expect(screen.getByRole('alert')).toHaveTextContent('Use WhatsApp ou e-mail');
-    expect(screen.getAllByRole('link', { name: /enviar dados por e-mail/i }).length).toBeGreaterThan(0);
-    expect(screen.getAllByRole('link', { name: /enviar resumo por whatsapp/i }).length).toBeGreaterThan(0);
+    expect(
+      screen.getAllByRole('link', { name: /enviar dados por e-mail/i }).length,
+    ).toBeGreaterThan(0);
+    expect(
+      screen.getAllByRole('link', { name: /enviar resumo por whatsapp/i }).length,
+    ).toBeGreaterThan(0);
   });
 });

@@ -2,17 +2,21 @@ type SectionTitleProps = {
   eyebrow: string;
   title: string;
   description?: string;
+  tone?: 'light' | 'dark';
 };
 
-export function SectionTitle({ eyebrow, title, description }: SectionTitleProps) {
+export function SectionTitle({ eyebrow, title, description, tone = 'light' }: SectionTitleProps) {
+  const titleClass = tone === 'dark' ? 'text-white' : 'text-wmg-navy-950';
+  const descriptionClass = tone === 'dark' ? 'text-slate-200' : 'text-wmg-graphite-500';
+
   return (
     <div className="max-w-3xl">
       <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.18em] text-wmg-lime-500">
         {eyebrow}
       </p>
-      <h2 className="text-3xl font-black leading-tight text-wmg-navy-950 md:text-5xl">{title}</h2>
+      <h2 className={`text-3xl font-black leading-tight md:text-5xl ${titleClass}`}>{title}</h2>
       {description ? (
-        <p className="mt-5 text-lg leading-8 text-wmg-graphite-500">{description}</p>
+        <p className={`mt-5 text-lg leading-8 ${descriptionClass}`}>{description}</p>
       ) : null}
     </div>
   );
