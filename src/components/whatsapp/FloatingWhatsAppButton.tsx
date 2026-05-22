@@ -1,3 +1,4 @@
+import { trackWhatsAppClick } from '../../analytics/analytics';
 import { companyContent } from '../../content';
 import { buildWhatsAppLink, defaultWhatsAppMessage } from './whatsappLink';
 
@@ -11,6 +12,7 @@ export function FloatingWhatsAppButton() {
       rel="noopener noreferrer"
       aria-label="Abrir conversa no WhatsApp da WMG"
       className="fixed bottom-4 right-4 z-50 inline-flex size-12 items-center justify-center rounded-full bg-green-500 text-white shadow-2xl transition hover:-translate-y-0.5 hover:bg-green-600 focus:outline-none focus:ring-4 focus:ring-green-300 sm:bottom-5 sm:right-5 sm:size-14 md:bottom-8 md:right-8"
+      onClick={() => trackWhatsAppClick('floating_button')}
     >
       <svg
         data-testid="whatsapp-icon"
