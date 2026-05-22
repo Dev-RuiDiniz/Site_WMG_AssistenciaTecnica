@@ -10,6 +10,7 @@ export type DiagnosticFormValues = {
   urgency: string;
   description: string;
   consent: boolean;
+  companyWebsite: string;
 };
 
 export type DiagnosticFormErrors = Partial<Record<keyof DiagnosticFormValues, string>>;
@@ -24,6 +25,7 @@ export const initialDiagnosticFormValues: DiagnosticFormValues = {
   urgency: '',
   description: '',
   consent: false,
+  companyWebsite: '',
 };
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
