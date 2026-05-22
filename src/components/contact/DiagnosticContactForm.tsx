@@ -2,6 +2,12 @@ import { FormEvent, useMemo, useState } from 'react';
 import { companyContent, contactContent, equipmentContent, failureTypeOptions, urgencyOptions } from '../../content';
 import { FormFeedback } from '../ui/FormFeedback';
 import {
+  getRateLimitRemainingMs,
+  hasFilledHoneypot,
+  readLastSubmitAt,
+  recordSubmitAttempt,
+} from './antiSpam';
+import {
   buildDiagnosticMailto,
   buildWhatsAppFallback,
   hasDiagnosticFormErrors,
@@ -24,8 +30,28 @@ const feedbackStatusByFormStatus: Record<DiagnosticStatus, 'idle' | 'loading' | 
   error: 'error',
 };
 
+const antiSpamMessage =
+  'Não foi possível enviar a solicitação agora. Revise os dados ou use e-mail/WhatsApp de fallback.';
+
 function ErrorText({ message }: { message?: string }) {
   return message ? <p className="mt-2 text-sm font-semibold text-red-200">{message}</p> : null;
+}
+
+function getSafeLastSubmitAt() {
+  try {
+    return readLastSubmitAt();
+  } catch {
+    return null;
+  }
+}
+
+function recordSafeSubmitAttempt() {
+  try {
+    recordSubmitAttempt();
+  } catch {
+    // O bloqueio por sessão é complementar. Se o storage estiver indisponível,
+    // o envio continua para não impedir contato legítimo.
+  }
 }
 
 export function DiagnosticContactForm() {
@@ -56,12 +82,29 @@ export function DiagnosticContactForm() {
       return;
     }
 
+    if (hasFilledHoneypot(values.companyWebsite)) {
+      setStatus('error');
+      setSubmitError(antiSpamMessage);
+      return;
+    }
+
+    const remainingRateLimitMs = getRateLimitRemainingMs(getSafeLastSubmitAt());
+
+    if (remainingRateLimitMs > 0) {
+      setStatus('error');
+      setSubmitError(
+        `Aguarde ${Math.ceil(remainingRateLimitMs / 1000)} segundos antes de enviar uma nova solicitação.`,
+      );
+      return;
+    }
+
     setStatus('submitting');
     setSubmitError('');
 
     const result = await submitDiagnosticForm(values);
 
     if (result.status === 'success') {
+      recordSafeSubmitAttempt();
       setStatus('success');
       return;
     }
@@ -186,6 +229,25 @@ export function DiagnosticContactForm() {
           <textarea className={`${inputClassName} min-h-40 resize-y`} value={values.description} onChange={(event) => update('description', event.target.value)} disabled={isSubmitting} />
           <ErrorText message={errors.description} />
         </label>
+      </div>
+
+      <div className="hidden" aria-hidden="true">
+        <label htmlFor="companyWebsite">Site da empresa</label>
+        <input
+          id="companyWebsite"
+          name="companyWebsite"
+          tabIndex={-1}
+          autoComplete="off"
+          value={values.companyWebsite}
+          onChange={(event) => update('companyWebsite', event.target.value)}
+        />
+      </div>
+
+      <div className="rounded-2xl bg-white/10 p-4 text-sm leading-6 text-slate-100">
+        <p>
+          Usaremos seus dados apenas para responder à solicitação técnica enviada. Não envie senhas,
+          documentos pessoais ou informações sensíveis pelo formulário.
+        </p>
       </div>
 
       <label className="flex gap-3 rounded-2xl bg-white/10 p-4 text-sm leading-6 text-slate-100">
