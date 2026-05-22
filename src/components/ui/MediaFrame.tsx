@@ -1,7 +1,7 @@
 import type { ImgHTMLAttributes } from 'react';
 import type { VisualAsset } from '../../content/visualAssets';
 
-type MediaFrameProps = ImgHTMLAttributes<HTMLImageElement> & {
+type MediaFrameProps = Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt' | 'width' | 'height'> & {
   asset: VisualAsset;
   label?: string;
   tone?: 'dark' | 'light';
@@ -12,22 +12,30 @@ export function MediaFrame({
   label,
   tone = 'dark',
   className = '',
+  loading,
+  decoding = 'async',
   ...props
 }: MediaFrameProps) {
   const labelClasses =
     tone === 'dark'
       ? 'border-white/15 bg-wmg-navy-950/70 text-white'
       : 'border-wmg-blue-700/15 bg-white/90 text-wmg-navy-950';
+  const aspectRatio = `${asset.width} / ${asset.height}`;
 
   return (
     <figure
       className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-wmg-navy-950 shadow-wmg-card ${className}`.trim()}
+      style={{ aspectRatio }}
     >
       <img
         src={asset.src}
         alt={asset.alt}
+        width={asset.width}
+        height={asset.height}
         className="h-full min-h-72 w-full object-cover transition duration-700 group-hover:scale-[1.03]"
-        loading="lazy"
+        loading={loading ?? asset.loading ?? 'lazy'}
+        decoding={decoding}
+        fetchPriority={asset.fetchPriority}
         {...props}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-wmg-navy-950/75 via-wmg-navy-950/10 to-transparent" />
