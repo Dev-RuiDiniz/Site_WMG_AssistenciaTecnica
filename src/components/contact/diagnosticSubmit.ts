@@ -1,3 +1,8 @@
+import {
+  trackContactFormSubmitAttempt,
+  trackContactFormSubmitError,
+  trackContactFormSubmitSuccess,
+} from '../../analytics/analytics';
 import type { DiagnosticFormValues } from './diagnosticForm';
 
 export type DiagnosticSubmitConfig = {
@@ -44,6 +49,8 @@ export async function submitDiagnosticForm(
   config: DiagnosticSubmitConfig = diagnosticSubmitConfig,
   fetcher: typeof fetch = fetch,
 ): Promise<DiagnosticSubmitResult> {
+  trackContactFormSubmitAttempt();
+
   try {
     const response = await fetcher(config.endpoint, {
       method: 'POST',
@@ -54,14 +61,20 @@ export async function submitDiagnosticForm(
     });
 
     if (!response.ok) {
+      trackContactFormSubmitError('provider');
+
       return {
         status: 'error',
         message: 'Não foi possível enviar o diagnóstico agora. Use o e-mail ou WhatsApp de fallback.',
       };
     }
 
+    trackContactFormSubmitSuccess();
+
     return { status: 'success' };
   } catch {
+    trackContactFormSubmitError('network');
+
     return {
       status: 'error',
       message: 'Falha de conexão ao enviar o diagnóstico. Use o e-mail ou WhatsApp de fallback.',
