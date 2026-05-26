@@ -1,7 +1,7 @@
 import type { ImgHTMLAttributes } from 'react';
 import type { VisualAsset } from '../../content/visualAssets';
 
-type MediaFrameProps = ImgHTMLAttributes<HTMLImageElement> & {
+type MediaFrameProps = Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt' | 'width' | 'height'> & {
   asset: VisualAsset;
   label?: string;
   tone?: 'dark' | 'light';
@@ -12,16 +12,20 @@ export function MediaFrame({
   label,
   tone = 'dark',
   className = '',
+  loading,
+  decoding = 'async',
   ...props
 }: MediaFrameProps) {
   const labelClasses =
     tone === 'dark'
       ? 'border-white/15 bg-wmg-navy-950/70 text-white'
       : 'border-wmg-blue-700/15 bg-white/90 text-wmg-navy-950';
+  const aspectRatio = `${asset.width} / ${asset.height}`;
 
   return (
     <figure
       className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-wmg-navy-950 shadow-wmg-card ${className}`.trim()}
+      style={{ aspectRatio }}
     >
       <img
         src={asset.src}
