@@ -9,8 +9,7 @@ type CardProps = HTMLAttributes<HTMLElement> & {
 
 const variantClasses: Record<CardVariant, string> = {
   default: 'border-wmg-blue-700/20 bg-white text-wmg-graphite-900',
-  service:
-    'border-wmg-cyan-400/30 bg-wmg-navy-900/80 text-white shadow-wmg-card backdrop-blur',
+  service: 'border-wmg-cyan-400/30 bg-wmg-navy-900 text-white shadow-wmg-card',
   highlight:
     'border-wmg-lime-500/40 bg-wmg-lime-500/10 text-white shadow-wmg-glow',
 };

@@ -26,7 +26,7 @@ export function MediaFrame({
       <img
         src={asset.src}
         alt={asset.alt}
-        className="h-full min-h-72 w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+        className="block h-auto w-full object-contain transition duration-700 group-hover:scale-[1.01]"
         loading="lazy"
         {...props}
       />

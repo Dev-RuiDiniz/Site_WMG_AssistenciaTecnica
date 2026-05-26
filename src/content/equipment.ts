@@ -1,4 +1,4 @@
-import type { ContentItem } from './types';
+﻿import type { ContentItem } from './types';
 
 export const equipmentContent: ContentItem[] = [
   {

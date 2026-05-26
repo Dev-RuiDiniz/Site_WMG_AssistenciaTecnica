@@ -38,10 +38,10 @@ export function HomePage() {
             <p className="mt-6 max-w-3xl text-xl font-semibold leading-9 text-slate-100 md:text-2xl">
               {homeContent.hero.subtitle}
             </p>
-            <p className="mt-4 max-w-3xl text-base leading-8 text-slate-300 md:text-lg">
+            <p className="mt-4 max-w-3xl text-base leading-8 text-slate-100 md:text-lg">
               {homeContent.hero.description}
             </p>
-            <div className="mt-8 flex flex-wrap gap-4" aria-label="Acoes principais">
+            <div className="mt-8 flex flex-wrap gap-4" aria-label="Ações principais">
               {primaryHeroCta ? (
                 <Button href={primaryHeroCta.href} className="min-w-64">
                   {primaryHeroCta.label}
@@ -69,20 +69,15 @@ export function HomePage() {
       </section>
 
       <Container className="grid gap-10 py-16 md:grid-cols-[0.95fr_1.05fr] md:items-center md:py-24">
-        <MediaFrame
-          asset={visualAssets.productionStop}
-          label="Reducao de tempo parado"
-          className="min-h-[28rem]"
-          loading="lazy"
-        />
+        <MediaFrame asset={visualAssets.productionStop} loading="lazy" />
         <section aria-labelledby="pain-home-title">
           <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.18em] text-wmg-cyan-700">
             {homeContent.painSection.eyebrow}
           </p>
           <h2 id="pain-home-title" className="text-3xl font-black text-wmg-navy-950 md:text-5xl">
-            Sua producao nao pode esperar por tentativa e erro
+            Sua produção não pode esperar por tentativa e erro
           </h2>
-          <p className="mt-5 leading-8 text-slate-600">{homeContent.painSection.description}</p>
+          <p className="mt-5 leading-8 text-slate-700">{homeContent.painSection.description}</p>
           <div className="mt-8 grid gap-4">
             {homeContent.painSection.points.map((point) => (
               <div
@@ -90,7 +85,7 @@ export function HomePage() {
                 className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"
               >
                 <h3 className="text-lg font-black text-wmg-navy-950">{point.title}</h3>
-                <p className="mt-2 leading-7 text-slate-600">{point.description}</p>
+                <p className="mt-2 leading-7 text-slate-700">{point.description}</p>
               </div>
             ))}
           </div>
@@ -100,16 +95,16 @@ export function HomePage() {
       <Container className="grid gap-8 pb-16 md:grid-cols-3 md:pb-24">
         <Card className="shadow-sm transition hover:-translate-y-1 hover:shadow-wmg-card">
           <p className="mb-4 text-sm font-extrabold uppercase tracking-[0.16em] text-wmg-cyan-700">
-            Servicos
+            Serviços
           </p>
           <h2 className="text-2xl font-black text-wmg-navy-950">
-            Diagnostico, reparo e suporte tecnico
+            Diagnóstico, reparo e suporte técnico
           </h2>
-          <p className="mt-3 leading-7 text-slate-600">
-            Veja o escopo tecnico da WMG para diagnostico, manutencao e suporte industrial.
+          <p className="mt-3 leading-7 text-slate-700">
+            Veja o escopo técnico da WMG para diagnóstico, manutenção e suporte industrial.
           </p>
           <Button href="/servicos" className="mt-5">
-            Ver servicos
+            Ver serviços
           </Button>
         </Card>
         <Card className="shadow-sm transition hover:-translate-y-1 hover:shadow-wmg-card">
@@ -117,10 +112,10 @@ export function HomePage() {
             Equipamentos
           </p>
           <h2 className="text-2xl font-black text-wmg-navy-950">
-            Componentes criticos da operacao
+            Componentes críticos da operação
           </h2>
-          <p className="mt-3 leading-7 text-slate-600">
-            Confira as categorias tecnicas atendidas para equipamentos criticos da operacao.
+          <p className="mt-3 leading-7 text-slate-700">
+            Confira as categorias técnicas atendidas para equipamentos críticos da operação.
           </p>
           <Button href="/equipamentos" className="mt-5">
             Ver equipamentos
@@ -130,12 +125,14 @@ export function HomePage() {
           <p className="mb-4 text-sm font-extrabold uppercase tracking-[0.16em] text-wmg-lime-500">
             Contato
           </p>
-          <h2 className="text-2xl font-black">Fale com um especialista</h2>
-          <p className="mt-3 leading-7 text-slate-200">
-            Solicite avaliacao tecnica com dados do equipamento e urgencia de atendimento.
+          <h2 className="text-2xl font-black text-white">
+            Fale com um especialista
+          </h2>
+          <p className="mt-3 leading-7 text-slate-100">
+            Solicite avaliação técnica com dados do equipamento e urgência de atendimento.
           </p>
           <Button href="/contato" className="mt-5">
-            Solicitar avaliacao tecnica agora
+            Solicitar avaliação técnica agora
           </Button>
         </Card>
       </Container>
@@ -143,7 +140,7 @@ export function HomePage() {
       <Container className="pb-20">
         <section
           className="grid gap-8 overflow-hidden rounded-3xl border border-wmg-cyan-400/20 bg-wmg-hero p-6 text-white shadow-wmg-card md:grid-cols-[1fr_0.78fr] md:p-10"
-          aria-label="Chamada final da pagina inicial"
+          aria-label="Chamada final da página inicial"
         >
           <div className="self-center">
             <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.18em] text-wmg-lime-500">
@@ -152,7 +149,7 @@ export function HomePage() {
             <h2 className="max-w-4xl text-3xl font-black md:text-5xl">
               {homeContent.finalCtaSection.title}
             </h2>
-            <p className="mt-4 max-w-3xl leading-8 text-slate-200">
+            <p className="mt-4 max-w-3xl leading-8 text-slate-100">
               {homeContent.finalCtaSection.description}
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
@@ -166,11 +163,7 @@ export function HomePage() {
               ) : null}
             </div>
           </div>
-          <MediaFrame
-            asset={visualAssets.maintenance}
-            label="Atendimento tecnico especializado"
-            className="min-h-80"
-          />
+          <MediaFrame asset={visualAssets.maintenance} />
         </section>
       </Container>
     </>

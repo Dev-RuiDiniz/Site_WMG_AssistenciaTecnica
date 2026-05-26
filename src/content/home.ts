@@ -1,4 +1,4 @@
-import type { HomeContent } from './types';
+﻿import type { HomeContent } from './types';
 
 export const homeContent: HomeContent = {
   hero: {
@@ -16,7 +16,7 @@ export const homeContent: HomeContent = {
         description: 'Avaliação técnica para identificar falhas e orientar o próximo passo com clareza.',
       },
       {
-        title: 'Foco em operação',
+        title: 'Foco na operação',
         description: 'Prioridade para reduzir tempo parado e apoiar a continuidade produtiva.',
       },
       {
@@ -29,7 +29,7 @@ export const homeContent: HomeContent = {
     eyebrow: 'O problema',
     title: 'Máquina parada compromete prazo, equipe e faturamento',
     description:
-      'Quando um equipamento crítico falha, cada hora sem diagnóstico aumenta o risco de atraso, retrabalho e custo operacional. A Home da WMG apresenta rapidamente uma rota de contato para avaliação técnica.',
+      'Quando um equipamento crítico falha, cada hora sem diagnóstico aumenta o risco de atraso, retrabalho e custo operacional. A página inicial da WMG apresenta rapidamente uma rota de contato para avaliação técnica.',
     points: [
       {
         title: 'Parada inesperada',
@@ -37,11 +37,11 @@ export const homeContent: HomeContent = {
       },
       {
         title: 'Diagnóstico incerto',
-        description: 'Trocas sem análise técnica elevam custo e podem não resolver a causa raiz.',
+        description: 'Trocas sem análise técnica elevam custos e podem não resolver a causa raiz.',
       },
       {
         title: 'Pressão por retorno',
-        description: 'A produção precisa de uma resposta clara para decidir reparo, substituição ou manutenção.',
+        description: 'A produção precisa de uma resposta clara para decidir entre reparo, substituição ou manutenção.',
       },
     ],
   },
@@ -85,7 +85,7 @@ export const homeContent: HomeContent = {
     items: [
       {
         title: 'Especialização industrial',
-        description: 'Copy focada em equipamentos e dores reais de manutenção elétrica e automação.',
+        description: 'Conteúdo focado em equipamentos e dores reais de manutenção elétrica e automação.',
       },
       {
         title: 'Conteúdo versionado',
@@ -93,7 +93,7 @@ export const homeContent: HomeContent = {
       },
       {
         title: 'Evolução segura',
-        description: 'Estrutura multipagina com rotas reais, testes e documentacao para reduzir risco de regressao.',
+        description: 'Estrutura multipágina com rotas reais, testes e documentação para reduzir risco de regressão.',
       },
     ],
   },
@@ -113,4 +113,3 @@ export const homeContent: HomeContent = {
     secondaryCtaId: 'view-services',
   },
 };
-

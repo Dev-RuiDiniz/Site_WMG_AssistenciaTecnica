@@ -1,4 +1,4 @@
-import type { CTAContent } from './types';
+﻿import type { CTAContent } from './types';
 import { buildWhatsAppLink, defaultWhatsAppMessage } from '../components/whatsapp/whatsappLink';
 import { companyContent } from './company';
 
@@ -22,4 +22,3 @@ export const ctaContent: CTAContent[] = [
     purpose: 'Levar o visitante para a seção de serviços.',
   },
 ];
-

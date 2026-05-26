@@ -13,7 +13,7 @@ export function Footer() {
       <Container className="grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
           <p className="text-2xl font-black">{companyContent.name}</p>
-          <p className="mt-4 max-w-md leading-7 text-slate-300">{companyContent.description}</p>
+          <p className="mt-4 max-w-md leading-7 text-slate-100">{companyContent.description}</p>
           {supportCta ? (
             <a
               href={supportCta.href}
@@ -31,7 +31,7 @@ export function Footer() {
           <ul className="grid gap-3">
             {navigationItems.map((item) => (
               <li key={item.href}>
-                <a className="text-slate-300 transition hover:text-wmg-lime-500" href={item.href}>
+                <a className="text-slate-100 transition hover:text-wmg-lime-500" href={item.href}>
                   {item.label}
                 </a>
               </li>
@@ -43,7 +43,7 @@ export function Footer() {
           <p className="mb-4 text-sm font-extrabold uppercase tracking-[0.18em] text-wmg-lime-500">
             Contato
           </p>
-          <ul className="grid gap-3 text-slate-300">
+          <ul className="grid gap-3 text-slate-100">
             <li>
               <a
                 className="transition hover:text-wmg-lime-500"
@@ -67,7 +67,7 @@ export function Footer() {
       </Container>
 
       <div className="border-t border-wmg-cyan-400/20 bg-black/10">
-        <Container className="py-5 text-sm text-slate-400">
+        <Container className="py-5 text-sm text-slate-200">
           (c) {companyContent.name}. Documentacao, qualidade e evolucao continua do site.
         </Container>
       </div>

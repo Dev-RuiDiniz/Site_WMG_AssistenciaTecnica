@@ -7,7 +7,7 @@ type SectionTitleProps = {
 
 export function SectionTitle({ eyebrow, title, description, tone = 'light' }: SectionTitleProps) {
   const titleClass = tone === 'dark' ? 'text-white' : 'text-wmg-navy-950';
-  const descriptionClass = tone === 'dark' ? 'text-slate-200' : 'text-wmg-graphite-500';
+  const descriptionClass = tone === 'dark' ? 'text-slate-100' : 'text-slate-700';
 
   return (
     <div className="max-w-3xl">

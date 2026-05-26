@@ -1,4 +1,4 @@
-import type { NavigationItem } from './types';
+﻿import type { NavigationItem } from './types';
 
 export const navigationItems: NavigationItem[] = [
   { label: 'Início', href: '/' },
@@ -7,4 +7,3 @@ export const navigationItems: NavigationItem[] = [
   { label: 'Sobre', href: '/sobre' },
   { label: 'Contato', href: '/contato' },
 ];
-
