@@ -30,12 +30,8 @@ export function MediaFrame({
       <img
         src={asset.src}
         alt={asset.alt}
-        width={asset.width}
-        height={asset.height}
-        className="h-full min-h-72 w-full object-cover transition duration-700 group-hover:scale-[1.03]"
-        loading={loading ?? asset.loading ?? 'lazy'}
-        decoding={decoding}
-        fetchPriority={asset.fetchPriority}
+        className="block h-auto w-full object-contain transition duration-700 group-hover:scale-[1.01]"
+        loading="lazy"
         {...props}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-wmg-navy-950/75 via-wmg-navy-950/10 to-transparent" />

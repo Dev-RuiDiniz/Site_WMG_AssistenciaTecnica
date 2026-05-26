@@ -1,4 +1,4 @@
-export type VisualAsset = {
+﻿export type VisualAsset = {
   src: string;
   alt: string;
   title: string;
@@ -17,26 +17,17 @@ const campaignImageDimensions = {
 export const visualAssets = {
   hero: {
     src: '/assets/campaign/wmg-industrial-hero.png',
-    alt: 'Equipamentos de automacao industrial e placas eletronicas em ambiente tecnico azul',
-    title: 'Automacao industrial e eletronica tecnica',
-    width: campaignImageDimensions.width,
-    height: campaignImageDimensions.height,
-    sizeBytes: 1_748_229,
-    loading: 'eager',
-    fetchPriority: 'high',
+    alt: 'Equipamentos de automação industrial e placas eletrônicas em ambiente técnico azul',
+    title: 'Automação industrial e eletrônica técnica',
   },
   growthMaintenance: {
     src: '/assets/campaign/wmg-growth-maintenance.png',
-    alt: 'Tecnico industrial realizando manutencao em painel com interface digital de diagnostico',
-    title: 'Manutencao tecnica orientada a crescimento',
-    width: campaignImageDimensions.width,
-    height: campaignImageDimensions.height,
-    sizeBytes: 2_023_963,
-    loading: 'lazy',
+    alt: 'Técnico industrial realizando manutenção em painel com interface digital de diagnóstico',
+    title: 'Manutenção técnica orientada a crescimento',
   },
   productionStop: {
     src: '/assets/campaign/wmg-production-stop.png',
-    alt: 'Linha industrial com painel eletrico aberto e alerta de producao interrompida',
+    alt: 'Linha industrial com painel elétrico aberto e alerta de produção interrompida',
     title: 'Falhas industriais geram parada operacional',
     width: campaignImageDimensions.width,
     height: campaignImageDimensions.height,
@@ -45,12 +36,8 @@ export const visualAssets = {
   },
   maintenance: {
     src: '/assets/campaign/wmg-industrial-maintenance.png',
-    alt: 'Tecnico analisando placa eletronica em bancada de manutencao industrial',
-    title: 'Manutencao industrial especializada',
-    width: campaignImageDimensions.width,
-    height: campaignImageDimensions.height,
-    sizeBytes: 2_088_005,
-    loading: 'lazy',
+    alt: 'Técnico analisando placa eletrônica em bancada de manutenção industrial',
+    title: 'Manutenção industrial especializada',
   },
 } as const;
 

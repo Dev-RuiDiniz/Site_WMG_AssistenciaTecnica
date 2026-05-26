@@ -11,15 +11,11 @@ export function EquipmentPage() {
         className="grid gap-10 md:grid-cols-[0.8fr_1fr] md:items-center"
         aria-labelledby="equipamentos-title"
       >
-        <MediaFrame
-          asset={visualAssets.hero}
-          label="Equipamentos criticos de automacao"
-          className="min-h-96"
-        />
+        <MediaFrame asset={visualAssets.hero} />
         <SectionTitle
           eyebrow="Equipamentos atendidos"
-          title="Categorias tecnicas atendidas pela WMG"
-          description="A lista ajuda a qualificar rapidamente se a demanda esta dentro do escopo tecnico para diagnostico, reparo ou suporte."
+          title="Categorias técnicas atendidas pela WMG"
+          description="A lista ajuda a qualificar rapidamente se a demanda está dentro do escopo técnico para diagnóstico, reparo ou suporte."
         />
       </section>
 
@@ -31,7 +27,7 @@ export function EquipmentPage() {
               className="shadow-sm transition hover:-translate-y-1 hover:border-wmg-cyan-400/50 hover:shadow-wmg-card"
             >
               <h2 className="text-xl font-black text-wmg-navy-950">{equipment.title}</h2>
-              <p className="mt-3 leading-7 text-slate-600">{equipment.description}</p>
+              <p className="mt-3 leading-7 text-slate-700">{equipment.description}</p>
             </Card>
           ))}
         </div>

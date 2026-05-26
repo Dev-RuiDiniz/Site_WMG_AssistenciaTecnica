@@ -1,4 +1,4 @@
-import type { ContentItem } from './types';
+﻿import type { ContentItem } from './types';
 
 export const contactContent = {
   eyebrow: 'Contato / diagnóstico',
@@ -8,11 +8,9 @@ export const contactContent = {
   loadingTitle: 'Enviando solicitação',
   loadingMessage: 'Estamos encaminhando seu diagnóstico para a equipe WMG. Isso pode levar alguns segundos.',
   successTitle: 'Solicitação enviada',
-  successMessage:
-    'Recebemos seu diagnóstico. A equipe WMG retornará pelos canais informados.',
+  successMessage: 'Recebemos seu diagnóstico. A equipe WMG retornará pelos canais informados.',
   errorTitle: 'Não foi possível enviar agora',
-  errorMessage:
-    'Use o WhatsApp ou e-mail abaixo para falar com a equipe WMG sem perder o atendimento.',
+  errorMessage: 'Use o WhatsApp ou e-mail abaixo para falar com a equipe WMG sem perder o atendimento.',
   validationErrorTitle: 'Revise os dados do formulário',
   validationErrorMessage: 'Alguns campos precisam de ajuste antes do envio.',
   privacyNote:

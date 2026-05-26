@@ -1,10 +1,10 @@
-import type { CompanyContent } from './types';
+﻿import type { CompanyContent } from './types';
 
 export const companyContent: CompanyContent = {
   name: 'WMG Assistência Técnica',
   segment: 'Assistência técnica industrial',
   email: 'suporte@wmgassistenciatecnica.com.br',
-  phone: '+55 12 99158-8460',
+  phone: '+55 012 3426-0300',
   location: 'Taubaté - SP',
   website: 'www.wmgassistenciatecnica.com.br',
   description:

@@ -1,4 +1,4 @@
-import type { ServiceContent } from './types';
+﻿import type { ServiceContent } from './types';
 
 export const servicesContent: ServiceContent[] = [
   {
@@ -6,7 +6,8 @@ export const servicesContent: ServiceContent[] = [
     title: 'Diagnóstico técnico',
     description:
       'Avaliação objetiva para identificar a causa da falha e orientar a melhor decisão técnica e comercial.',
-    demand: 'Quando o equipamento apresenta falha sem causa clara, parada intermitente ou comportamento instável.',
+    demand:
+      'Quando o equipamento apresenta falha sem causa clara, parada intermitente ou comportamento instável.',
     response:
       'A WMG analisa sintomas, histórico e criticidade para indicar reparo, manutenção ou substituição com mais segurança.',
     ctaId: 'request-evaluation',

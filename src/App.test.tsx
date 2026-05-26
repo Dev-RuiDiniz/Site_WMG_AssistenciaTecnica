@@ -32,7 +32,7 @@ describe('App routes', () => {
     renderAtRoute('/equipamentos');
 
     expect(
-      screen.getByRole('heading', { name: /categorias tecnicas atendidas pela wmg/i }),
+      screen.getByRole('heading', { name: /categorias técnicas atendidas pela wmg/i }),
     ).toBeInTheDocument();
   });
 
@@ -40,7 +40,7 @@ describe('App routes', () => {
     renderAtRoute('/sobre');
 
     expect(
-      screen.getByRole('heading', { name: /assistencia tecnica para operacoes/i }),
+      screen.getByRole('heading', { name: /assistência técnica para operações/i }),
     ).toBeInTheDocument();
   });
 
@@ -48,7 +48,7 @@ describe('App routes', () => {
     renderAtRoute('/contato');
 
     expect(
-      screen.getByRole('heading', { name: /solicite uma avaliacao tecnica/i }),
+      screen.getByRole('heading', { name: /solicite uma avaliação técnica/i }),
     ).toBeInTheDocument();
   });
 
@@ -56,7 +56,7 @@ describe('App routes', () => {
     renderAtRoute('/');
 
     expect(
-      screen.getByRole('heading', { name: /sua producao nao pode esperar/i }),
+      screen.getByRole('heading', { name: /sua produção não pode esperar/i }),
     ).toBeInTheDocument();
     expect(
       screen.queryByRole('heading', { name: homeContent.benefitsSection.title }),
@@ -71,10 +71,10 @@ describe('App routes', () => {
       screen.getByRole('heading', { name: homeContent.painSection.title }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('heading', { name: homeContent.benefitsSection.title }),
-    ).toBeInTheDocument();
+      screen.queryByRole('heading', { name: homeContent.benefitsSection.title }),
+    ).not.toBeInTheDocument();
     expect(
-      screen.getByRole('heading', { name: homeContent.credibilitySection.title }),
-    ).toBeInTheDocument();
+      screen.queryByRole('heading', { name: homeContent.credibilitySection.title }),
+    ).not.toBeInTheDocument();
   });
 });
