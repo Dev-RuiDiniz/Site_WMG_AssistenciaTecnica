@@ -14,16 +14,28 @@ const campaignImageDimensions = {
   height: 1024,
 };
 
-export const visualAssets = {
+export const visualAssets: Record<
+  'hero' | 'growthMaintenance' | 'productionStop' | 'maintenance',
+  VisualAsset
+> = {
   hero: {
     src: '/assets/campaign/wmg-industrial-hero.png',
     alt: 'Equipamentos de automação industrial e placas eletrônicas em ambiente técnico azul',
     title: 'Automação industrial e eletrônica técnica',
+    width: campaignImageDimensions.width,
+    height: campaignImageDimensions.height,
+    sizeBytes: 2_084_321,
+    loading: 'eager',
+    fetchPriority: 'high',
   },
   growthMaintenance: {
     src: '/assets/campaign/wmg-growth-maintenance.png',
     alt: 'Técnico industrial realizando manutenção em painel com interface digital de diagnóstico',
     title: 'Manutenção técnica orientada a crescimento',
+    width: campaignImageDimensions.width,
+    height: campaignImageDimensions.height,
+    sizeBytes: 2_067_418,
+    loading: 'lazy',
   },
   productionStop: {
     src: '/assets/campaign/wmg-production-stop.png',
@@ -38,8 +50,12 @@ export const visualAssets = {
     src: '/assets/campaign/wmg-industrial-maintenance.png',
     alt: 'Técnico analisando placa eletrônica em bancada de manutenção industrial',
     title: 'Manutenção industrial especializada',
+    width: campaignImageDimensions.width,
+    height: campaignImageDimensions.height,
+    sizeBytes: 2_103_559,
+    loading: 'lazy',
   },
-} as const;
+};
 
 export const imagePerformanceBudget = {
   maxCampaignImageBytes: 2_200_000,
