@@ -3,6 +3,7 @@ import { Button } from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
 import { Container } from '../components/ui/Container';
 import { MediaFrame } from '../components/ui/MediaFrame';
+import { RevealOnScroll } from '../components/ui/RevealOnScroll';
 import { SectionTitle } from '../components/ui/SectionTitle';
 
 function getCtaById(id: string) {
@@ -39,24 +40,25 @@ export function ServicesPage() {
 
       <section className="grid gap-10" aria-label="Lista de serviços">
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {servicesContent.map((service) => {
+          {servicesContent.map((service, index) => {
             const serviceCta = getCtaById(service.ctaId);
             return (
-              <Card
-                key={service.slug}
-                variant="service"
-                className="transition hover:-translate-y-1 hover:border-wmg-lime-500/50"
-              >
-                <h2 className="text-2xl font-black text-wmg-lime-500">{service.title}</h2>
-                <p className="mt-4 leading-7 text-slate-200">{service.description}</p>
-                <p className="mt-4 leading-7 text-slate-100">{service.demand}</p>
-                <p className="mt-4 leading-7 text-slate-100">{service.response}</p>
-                {serviceCta ? (
-                  <Button href={serviceCta.href} variant="secondary" className="mt-5">
-                    {serviceCta.label}
-                  </Button>
-                ) : null}
-              </Card>
+              <RevealOnScroll key={service.slug} delay={index * 0.06}>
+                <Card
+                  variant="service"
+                  className="h-full transition hover:-translate-y-1 hover:border-wmg-lime-500/50 hover:shadow-wmg-glow-lime"
+                >
+                  <h2 className="text-2xl font-black text-wmg-lime-500">{service.title}</h2>
+                  <p className="mt-4 leading-7 text-slate-200">{service.description}</p>
+                  <p className="mt-4 leading-7 text-slate-100">{service.demand}</p>
+                  <p className="mt-4 leading-7 text-slate-100">{service.response}</p>
+                  {serviceCta ? (
+                    <Button href={serviceCta.href} variant="secondary" className="mt-5">
+                      {serviceCta.label}
+                    </Button>
+                  ) : null}
+                </Card>
+              </RevealOnScroll>
             );
           })}
         </div>

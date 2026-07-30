@@ -5,7 +5,7 @@ import { companyContent } from './company';
 export const ctaContent: CTAContent[] = [
   {
     id: 'request-evaluation',
-    label: 'Solicitar avaliação técnica agora',
+    label: 'Solicite Avaliação Técnica',
     href: '/contato',
     purpose: 'Direcionar o visitante para o contato comercial principal.',
   },

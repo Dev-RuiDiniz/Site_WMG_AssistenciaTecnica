@@ -14,11 +14,19 @@ A navegacao principal foi convertida para rotas reais:
 
 ## Estrutura das paginas
 
-- `/`: home resumida com hero e CTAs para paginas internas.
-- `/servicos`: cards comerciais e tecnicos dos servicos.
-- `/equipamentos`: categorias de equipamentos atendidos.
-- `/sobre`: contexto institucional e blocos de dor, beneficios e credibilidade.
-- `/contato`: formulario de diagnostico tecnico.
+- `/`: hero em video com CTAs, metricas animadas, secao "como funciona", cards de servicos/equipamentos/contato, depoimentos e CTA final.
+- `/servicos`: cards comerciais e tecnicos dos servicos com animacao de entrada ao rolar.
+- `/equipamentos`: categorias de equipamentos atendidos com animacao de entrada ao rolar.
+- `/sobre`: contexto institucional, blocos de dor e timeline "como funciona".
+- `/contato`: formulario de diagnostico tecnico com coluna de canais diretos em glassmorphism.
+
+## Efeitos visuais
+
+- Hero da Home usa `VideoHero` (video em loop com poster de fallback).
+- Secoes usam `RevealOnScroll` para fade/slide ao entrar na viewport.
+- Metricas da Home usam `Counter` para contagem animada.
+- Superficies de destaque usam `GlassCard` (glassmorphism).
+- Todas as animacoes respeitam `prefers-reduced-motion`.
 
 ## Responsividade
 

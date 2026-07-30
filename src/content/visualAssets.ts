@@ -62,3 +62,28 @@ export const imagePerformanceBudget = {
   recommendedNextGenFormat: 'webp',
   recommendedMaxLcpImageBytes: 350_000,
 } as const;
+
+export type HeroVideoAsset = {
+  poster: string;
+  posterAlt: string;
+  sources: Array<{ src: string; type: string }>;
+  note: string;
+};
+
+/**
+ * Placeholder de vídeo institucional (royalty-free) para o hero da Home.
+ * Substituir `sources` por vídeo real da WMG assim que disponível, mantendo
+ * o `poster` como fallback estático para navegadores sem suporte a vídeo
+ * e para `prefers-reduced-motion`.
+ */
+export const heroVideo: HeroVideoAsset = {
+  poster: visualAssets.hero.src,
+  posterAlt: visualAssets.hero.alt,
+  sources: [
+    {
+      src: 'https://assets.mixkit.co/videos/preview/mixkit-industrial-machine-in-a-factory-4k-33921-large.mp4',
+      type: 'video/mp4',
+    },
+  ],
+  note: 'Placeholder royalty-free. Substituir por vídeo institucional real da WMG quando disponível.',
+};

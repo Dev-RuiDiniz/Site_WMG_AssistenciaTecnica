@@ -1,8 +1,12 @@
-import { ctaContent, homeContent, visualAssets } from '../content';
+import { ctaContent, heroVideo, homeContent, visualAssets } from '../content';
 import { Button } from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
 import { Container } from '../components/ui/Container';
+import { Counter } from '../components/ui/Counter';
+import { GlassCard } from '../components/ui/GlassCard';
 import { MediaFrame } from '../components/ui/MediaFrame';
+import { RevealOnScroll } from '../components/ui/RevealOnScroll';
+import { VideoHero } from '../components/ui/VideoHero';
 
 function getCtaById(id: string) {
   return ctaContent.find((cta) => cta.id === id);
@@ -20,13 +24,11 @@ export function HomePage() {
         className="relative isolate overflow-hidden bg-wmg-navy-950 text-white"
         aria-labelledby="hero-title"
       >
-        <img
-          src={visualAssets.hero.src}
-          alt=""
-          className="absolute inset-0 -z-20 h-full w-full object-cover object-center opacity-70"
-          aria-hidden="true"
+        <VideoHero
+          poster={heroVideo.poster}
+          posterAlt={heroVideo.posterAlt}
+          sources={heroVideo.sources}
         />
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(3,17,31,0.98)_0%,rgba(3,17,31,0.82)_42%,rgba(3,17,31,0.28)_100%)]" />
         <Container className="grid min-h-[calc(100vh-5rem)] gap-10 py-16 md:grid-cols-[1.05fr_0.95fr] md:items-end md:py-20">
           <div className="max-w-4xl self-center">
             <p className="mb-5 text-sm font-extrabold uppercase tracking-[0.22em] text-wmg-lime-500 md:text-base">
@@ -58,7 +60,7 @@ export function HomePage() {
             {homeContent.hero.highlights.map((highlight) => (
               <div
                 key={highlight.title}
-                className="rounded-2xl border border-wmg-cyan-400/15 bg-white/[0.06] p-5"
+                className="rounded-2xl border border-wmg-cyan-400/15 bg-white/[0.06] p-5 transition duration-300 hover:border-wmg-lime-500/40 hover:bg-white/[0.09]"
               >
                 <h2 className="text-lg font-black text-wmg-lime-500">{highlight.title}</h2>
                 <p className="mt-2 leading-7 text-slate-200">{highlight.description}</p>
@@ -68,31 +70,85 @@ export function HomePage() {
         </Container>
       </section>
 
-      <Container className="grid gap-10 py-16 md:grid-cols-[0.95fr_1.05fr] md:items-center md:py-24">
-        <MediaFrame asset={visualAssets.productionStop} loading="lazy" />
-        <section aria-labelledby="pain-home-title">
-          <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.18em] text-wmg-cyan-700">
-            {homeContent.painSection.eyebrow}
+      <section className="relative overflow-hidden bg-wmg-hero py-14 text-white" aria-label="Métricas de confiança">
+        <Container>
+          <p className="mb-2 text-sm font-extrabold uppercase tracking-[0.18em] text-wmg-lime-500">
+            {homeContent.metricsSection.eyebrow}
           </p>
-          <h2 id="pain-home-title" className="text-3xl font-black text-wmg-navy-950 md:text-5xl">
-            Sua produção não pode esperar por tentativa e erro
+          <h2 className="max-w-3xl text-2xl font-black md:text-3xl">
+            {homeContent.metricsSection.title}
           </h2>
-          <p className="mt-5 leading-8 text-slate-700">{homeContent.painSection.description}</p>
-          <div className="mt-8 grid gap-4">
-            {homeContent.painSection.points.map((point) => (
-              <div
-                key={point.title}
-                className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"
-              >
-                <h3 className="text-lg font-black text-wmg-navy-950">{point.title}</h3>
-                <p className="mt-2 leading-7 text-slate-700">{point.description}</p>
-              </div>
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {homeContent.metricsSection.metrics.map((metric, index) => (
+              <RevealOnScroll key={metric.label} delay={index * 0.08}>
+                <GlassCard tone="cyan" className="text-center">
+                  <p className="text-4xl font-black text-wmg-lime-500 md:text-5xl">
+                    <Counter value={metric.value} suffix={metric.suffix} />
+                  </p>
+                  <p className="mt-3 text-sm font-bold uppercase tracking-[0.06em] text-slate-200">
+                    {metric.label}
+                  </p>
+                </GlassCard>
+              </RevealOnScroll>
             ))}
           </div>
+        </Container>
+      </section>
+
+      <Container className="grid gap-10 py-16 md:grid-cols-[0.95fr_1.05fr] md:items-center md:py-24">
+        <RevealOnScroll>
+          <MediaFrame asset={visualAssets.productionStop} loading="lazy" />
+        </RevealOnScroll>
+        <section aria-labelledby="pain-home-title">
+          <RevealOnScroll delay={0.1}>
+            <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.18em] text-wmg-cyan-700">
+              {homeContent.painSection.eyebrow}
+            </p>
+            <h2 id="pain-home-title" className="text-3xl font-black text-wmg-navy-950 md:text-5xl">
+              Sua produção não pode esperar por tentativa e erro
+            </h2>
+            <p className="mt-5 leading-8 text-slate-700">{homeContent.painSection.description}</p>
+            <div className="mt-8 grid gap-4">
+              {homeContent.painSection.points.map((point) => (
+                <div
+                  key={point.title}
+                  className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-wmg-card"
+                >
+                  <h3 className="text-lg font-black text-wmg-navy-950">{point.title}</h3>
+                  <p className="mt-2 leading-7 text-slate-700">{point.description}</p>
+                </div>
+              ))}
+            </div>
+          </RevealOnScroll>
         </section>
       </Container>
 
-      <Container className="grid gap-8 pb-16 md:grid-cols-3 md:pb-24">
+      <section className="bg-wmg-navy-950 py-16 text-white md:py-24" aria-label="Como funciona o atendimento">
+        <Container>
+          <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.18em] text-wmg-lime-500">
+            {homeContent.howItWorksSection.eyebrow}
+          </p>
+          <h2 className="max-w-3xl text-3xl font-black md:text-5xl">
+            {homeContent.howItWorksSection.title}
+          </h2>
+          <p className="mt-4 max-w-3xl leading-8 text-slate-200">
+            {homeContent.howItWorksSection.description}
+          </p>
+          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {homeContent.howItWorksSection.steps.map((step, index) => (
+              <RevealOnScroll key={step.step} delay={index * 0.1}>
+                <GlassCard tone={index === homeContent.howItWorksSection.steps.length - 1 ? 'lime' : 'navy'}>
+                  <p className="text-3xl font-black text-wmg-cyan-400">{step.step}</p>
+                  <h3 className="mt-3 text-lg font-black text-white">{step.title}</h3>
+                  <p className="mt-2 leading-7 text-slate-200">{step.description}</p>
+                </GlassCard>
+              </RevealOnScroll>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <Container className="grid gap-8 py-16 md:grid-cols-3 md:py-24">
         <Card className="shadow-sm transition hover:-translate-y-1 hover:shadow-wmg-card">
           <p className="mb-4 text-sm font-extrabold uppercase tracking-[0.16em] text-wmg-cyan-700">
             Serviços
@@ -137,12 +193,37 @@ export function HomePage() {
         </Card>
       </Container>
 
-      <Container className="pb-20">
+      <section className="bg-white py-16 md:py-24" aria-label="Depoimentos de clientes">
+        <Container>
+          <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.18em] text-wmg-cyan-700">
+            {homeContent.testimonialsSection.eyebrow}
+          </p>
+          <h2 className="max-w-3xl text-3xl font-black text-wmg-navy-950 md:text-5xl">
+            {homeContent.testimonialsSection.title}
+          </h2>
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
+            {homeContent.testimonialsSection.testimonials.map((testimonial, index) => (
+              <RevealOnScroll key={testimonial.author} delay={index * 0.1}>
+                <figure className="h-full rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-wmg-card">
+                  <blockquote className="leading-7 text-slate-700">“{testimonial.quote}”</blockquote>
+                  <figcaption className="mt-4 text-sm font-bold text-wmg-navy-950">
+                    {testimonial.author}
+                    <span className="block font-normal text-slate-500">{testimonial.role}</span>
+                  </figcaption>
+                </figure>
+              </RevealOnScroll>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <Container className="py-16 md:py-24">
         <section
-          className="grid gap-8 overflow-hidden rounded-3xl border border-wmg-cyan-400/20 bg-wmg-hero p-6 text-white shadow-wmg-card md:grid-cols-[1fr_0.78fr] md:p-10"
+          className="relative overflow-hidden rounded-3xl border border-wmg-cyan-400/20 bg-wmg-hero p-6 text-white shadow-wmg-card md:p-10"
           aria-label="Chamada final da página inicial"
         >
-          <div className="self-center">
+          <div className="pointer-events-none absolute inset-0 bg-wmg-shimmer bg-[length:200%_100%] opacity-40 animate-shimmer" />
+          <div className="relative">
             <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.18em] text-wmg-lime-500">
               {homeContent.finalCtaSection.eyebrow}
             </p>
@@ -163,7 +244,6 @@ export function HomePage() {
               ) : null}
             </div>
           </div>
-          <MediaFrame asset={visualAssets.maintenance} />
         </section>
       </Container>
     </>

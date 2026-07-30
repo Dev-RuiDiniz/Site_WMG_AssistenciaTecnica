@@ -5,11 +5,20 @@ export { equipmentContent } from './equipment';
 export { homeContent } from './home';
 export { navigationItems } from './navigation';
 export { servicesContent } from './services';
-export { visualAssets } from './visualAssets';
+export { heroVideo, visualAssets } from './visualAssets';
 export {
   findDuplicateSlugs,
   findEmptyTextFields,
   hasRequiredTextFields,
   hasUniqueSlugs,
 } from './validators';
-export type { CompanyContent, ContentItem, CTAContent, HomeContent, NavigationItem } from './types';
+export type {
+  CompanyContent,
+  ContentItem,
+  CTAContent,
+  HomeContent,
+  MetricItem,
+  NavigationItem,
+  TestimonialItem,
+  TimelineStep,
+} from './types';

@@ -6,9 +6,11 @@ const supportCta = ctaContent.find((cta) => cta.id === 'talk-to-support');
 export function Footer() {
   return (
     <footer
-      className="relative overflow-hidden bg-wmg-navy-950 text-white"
+      className="relative overflow-hidden bg-wmg-hero text-white"
       aria-label="Rodape institucional"
     >
+      <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-wmg-cyan-400/10 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-wmg-lime-500/10 blur-3xl" />
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-wmg-cyan-400/70 to-transparent" />
       <Container className="grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
         <div>
@@ -61,14 +63,13 @@ export function Footer() {
               </a>
             </li>
             <li>{companyContent.location}</li>
-            <li>{companyContent.website}</li>
           </ul>
         </address>
       </Container>
 
       <div className="border-t border-wmg-cyan-400/20 bg-black/10">
         <Container className="py-5 text-sm text-slate-200">
-          (c) {companyContent.name}. Documentacao, qualidade e evolucao continua do site.
+          (c) {companyContent.name}.
         </Container>
       </div>
     </footer>

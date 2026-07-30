@@ -112,4 +112,66 @@ export const homeContent: HomeContent = {
     primaryCtaId: 'request-evaluation',
     secondaryCtaId: 'view-services',
   },
+  metricsSection: {
+    eyebrow: 'Números que sustentam a confiança',
+    title: 'Atendimento técnico consistente para operações industriais',
+    metrics: [
+      { value: 7, suffix: '+', label: 'Anos de atuação técnica' },
+      { value: 2000, suffix: '+', label: 'Atendimentos' },
+      { value: 24, suffix: 'h', label: 'Tempo médio de resposta' },
+      { value: 98, suffix: '%', label: 'Satisfação em avaliações técnicas' },
+    ],
+  },
+  howItWorksSection: {
+    eyebrow: 'Como funciona',
+    title: 'Um fluxo técnico claro do primeiro contato até o retorno da operação',
+    description:
+      'A WMG organiza o atendimento em etapas objetivas para reduzir incerteza e acelerar a decisão técnica.',
+    steps: [
+      {
+        step: '01',
+        title: 'Diagnóstico',
+        description: 'Levantamento técnico do equipamento, sintomas e histórico da falha.',
+      },
+      {
+        step: '02',
+        title: 'Orçamento',
+        description: 'Retorno claro com escopo, prazo estimado e prioridade de atendimento.',
+      },
+      {
+        step: '03',
+        title: 'Execução',
+        description: 'Reparo ou manutenção conduzida com rastreabilidade técnica do processo.',
+      },
+      {
+        step: '04',
+        title: 'Garantia',
+        description: 'Acompanhamento pós-atendimento e suporte para dúvidas sobre o serviço.',
+      },
+    ],
+  },
+  testimonialsSection: {
+    eyebrow: 'Prova social',
+    title: 'O que operações industriais dizem sobre o atendimento da WMG',
+    testimonials: [
+      {
+        quote:
+          'O diagnóstico foi rápido e evitou que trocássemos um inversor que ainda podia ser recuperado.',
+        author: 'Coordenador de manutenção',
+        role: 'Indústria metalúrgica',
+      },
+      {
+        quote:
+          'A comunicação técnica foi clara desde o primeiro contato até o retorno do equipamento.',
+        author: 'Responsável por automação',
+        role: 'Planta industrial',
+      },
+      {
+        quote:
+          'Conseguimos reduzir o tempo de parada porque o time entendeu a urgência da operação.',
+        author: 'Gerente de produção',
+        role: 'Operação fabril',
+      },
+    ],
+  },
 };

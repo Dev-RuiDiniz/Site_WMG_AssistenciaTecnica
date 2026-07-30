@@ -9,15 +9,15 @@ type CardProps = HTMLAttributes<HTMLElement> & {
 
 const variantClasses: Record<CardVariant, string> = {
   default: 'border-wmg-blue-700/20 bg-white text-wmg-graphite-900',
-  service: 'border-wmg-cyan-400/30 bg-wmg-navy-900 text-white shadow-wmg-card',
+  service: 'border-wmg-cyan-400/30 bg-wmg-navy-900/80 text-white shadow-wmg-card backdrop-blur-xl',
   highlight:
-    'border-wmg-lime-500/40 bg-wmg-lime-500/10 text-white shadow-wmg-glow',
+    'border-wmg-lime-500/40 bg-wmg-lime-500/10 text-white shadow-wmg-glow backdrop-blur-xl',
 };
 
 export function Card({ children, variant = 'default', className = '', ...props }: CardProps) {
   return (
     <article
-      className={`rounded-3xl border p-7 ${variantClasses[variant]} ${className}`.trim()}
+      className={`rounded-3xl border p-7 transition duration-300 ${variantClasses[variant]} ${className}`.trim()}
       {...props}
     >
       {children}

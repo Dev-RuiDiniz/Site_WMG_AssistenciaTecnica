@@ -32,6 +32,24 @@ export type HomeHighlightItem = {
   description: string;
 };
 
+export type MetricItem = {
+  value: number;
+  suffix?: string;
+  label: string;
+};
+
+export type TimelineStep = {
+  step: string;
+  title: string;
+  description: string;
+};
+
+export type TestimonialItem = {
+  quote: string;
+  author: string;
+  role: string;
+};
+
 export type HomeContent = {
   hero: {
     eyebrow: string;
@@ -82,6 +100,22 @@ export type HomeContent = {
     description: string;
     primaryCtaId: string;
     secondaryCtaId: string;
+  };
+  metricsSection: {
+    eyebrow: string;
+    title: string;
+    metrics: MetricItem[];
+  };
+  howItWorksSection: {
+    eyebrow: string;
+    title: string;
+    description: string;
+    steps: TimelineStep[];
+  };
+  testimonialsSection: {
+    eyebrow: string;
+    title: string;
+    testimonials: TestimonialItem[];
   };
 };
 

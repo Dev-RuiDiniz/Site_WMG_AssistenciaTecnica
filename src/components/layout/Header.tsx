@@ -1,30 +1,49 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ctaContent, navigationItems } from '../../content';
 import { Button } from '../ui/Button';
 import { Container } from '../ui/Container';
 
 const requestEvaluationCta = ctaContent.find((cta) => cta.id === 'request-evaluation');
-const logoSrc = '/assets/brand/wmg-logo.jpg';
+const logoSrc = '/assets/brand/logo_wmg.png';
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   function toggleMenu() {
     setIsMenuOpen((currentState) => !currentState);
   }
 
+  useEffect(() => {
+    function handleScroll() {
+      setIsScrolled(window.scrollY > 12);
+    }
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-wmg-cyan-400/20 bg-wmg-navy-950/90 text-white shadow-[0_18px_60px_rgba(3,17,31,0.28)] backdrop-blur-xl">
+    <header
+      className={`sticky top-0 z-50 border-b bg-wmg-hero-video text-white backdrop-blur-xl transition-all duration-300 ${
+        isScrolled
+          ? 'border-wmg-cyan-400/30 shadow-[0_18px_60px_rgba(3,17,31,0.4)]'
+          : 'border-wmg-cyan-400/10 shadow-[0_8px_32px_rgba(3,17,31,0.2)]'
+      }`}
+    >
       <Container className="flex min-h-20 items-center justify-between gap-6 py-4">
         <a href="/" className="group inline-flex items-center gap-3" aria-label="Ir para o início">
-          <img
-            src={logoSrc}
-            alt="WMG Assistência Técnica"
-            className="h-14 w-auto rounded-2xl border border-wmg-cyan-400/25 object-contain shadow-wmg-glow transition group-hover:border-wmg-lime-500/50"
-          />
+          <span className="inline-flex shrink-0 items-center rounded-2xl border border-wmg-cyan-400/30 bg-white px-3 py-2 shadow-wmg-glow transition duration-300 group-hover:border-wmg-lime-500/50 group-hover:bg-slate-50">
+            <img
+              src={logoSrc}
+              alt="WMG Assistência Técnica"
+              className="h-12 w-auto shrink-0 object-contain transition duration-300 group-hover:scale-105 md:h-16"
+            />
+          </span>
         </a>
 
-        <nav className="hidden items-center gap-6 md:flex" aria-label="Navegação principal">
+        <nav className="hidden items-center gap-6 md:ml-8 md:flex" aria-label="Navegação principal">
           {navigationItems.map((item) => (
             <a
               key={item.href}
