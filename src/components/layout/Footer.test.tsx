@@ -19,5 +19,13 @@ describe('Footer', () => {
       'href',
       '/equipamentos',
     );
+    expect(
+      screen.getByRole('link', {
+        name: /R\. Antônio de Deus Andrade, nº 250 - Jardim Eulalia, Taubaté - SP, 12091-040/i,
+      }),
+    ).toHaveAttribute(
+      'href',
+      'https://www.google.com/search?client=opera-gx&hs=KUD&sca_esv=19d038241e14d62e&sxsrf=APpeQnuBgyYs4mQ1TuYJvK74aTxdzsnDZA:1787095021294&q=wmg+manuten%C3%A7%C3%A3o+industrial,+el%C3%A9trica,+eletr%C3%B4nica+e+servo+motores+taubat%C3%A9+endere%C3%A7o&ludocid=15377243400275212637&sa=X&ved=2ahUKEwiQ37Hfp6uWAxUZqpUCHYzwMp0Q6BN6BAg2EAI',
+    );
   });
 });
