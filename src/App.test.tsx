@@ -72,9 +72,16 @@ describe('App routes', () => {
   it('renderiza a pagina de contato em /contato', () => {
     renderAtRoute('/contato');
 
+    const contactHeading = screen.getByRole('heading', {
+      level: 1,
+      name: /solicite uma avaliação técnica/i,
+    });
+
+    expect(contactHeading).toBeInTheDocument();
+    expect(contactHeading).toHaveClass('font-black', 'text-wmg-navy-950');
     expect(
-      screen.getByRole('heading', { name: /solicite uma avaliação técnica/i }),
-    ).toBeInTheDocument();
+      screen.queryByRole('img', { name: /técnico industrial realizando manutenção/i }),
+    ).not.toBeInTheDocument();
   });
 
   it('mantem provas comerciais na home e aprofunda contexto na pagina sobre', () => {
