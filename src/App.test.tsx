@@ -15,12 +15,17 @@ describe('App routes', () => {
   it('renderiza a home em /', () => {
     renderAtRoute('/');
 
+    const heroSection = screen.getByRole('region', {
+      name: /inteligência técnica para sua operação/i,
+    });
+
     expect(
       screen.getByRole('heading', { name: /inteligência técnica para sua operação/i }),
     ).toBeInTheDocument();
+    expect(heroSection).toHaveClass('relative');
     expect(
       screen.getByRole('img', { name: /inversor, placas eletrônicas e cabos industriais/i }),
-    ).toHaveAttribute('src', '/assets/campaign/wmg-industrial-hero-light.png');
+    ).toHaveClass('absolute', 'inset-0', 'h-full', 'w-full', 'object-cover');
     expect(screen.getByText(/equipamentos críticos/i)).toBeInTheDocument();
     expect(screen.getByText(/inversores e drives/i)).toBeInTheDocument();
     expect(
@@ -96,5 +101,13 @@ describe('App routes', () => {
     expect(
       screen.queryByRole('heading', { name: homeContent.credibilitySection.title }),
     ).not.toBeInTheDocument();
+  });
+
+  it('separa a chamada final do rodape com uma linha fina', () => {
+    renderAtRoute('/');
+
+    expect(screen.getByRole('region', { name: /chamada final da página inicial/i })).toHaveClass(
+      'border-b',
+    );
   });
 });
