@@ -23,9 +23,26 @@ const solutionItems = [
 export function HomePage() {
   return (
     <>
-      <section className="overflow-hidden bg-white" aria-labelledby="hero-title">
-        <Container className="grid gap-6 py-10 md:min-h-[36rem] md:grid-cols-[1fr_1.15fr] md:items-center md:gap-0 md:py-0">
-          <div className="relative z-10 max-w-2xl pt-8 lg:pt-0">
+      <section
+        className="relative isolate min-h-[32rem] overflow-hidden bg-white md:min-h-[36rem]"
+        aria-labelledby="hero-title"
+      >
+        <img
+          src={visualAssets.hero.src}
+          alt={visualAssets.hero.alt}
+          width={visualAssets.hero.width}
+          height={visualAssets.hero.height}
+          className="absolute inset-0 z-0 h-full w-full object-cover object-center"
+          loading="eager"
+          fetchPriority="high"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 z-0 bg-gradient-to-r from-white via-white/85 to-white/10"
+        />
+
+        <Container className="relative z-10 flex min-h-[32rem] items-center py-14 md:min-h-[36rem] md:py-0">
+          <div className="max-w-2xl pt-8 lg:pt-0">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-wmg-blue-500 md:text-sm">
               Automação, elétrica e eletrônica industrial
             </p>
@@ -42,20 +59,9 @@ export function HomePage() {
             </p>
           </div>
 
-          <div className="relative -mr-20 min-h-[24rem] md:-mr-28 md:min-h-[36rem]">
-            <img
-              src={visualAssets.hero.src}
-              alt={visualAssets.hero.alt}
-              width={visualAssets.hero.width}
-              height={visualAssets.hero.height}
-              className="h-full min-h-[24rem] w-full object-cover object-[76%_center] md:min-h-[36rem]"
-              loading="eager"
-              fetchPriority="high"
-            />
-            <div className="absolute right-1/4 top-12 hidden items-start gap-3 text-xs font-semibold leading-5 text-wmg-navy-900 md:flex">
-              <span className="mt-2 h-px w-14 bg-wmg-cyan-400" />
-              <span className="max-w-24">Equipamentos críticos</span>
-            </div>
+          <div className="absolute right-10 top-12 hidden items-start gap-3 text-xs font-semibold leading-5 text-wmg-navy-900 md:flex lg:right-16">
+            <span className="mt-2 h-px w-14 bg-wmg-cyan-400" />
+            <span className="max-w-24">Equipamentos críticos</span>
           </div>
         </Container>
       </section>
@@ -110,7 +116,10 @@ export function HomePage() {
         </Container>
       </section>
 
-      <section className="bg-wmg-navy-950" aria-label="Chamada final da página inicial">
+      <section
+        className="border-b border-white/20 bg-wmg-navy-950"
+        aria-label="Chamada final da página inicial"
+      >
         <Container className="flex flex-col items-center gap-8 py-12 text-center md:py-14">
           <div className="max-w-3xl">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-wmg-lime-500">
