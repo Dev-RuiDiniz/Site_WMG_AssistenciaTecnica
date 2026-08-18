@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import App from './App';
 import { homeContent } from './content';
@@ -53,9 +53,15 @@ describe('App routes', () => {
   it('renderiza a pagina de equipamentos em /equipamentos', () => {
     renderAtRoute('/equipamentos');
 
+    const equipmentGrid = screen.getByRole('region', { name: /categorias de equipamentos/i });
+
     expect(
       screen.getByRole('heading', { name: /categorias técnicas atendidas pela wmg/i }),
     ).toBeInTheDocument();
+    expect(within(equipmentGrid).getAllByRole('heading', { level: 2 })).not.toHaveLength(0);
+    within(equipmentGrid)
+      .getAllByRole('heading', { level: 2 })
+      .forEach((heading) => expect(heading).toHaveClass('text-center'));
     expect(
       screen.queryByRole('img', { name: /inversor, placas eletrônicas e cabos industriais/i }),
     ).not.toBeInTheDocument();
