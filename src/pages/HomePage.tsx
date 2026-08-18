@@ -1,251 +1,157 @@
-import { ctaContent, heroVideo, homeContent, visualAssets } from '../content';
+import { ctaContent, visualAssets } from '../content';
 import { Button } from '../components/ui/Button';
-import { Card } from '../components/ui/Card';
 import { Container } from '../components/ui/Container';
-import { Counter } from '../components/ui/Counter';
-import { GlassCard } from '../components/ui/GlassCard';
-import { MediaFrame } from '../components/ui/MediaFrame';
-import { RevealOnScroll } from '../components/ui/RevealOnScroll';
-import { VideoHero } from '../components/ui/VideoHero';
 
-function getCtaById(id: string) {
-  return ctaContent.find((cta) => cta.id === id);
-}
+const requestEvaluationCta = ctaContent.find((cta) => cta.id === 'request-evaluation');
+const servicesCta = ctaContent.find((cta) => cta.id === 'view-services');
+
+const solutionItems = [
+  {
+    title: 'Inversores e drives',
+    description: 'Diagnóstico e reparo para acionamentos que não podem parar.',
+    href: '/equipamentos',
+  },
+  {
+    title: 'Placas eletrônicas',
+    description: 'Recuperação de placas de potência, controle e fontes industriais.',
+    href: '/equipamentos',
+  },
+  {
+    title: 'CLPs, IHMs e painéis',
+    description: 'Suporte técnico para comandos, interfaces e painéis elétricos.',
+    href: '/servicos',
+  },
+];
 
 export function HomePage() {
-  const primaryHeroCta = getCtaById(homeContent.hero.primaryCtaId);
-  const secondaryHeroCta = getCtaById(homeContent.hero.secondaryCtaId);
-  const finalPrimaryCta = getCtaById(homeContent.finalCtaSection.primaryCtaId);
-  const finalSecondaryCta = getCtaById(homeContent.finalCtaSection.secondaryCtaId);
-
   return (
     <>
-      <section
-        className="relative isolate overflow-hidden bg-wmg-navy-950 text-white"
-        aria-labelledby="hero-title"
-      >
-        <VideoHero
-          poster={heroVideo.poster}
-          posterAlt={heroVideo.posterAlt}
-          sources={heroVideo.sources}
-        />
-        <Container className="grid min-h-[calc(100vh-5rem)] gap-10 py-16 md:grid-cols-[1.05fr_0.95fr] md:items-end md:py-20">
-          <div className="max-w-4xl self-center">
-            <p className="mb-5 text-sm font-extrabold uppercase tracking-[0.22em] text-wmg-lime-500 md:text-base">
-              {homeContent.hero.eyebrow}
+      <section className="border-b border-slate-200 bg-white" aria-labelledby="hero-title">
+        <Container className="grid min-h-[calc(100vh-9rem)] gap-10 py-12 md:grid-cols-[0.9fr_1.1fr] md:items-center md:py-16">
+          <div className="max-w-xl">
+            <p className="text-xs font-bold uppercase tracking-[0.24em] text-wmg-blue-600 md:text-sm">
+              Automação, elétrica e eletrônica industrial
             </p>
-            <h1 id="hero-title" className="max-w-4xl text-5xl font-black leading-none md:text-7xl">
-              {homeContent.hero.title}
+            <h1
+              id="hero-title"
+              className="mt-6 max-w-xl text-5xl font-semibold leading-[0.98] tracking-[-0.045em] text-wmg-navy-900 md:text-7xl"
+            >
+              Inteligência técnica para sua operação<span className="text-wmg-lime-500">.</span>
             </h1>
-            <p className="mt-6 max-w-3xl text-xl font-semibold leading-9 text-slate-100 md:text-2xl">
-              {homeContent.hero.subtitle}
+            <p className="mt-7 max-w-lg text-lg leading-8 text-wmg-graphite-700 md:text-xl">
+              Diagnóstico, reparo e manutenção para recuperar o desempenho dos seus equipamentos.
             </p>
-            <p className="mt-4 max-w-3xl text-base leading-8 text-slate-100 md:text-lg">
-              {homeContent.hero.description}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4" aria-label="Ações principais">
-              {primaryHeroCta ? (
-                <Button href={primaryHeroCta.href} className="min-w-64">
-                  {primaryHeroCta.label}
-                </Button>
-              ) : null}
-              {secondaryHeroCta ? (
-                <Button href={secondaryHeroCta.href} variant="secondary">
-                  {secondaryHeroCta.label}
-                </Button>
-              ) : null}
-            </div>
-          </div>
-          <div className="grid gap-4 self-end rounded-3xl border border-white/10 bg-wmg-navy-950/72 p-5 shadow-wmg-card backdrop-blur">
-            {homeContent.hero.highlights.map((highlight) => (
-              <div
-                key={highlight.title}
-                className="rounded-2xl border border-wmg-cyan-400/15 bg-white/[0.06] p-5 transition duration-300 hover:border-wmg-lime-500/40 hover:bg-white/[0.09]"
-              >
-                <h2 className="text-lg font-black text-wmg-lime-500">{highlight.title}</h2>
-                <p className="mt-2 leading-7 text-slate-200">{highlight.description}</p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="relative overflow-hidden bg-wmg-hero py-14 text-white" aria-label="Métricas de confiança">
-        <Container>
-          <p className="mb-2 text-sm font-extrabold uppercase tracking-[0.18em] text-wmg-lime-500">
-            {homeContent.metricsSection.eyebrow}
-          </p>
-          <h2 className="max-w-3xl text-2xl font-black md:text-3xl">
-            {homeContent.metricsSection.title}
-          </h2>
-          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {homeContent.metricsSection.metrics.map((metric, index) => (
-              <RevealOnScroll key={metric.label} delay={index * 0.08}>
-                <GlassCard tone="cyan" className="text-center">
-                  <p className="text-4xl font-black text-wmg-lime-500 md:text-5xl">
-                    <Counter value={metric.value} suffix={metric.suffix} />
-                  </p>
-                  <p className="mt-3 text-sm font-bold uppercase tracking-[0.06em] text-slate-200">
-                    {metric.label}
-                  </p>
-                </GlassCard>
-              </RevealOnScroll>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <Container className="grid gap-10 py-16 md:grid-cols-[0.95fr_1.05fr] md:items-center md:py-24">
-        <RevealOnScroll>
-          <MediaFrame asset={visualAssets.productionStop} loading="lazy" />
-        </RevealOnScroll>
-        <section aria-labelledby="pain-home-title">
-          <RevealOnScroll delay={0.1}>
-            <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.18em] text-wmg-cyan-700">
-              {homeContent.painSection.eyebrow}
-            </p>
-            <h2 id="pain-home-title" className="text-3xl font-black text-wmg-navy-950 md:text-5xl">
-              Sua produção não pode esperar por tentativa e erro
-            </h2>
-            <p className="mt-5 leading-8 text-slate-700">{homeContent.painSection.description}</p>
-            <div className="mt-8 grid gap-4">
-              {homeContent.painSection.points.map((point) => (
-                <div
-                  key={point.title}
-                  className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-wmg-card"
+            <div className="mt-9 flex flex-wrap items-center gap-5">
+              {servicesCta ? (
+                <Button
+                  href={servicesCta.href}
+                  className="rounded-none normal-case tracking-normal shadow-none"
                 >
-                  <h3 className="text-lg font-black text-wmg-navy-950">{point.title}</h3>
-                  <p className="mt-2 leading-7 text-slate-700">{point.description}</p>
-                </div>
-              ))}
-            </div>
-          </RevealOnScroll>
-        </section>
-      </Container>
-
-      <section className="bg-wmg-navy-950 py-16 text-white md:py-24" aria-label="Como funciona o atendimento">
-        <Container>
-          <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.18em] text-wmg-lime-500">
-            {homeContent.howItWorksSection.eyebrow}
-          </p>
-          <h2 className="max-w-3xl text-3xl font-black md:text-5xl">
-            {homeContent.howItWorksSection.title}
-          </h2>
-          <p className="mt-4 max-w-3xl leading-8 text-slate-200">
-            {homeContent.howItWorksSection.description}
-          </p>
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {homeContent.howItWorksSection.steps.map((step, index) => (
-              <RevealOnScroll key={step.step} delay={index * 0.1}>
-                <GlassCard tone={index === homeContent.howItWorksSection.steps.length - 1 ? 'lime' : 'navy'}>
-                  <p className="text-3xl font-black text-wmg-cyan-400">{step.step}</p>
-                  <h3 className="mt-3 text-lg font-black text-white">{step.title}</h3>
-                  <p className="mt-2 leading-7 text-slate-200">{step.description}</p>
-                </GlassCard>
-              </RevealOnScroll>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <Container className="grid gap-8 py-16 md:grid-cols-3 md:py-24">
-        <Card className="shadow-sm transition hover:-translate-y-1 hover:shadow-wmg-card">
-          <p className="mb-4 text-sm font-extrabold uppercase tracking-[0.16em] text-wmg-cyan-700">
-            Serviços
-          </p>
-          <h2 className="text-2xl font-black text-wmg-navy-950">
-            Diagnóstico, reparo e suporte técnico
-          </h2>
-          <p className="mt-3 leading-7 text-slate-700">
-            Veja o escopo técnico da WMG para diagnóstico, manutenção e suporte industrial.
-          </p>
-          <Button href="/servicos" className="mt-5">
-            Ver serviços
-          </Button>
-        </Card>
-        <Card className="shadow-sm transition hover:-translate-y-1 hover:shadow-wmg-card">
-          <p className="mb-4 text-sm font-extrabold uppercase tracking-[0.16em] text-wmg-cyan-700">
-            Equipamentos
-          </p>
-          <h2 className="text-2xl font-black text-wmg-navy-950">
-            Componentes críticos da operação
-          </h2>
-          <p className="mt-3 leading-7 text-slate-700">
-            Confira as categorias técnicas atendidas para equipamentos críticos da operação.
-          </p>
-          <Button href="/equipamentos" className="mt-5">
-            Ver equipamentos
-          </Button>
-        </Card>
-        <Card className="border-wmg-lime-500/40 bg-wmg-navy-950 text-white shadow-wmg-card transition hover:-translate-y-1">
-          <p className="mb-4 text-sm font-extrabold uppercase tracking-[0.16em] text-wmg-lime-500">
-            Contato
-          </p>
-          <h2 className="text-2xl font-black text-white">
-            Fale com um especialista
-          </h2>
-          <p className="mt-3 leading-7 text-slate-100">
-            Solicite avaliação técnica com dados do equipamento e urgência de atendimento.
-          </p>
-          <Button href="/contato" className="mt-5">
-            Solicitar avaliação técnica agora
-          </Button>
-        </Card>
-      </Container>
-
-      <section className="bg-white py-16 md:py-24" aria-label="Depoimentos de clientes">
-        <Container>
-          <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.18em] text-wmg-cyan-700">
-            {homeContent.testimonialsSection.eyebrow}
-          </p>
-          <h2 className="max-w-3xl text-3xl font-black text-wmg-navy-950 md:text-5xl">
-            {homeContent.testimonialsSection.title}
-          </h2>
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {homeContent.testimonialsSection.testimonials.map((testimonial, index) => (
-              <RevealOnScroll key={testimonial.author} delay={index * 0.1}>
-                <figure className="h-full rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-wmg-card">
-                  <blockquote className="leading-7 text-slate-700">“{testimonial.quote}”</blockquote>
-                  <figcaption className="mt-4 text-sm font-bold text-wmg-navy-950">
-                    {testimonial.author}
-                    <span className="block font-normal text-slate-500">{testimonial.role}</span>
-                  </figcaption>
-                </figure>
-              </RevealOnScroll>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <Container className="py-16 md:py-24">
-        <section
-          className="relative overflow-hidden rounded-3xl border border-wmg-cyan-400/20 bg-wmg-hero p-6 text-white shadow-wmg-card md:p-10"
-          aria-label="Chamada final da página inicial"
-        >
-          <div className="pointer-events-none absolute inset-0 bg-wmg-shimmer bg-[length:200%_100%] opacity-40 animate-shimmer" />
-          <div className="relative">
-            <p className="mb-3 text-sm font-extrabold uppercase tracking-[0.18em] text-wmg-lime-500">
-              {homeContent.finalCtaSection.eyebrow}
-            </p>
-            <h2 className="max-w-4xl text-3xl font-black md:text-5xl">
-              {homeContent.finalCtaSection.title}
-            </h2>
-            <p className="mt-4 max-w-3xl leading-8 text-slate-100">
-              {homeContent.finalCtaSection.description}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              {finalPrimaryCta ? (
-                <Button href={finalPrimaryCta.href}>{finalPrimaryCta.label}</Button>
-              ) : null}
-              {finalSecondaryCta ? (
-                <Button href={finalSecondaryCta.href} variant="secondary">
-                  {finalSecondaryCta.label}
+                  Conheça nossas soluções
                 </Button>
               ) : null}
+              {requestEvaluationCta ? (
+                <a
+                  href={requestEvaluationCta.href}
+                  className="border-b border-wmg-navy-900 px-0.5 py-2 text-sm font-semibold text-wmg-navy-900 transition hover:border-wmg-lime-500 hover:text-wmg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-wmg-cyan-400"
+                >
+                  Solicitar atendimento
+                </a>
+              ) : null}
+            </div>
+            <div className="mt-10 flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium text-wmg-graphite-700">
+              <span>Atendimento especializado</span>
+              <span aria-hidden="true" className="text-wmg-lime-500">
+                •
+              </span>
+              <span>Diagnóstico claro</span>
+              <span aria-hidden="true" className="text-wmg-lime-500">
+                •
+              </span>
+              <span>Retorno seguro</span>
             </div>
           </div>
-        </section>
-      </Container>
+
+          <div className="relative min-h-[22rem] overflow-hidden border border-slate-200 bg-wmg-navy-950 md:min-h-[34rem]">
+            <img
+              src={visualAssets.hero.src}
+              alt={visualAssets.hero.alt}
+              className="h-full min-h-[22rem] w-full object-cover object-right md:min-h-[34rem]"
+              loading="eager"
+              fetchPriority="high"
+            />
+            <p className="absolute right-5 top-5 max-w-32 border-l-2 border-wmg-cyan-400 pl-3 text-xs font-semibold leading-5 text-white md:right-8 md:top-8">
+              Equipamentos críticos
+            </p>
+          </div>
+        </Container>
+      </section>
+
+      <section className="border-b border-slate-200 bg-white" aria-label="Soluções atendidas">
+        <Container className="grid md:grid-cols-3">
+          {solutionItems.map((item, index) => (
+            <a
+              key={item.title}
+              href={item.href}
+              className={`group border-slate-200 px-1 py-9 transition hover:bg-slate-50 md:px-8 md:py-12 ${
+                index > 0 ? 'border-t md:border-l md:border-t-0' : ''
+              }`}
+            >
+              <p className="text-2xl font-semibold leading-tight tracking-[-0.03em] text-wmg-navy-900 group-hover:text-wmg-blue-700">
+                {item.title}
+              </p>
+              <span className="mt-5 block h-1 w-9 bg-wmg-lime-500 transition-all duration-300 group-hover:w-16" />
+              <p className="mt-5 max-w-xs text-sm leading-6 text-wmg-graphite-500">
+                {item.description}
+              </p>
+              <span className="mt-6 inline-block text-xs font-bold uppercase tracking-[0.16em] text-wmg-blue-600">
+                Ver detalhes
+              </span>
+            </a>
+          ))}
+        </Container>
+      </section>
+
+      <section className="bg-slate-50" aria-labelledby="confidence-title">
+        <Container className="grid gap-10 py-16 md:grid-cols-[0.35fr_1fr] md:items-center md:py-20">
+          <p className="text-xs font-bold uppercase tracking-[0.24em] text-wmg-blue-600">
+            Por que a WMG
+          </p>
+          <div className="border-l-2 border-wmg-cyan-400 pl-6 md:pl-10">
+            <h2
+              id="confidence-title"
+              className="max-w-4xl text-3xl font-semibold leading-tight tracking-[-0.04em] text-wmg-navy-900 md:text-5xl"
+            >
+              Mais que reparo. Performance, confiabilidade e continuidade para a sua indústria.
+            </h2>
+            <p className="mt-5 max-w-3xl text-base leading-7 text-wmg-graphite-700">
+              Atuamos com diagnóstico avançado, componentes de qualidade e processos técnicos que
+              garantem o retorno rápido e seguro dos seus equipamentos ao pleno desempenho.
+            </p>
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-wmg-navy-950" aria-label="Chamada final da página inicial">
+        <Container className="flex flex-col gap-8 py-12 md:flex-row md:items-center md:justify-between md:py-14">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-wmg-lime-500">
+              Fale com a equipe técnica
+            </p>
+            <h2 className="mt-3 max-w-2xl text-2xl font-semibold tracking-[-0.03em] text-white md:text-3xl">
+              Conte com a WMG para manter seus equipamentos em pleno funcionamento.
+            </h2>
+          </div>
+          {requestEvaluationCta ? (
+            <Button
+              href={requestEvaluationCta.href}
+              className="shrink-0 rounded-none border border-wmg-lime-500 bg-transparent normal-case tracking-normal text-white shadow-none hover:bg-wmg-lime-500 hover:text-wmg-navy-950"
+            >
+              Solicitar avaliação técnica
+            </Button>
+          ) : null}
+        </Container>
+      </section>
     </>
   );
 }

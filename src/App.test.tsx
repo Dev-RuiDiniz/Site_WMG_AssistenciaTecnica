@@ -16,8 +16,9 @@ describe('App routes', () => {
     renderAtRoute('/');
 
     expect(
-      screen.getByRole('heading', { name: new RegExp(homeContent.hero.title, 'i') }),
+      screen.getByRole('heading', { name: /inteligência técnica para sua operação/i }),
     ).toBeInTheDocument();
+    expect(screen.getByText(/inversores e drives/i)).toBeInTheDocument();
   });
 
   it('renderiza a pagina de servicos em /servicos', () => {
@@ -56,7 +57,7 @@ describe('App routes', () => {
     renderAtRoute('/');
 
     expect(
-      screen.getByRole('heading', { name: /sua produção não pode esperar/i }),
+      screen.getByRole('heading', { name: /mais que reparo\. performance/i }),
     ).toBeInTheDocument();
     expect(
       screen.queryByRole('heading', { name: homeContent.benefitsSection.title }),

@@ -7,6 +7,11 @@ describe('Header', () => {
 
     expect(screen.getByRole('banner')).toBeInTheDocument();
     expect(screen.getByRole('navigation', { name: /navegação principal/i })).toBeInTheDocument();
+    expect(screen.getByText(/assistência técnica industrial/i)).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /fale com especialista/i })).toHaveAttribute(
+      'href',
+      '/contato',
+    );
 
     const serviceLinks = screen.getAllByRole('link', { name: /serviços/i });
     const equipmentLinks = screen.getAllByRole('link', { name: /equipamentos/i });
