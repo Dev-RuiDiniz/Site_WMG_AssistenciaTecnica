@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import { Header } from './Header';
 
 describe('Header', () => {
@@ -10,7 +10,8 @@ describe('Header', () => {
     expect(screen.getByText(/assistência técnica industrial/i)).toBeInTheDocument();
     expect(screen.queryByRole('link', { name: /fale com especialista/i })).not.toBeInTheDocument();
     expect(screen.queryByRole('link', { name: /soluções/i })).not.toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /a wmg/i })).toHaveAttribute('href', '/sobre');
+    expect(screen.getByRole('link', { name: /^sobre$/i })).toHaveAttribute('href', '/sobre');
+    expect(screen.queryByRole('link', { name: /a wmg/i })).not.toBeInTheDocument();
 
     const serviceLinks = screen.getAllByRole('link', { name: /serviços/i });
     const equipmentLinks = screen.getAllByRole('link', { name: /equipamentos/i });
@@ -39,5 +40,10 @@ describe('Header', () => {
         .getByRole('navigation', { name: /navegação mobile/i })
         .querySelector('a[href="/servicos"]'),
     ).not.toHaveTextContent(/soluções/i);
+    const mobileNavigation = screen.getByRole('navigation', { name: /navegação mobile/i });
+    expect(within(mobileNavigation).getByRole('link', { name: /^sobre$/i })).toHaveAttribute(
+      'href',
+      '/sobre',
+    );
   });
 });
