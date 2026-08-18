@@ -1,130 +1,108 @@
-import { ctaContent, visualAssets } from '../content';
-import { Button } from '../components/ui/Button';
+import { TbCircuitMotor, TbComponents, TbSettingsAutomation, TbShieldCheck } from 'react-icons/tb';
+import { visualAssets } from '../content';
 import { Container } from '../components/ui/Container';
-
-const requestEvaluationCta = ctaContent.find((cta) => cta.id === 'request-evaluation');
-const servicesCta = ctaContent.find((cta) => cta.id === 'view-services');
 
 const solutionItems = [
   {
     title: 'Inversores e drives',
-    description: 'Diagnóstico e reparo para acionamentos que não podem parar.',
     href: '/equipamentos',
+    Icon: TbCircuitMotor,
   },
   {
     title: 'Placas eletrônicas',
-    description: 'Recuperação de placas de potência, controle e fontes industriais.',
     href: '/equipamentos',
+    Icon: TbComponents,
   },
   {
     title: 'CLPs, IHMs e painéis',
-    description: 'Suporte técnico para comandos, interfaces e painéis elétricos.',
     href: '/servicos',
+    Icon: TbSettingsAutomation,
   },
 ];
 
 export function HomePage() {
   return (
     <>
-      <section className="border-b border-slate-200 bg-white" aria-labelledby="hero-title">
-        <Container className="grid min-h-[calc(100vh-9rem)] gap-10 py-12 md:grid-cols-[0.9fr_1.1fr] md:items-center md:py-16">
-          <div className="max-w-xl">
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-wmg-blue-600 md:text-sm">
+      <section className="overflow-hidden bg-white" aria-labelledby="hero-title">
+        <Container className="grid gap-6 py-10 md:min-h-[36rem] md:grid-cols-[1fr_1.15fr] md:items-center md:gap-0 md:py-0">
+          <div className="relative z-10 max-w-2xl pt-8 lg:pt-0">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-wmg-blue-500 md:text-sm">
               Automação, elétrica e eletrônica industrial
             </p>
             <h1
               id="hero-title"
-              className="mt-6 max-w-xl text-5xl font-semibold leading-[0.98] tracking-[-0.045em] text-wmg-navy-900 md:text-7xl"
+              className="mt-6 max-w-2xl text-5xl font-semibold leading-[0.98] tracking-[-0.055em] text-wmg-navy-900 md:text-[4.15rem]"
             >
-              Inteligência técnica para sua operação<span className="text-wmg-lime-500">.</span>
+              Inteligência técnica
+              <br />
+              para sua operação<span className="text-wmg-lime-500">.</span>
             </h1>
             <p className="mt-7 max-w-lg text-lg leading-8 text-wmg-graphite-700 md:text-xl">
               Diagnóstico, reparo e manutenção para recuperar o desempenho dos seus equipamentos.
             </p>
-            <div className="mt-9 flex flex-wrap items-center gap-5">
-              {servicesCta ? (
-                <Button
-                  href={servicesCta.href}
-                  className="rounded-none normal-case tracking-normal shadow-none"
-                >
-                  Conheça nossas soluções
-                </Button>
-              ) : null}
-              {requestEvaluationCta ? (
-                <a
-                  href={requestEvaluationCta.href}
-                  className="border-b border-wmg-navy-900 px-0.5 py-2 text-sm font-semibold text-wmg-navy-900 transition hover:border-wmg-lime-500 hover:text-wmg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-wmg-cyan-400"
-                >
-                  Solicitar atendimento
-                </a>
-              ) : null}
-            </div>
-            <div className="mt-10 flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium text-wmg-graphite-700">
-              <span>Atendimento especializado</span>
-              <span aria-hidden="true" className="text-wmg-lime-500">
-                •
-              </span>
-              <span>Diagnóstico claro</span>
-              <span aria-hidden="true" className="text-wmg-lime-500">
-                •
-              </span>
-              <span>Retorno seguro</span>
-            </div>
           </div>
 
-          <div className="relative min-h-[22rem] overflow-hidden border border-slate-200 bg-wmg-navy-950 md:min-h-[34rem]">
+          <div className="relative -mr-20 min-h-[24rem] md:-mr-28 md:min-h-[36rem]">
             <img
               src={visualAssets.hero.src}
               alt={visualAssets.hero.alt}
-              className="h-full min-h-[22rem] w-full object-cover object-right md:min-h-[34rem]"
+              width={visualAssets.hero.width}
+              height={visualAssets.hero.height}
+              className="h-full min-h-[24rem] w-full object-cover object-[76%_center] md:min-h-[36rem]"
               loading="eager"
               fetchPriority="high"
             />
-            <p className="absolute right-5 top-5 max-w-32 border-l-2 border-wmg-cyan-400 pl-3 text-xs font-semibold leading-5 text-white md:right-8 md:top-8">
-              Equipamentos críticos
-            </p>
+            <div className="absolute right-1/4 top-12 hidden items-start gap-3 text-xs font-semibold leading-5 text-wmg-navy-900 md:flex">
+              <span className="mt-2 h-px w-14 bg-wmg-cyan-400" />
+              <span className="max-w-24">Equipamentos críticos</span>
+            </div>
           </div>
         </Container>
       </section>
 
-      <section className="border-b border-slate-200 bg-white" aria-label="Soluções atendidas">
+      <section className="border-y border-slate-200 bg-white" aria-label="Soluções atendidas">
         <Container className="grid md:grid-cols-3">
-          {solutionItems.map((item, index) => (
+          {solutionItems.map(({ title, href, Icon }, index) => (
             <a
-              key={item.title}
-              href={item.href}
-              className={`group border-slate-200 px-1 py-9 transition hover:bg-slate-50 md:px-8 md:py-12 ${
-                index > 0 ? 'border-t md:border-l md:border-t-0' : ''
+              key={title}
+              href={href}
+              className={`group flex flex-col items-center justify-center gap-4 px-6 py-9 text-center transition hover:bg-slate-50 md:px-10 md:py-10 ${
+                index > 0 ? 'border-t border-slate-200 md:border-l md:border-t-0' : ''
               }`}
             >
-              <p className="text-2xl font-semibold leading-tight tracking-[-0.03em] text-wmg-navy-900 group-hover:text-wmg-blue-700">
-                {item.title}
-              </p>
-              <span className="mt-5 block h-1 w-9 bg-wmg-lime-500 transition-all duration-300 group-hover:w-16" />
-              <p className="mt-5 max-w-xs text-sm leading-6 text-wmg-graphite-500">
-                {item.description}
-              </p>
-              <span className="mt-6 inline-block text-xs font-bold uppercase tracking-[0.16em] text-wmg-blue-600">
-                Ver detalhes
-              </span>
+              <Icon
+                aria-hidden="true"
+                className="shrink-0 text-wmg-blue-500"
+                size={58}
+                strokeWidth={1.45}
+              />
+              <div className="flex flex-col items-center">
+                <p className="max-w-48 text-xl font-semibold leading-[1.08] tracking-[-0.04em] text-wmg-navy-900 group-hover:text-wmg-blue-700 md:text-2xl">
+                  {title}
+                </p>
+                <span className="mt-5 block h-0.5 w-9 bg-wmg-lime-500 transition-all duration-300 group-hover:w-14" />
+              </div>
             </a>
           ))}
         </Container>
       </section>
 
-      <section className="bg-slate-50" aria-labelledby="confidence-title">
-        <Container className="grid gap-10 py-16 md:grid-cols-[0.35fr_1fr] md:items-center md:py-20">
-          <p className="text-xs font-bold uppercase tracking-[0.24em] text-wmg-blue-600">
-            Por que a WMG
-          </p>
-          <div className="border-l-2 border-wmg-cyan-400 pl-6 md:pl-10">
+      <section className="bg-white" aria-labelledby="confidence-title">
+        <Container className="flex flex-col items-center gap-7 py-14 text-center md:py-16">
+          <TbShieldCheck
+            aria-hidden="true"
+            className="shrink-0 text-wmg-blue-500"
+            size={62}
+            strokeWidth={1.25}
+          />
+          <div className="max-w-4xl border-t-2 border-wmg-cyan-400 pt-6">
             <h2
               id="confidence-title"
-              className="max-w-4xl text-3xl font-semibold leading-tight tracking-[-0.04em] text-wmg-navy-900 md:text-5xl"
+              className="text-2xl font-semibold leading-tight tracking-[-0.035em] text-wmg-navy-900 md:text-3xl"
             >
               Mais que reparo. Performance, confiabilidade e continuidade para a sua indústria.
             </h2>
-            <p className="mt-5 max-w-3xl text-base leading-7 text-wmg-graphite-700">
+            <p className="mx-auto mt-4 max-w-3xl text-base leading-7 text-wmg-graphite-700">
               Atuamos com diagnóstico avançado, componentes de qualidade e processos técnicos que
               garantem o retorno rápido e seguro dos seus equipamentos ao pleno desempenho.
             </p>
@@ -133,8 +111,8 @@ export function HomePage() {
       </section>
 
       <section className="bg-wmg-navy-950" aria-label="Chamada final da página inicial">
-        <Container className="flex flex-col gap-8 py-12 md:flex-row md:items-center md:justify-between md:py-14">
-          <div>
+        <Container className="flex flex-col items-center gap-8 py-12 text-center md:py-14">
+          <div className="max-w-3xl">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-wmg-lime-500">
               Fale com a equipe técnica
             </p>
@@ -142,14 +120,6 @@ export function HomePage() {
               Conte com a WMG para manter seus equipamentos em pleno funcionamento.
             </h2>
           </div>
-          {requestEvaluationCta ? (
-            <Button
-              href={requestEvaluationCta.href}
-              className="shrink-0 rounded-none border border-wmg-lime-500 bg-transparent normal-case tracking-normal text-white shadow-none hover:bg-wmg-lime-500 hover:text-wmg-navy-950"
-            >
-              Solicitar avaliação técnica
-            </Button>
-          ) : null}
         </Container>
       </section>
     </>

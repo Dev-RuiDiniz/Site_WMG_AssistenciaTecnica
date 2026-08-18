@@ -33,7 +33,7 @@ test.describe('navegação crítica', () => {
     const routes = [
       { name: /serviços/i, url: /\/servicos$/ },
       { name: /equipamentos/i, url: /\/equipamentos$/ },
-      { name: /sobre/i, url: /\/sobre$/ },
+      { name: /a wmg|sobre/i, url: /\/sobre$/ },
       { name: /contato/i, url: /\/contato$/ },
     ];
 

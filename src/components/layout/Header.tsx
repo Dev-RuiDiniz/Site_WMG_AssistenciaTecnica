@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
-import { companyContent, ctaContent, navigationItems } from '../../content';
-import { Button } from '../ui/Button';
+import { companyContent } from '../../content';
 import { Container } from '../ui/Container';
 
-const requestEvaluationCta = ctaContent.find((cta) => cta.id === 'request-evaluation');
 const logoSrc = '/assets/brand/logo_wmg.png';
+const headerNavigationItems = [
+  { label: 'Equipamentos', href: '/equipamentos' },
+  { label: 'Serviços', href: '/servicos' },
+  { label: 'A WMG', href: '/sobre' },
+  { label: 'Contato', href: '/contato' },
+];
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -28,8 +32,13 @@ export function Header() {
     >
       <div className="border-b border-wmg-navy-900 bg-wmg-navy-950 text-white">
         <Container className="flex min-h-9 items-center justify-between text-xs font-medium tracking-[0.04em]">
-          <span>Assistência técnica industrial</span>
-          <span>{companyContent.location}</span>
+          <div className="flex items-center gap-3">
+            <span>Assistência técnica industrial</span>
+            <span aria-hidden="true" className="text-wmg-lime-500">
+              |
+            </span>
+            <span>{companyContent.location}</span>
+          </div>
         </Container>
       </div>
 
@@ -39,33 +48,22 @@ export function Header() {
             <img
               src={logoSrc}
               alt="WMG Assistência Técnica"
-              className="h-14 w-auto object-contain md:h-[4.5rem]"
+              className="h-20 w-auto object-contain md:h-[5.5rem]"
             />
           </a>
 
           <nav className="hidden items-center gap-7 lg:flex" aria-label="Navegação principal">
-            {navigationItems.map((item) => (
+            {headerNavigationItems.map((item) => (
               <a
-                key={item.href}
+                key={`${item.label}-${item.href}`}
                 href={item.href}
-                aria-label={item.href === '/sobre' ? 'Sobre a WMG' : undefined}
-                className="border-b-2 border-transparent px-1 py-4 text-sm font-semibold text-wmg-navy-900 transition hover:border-wmg-lime-500 hover:text-wmg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-wmg-cyan-400"
+                aria-label={item.label === 'A WMG' ? 'A WMG' : undefined}
+                className="flex items-center gap-1 border-b-2 border-transparent px-1 py-4 text-sm font-medium text-wmg-navy-900 transition hover:border-wmg-lime-500 hover:text-wmg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-wmg-cyan-400"
               >
                 {item.label}
               </a>
             ))}
           </nav>
-
-          <div className="hidden lg:block">
-            {requestEvaluationCta ? (
-              <Button
-                href={requestEvaluationCta.href}
-                className="rounded-none border border-wmg-lime-500 bg-transparent px-5 text-sm normal-case tracking-normal text-wmg-navy-900 shadow-none hover:bg-wmg-lime-500"
-              >
-                Fale com especialista
-              </Button>
-            ) : null}
-          </div>
 
           <button
             type="button"
@@ -87,25 +85,16 @@ export function Header() {
           aria-label="Navegação mobile"
         >
           <Container className="grid gap-1 py-4">
-            {navigationItems.map((item) => (
+            {headerNavigationItems.map((item) => (
               <a
-                key={item.href}
+                key={`${item.label}-${item.href}`}
                 href={item.href}
-                aria-label={item.href === '/sobre' ? 'Sobre a WMG' : undefined}
                 className="border-b border-slate-200 px-2 py-3 text-sm font-semibold text-wmg-navy-900 transition hover:border-wmg-lime-500 hover:text-wmg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-wmg-cyan-400"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.label}
               </a>
             ))}
-            {requestEvaluationCta ? (
-              <Button
-                href={requestEvaluationCta.href}
-                className="mt-3 rounded-none normal-case tracking-normal shadow-none"
-              >
-                Fale com especialista
-              </Button>
-            ) : null}
           </Container>
         </nav>
       ) : null}

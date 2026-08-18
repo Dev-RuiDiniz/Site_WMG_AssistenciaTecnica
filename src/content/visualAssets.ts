@@ -14,17 +14,22 @@ const campaignImageDimensions = {
   height: 1024,
 };
 
+const heroImageDimensions = {
+  width: 1672,
+  height: 941,
+};
+
 export const visualAssets: Record<
   'hero' | 'growthMaintenance' | 'productionStop' | 'maintenance',
   VisualAsset
 > = {
   hero: {
-    src: '/assets/campaign/wmg-industrial-hero.png',
-    alt: 'Equipamentos de automação industrial e placas eletrônicas em ambiente técnico azul',
-    title: 'Automação industrial e eletrônica técnica',
-    width: campaignImageDimensions.width,
-    height: campaignImageDimensions.height,
-    sizeBytes: 2_084_321,
+    src: '/assets/campaign/wmg-industrial-hero-light.png',
+    alt: 'Inversor, placas eletrônicas e cabos industriais em composição clara de estúdio',
+    title: 'Inversor, placas e cabos industriais',
+    width: heroImageDimensions.width,
+    height: heroImageDimensions.height,
+    sizeBytes: 1_283_000,
     loading: 'eager',
     fetchPriority: 'high',
   },

@@ -12,14 +12,6 @@ export function Footer() {
           <p className="mt-4 max-w-md text-sm leading-7 text-slate-300">
             {companyContent.description}
           </p>
-          {supportCta ? (
-            <a
-              href={supportCta.href}
-              className="mt-6 inline-flex min-h-11 items-center justify-center rounded-none bg-wmg-lime-500 px-5 text-sm font-semibold text-wmg-navy-950 transition hover:bg-wmg-lime-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-wmg-lime-400"
-            >
-              Falar com suporte
-            </a>
-          ) : null}
         </div>
 
         <nav aria-label="Links rapidos do rodape">

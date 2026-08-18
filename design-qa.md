@@ -1,20 +1,21 @@
-# Design QA — direção WMG aprovada
+# Design QA — aproximação WMG ao mockup aprovado
 
 final result: passed
 
 ## Referência
 
 - Mockup aprovado: `C:\Users\RUI FRANCISCO\.codex\generated_images\01a0166b-20e7-7b00-be24-7994a5df1a4f\exec-7080b426-81b7-42f9-a672-c78d08efdd0c.png`
-- Preview desktop: `C:\Users\RUI FRANCISCO\AppData\Local\Temp\wmg-home-redesign-desktop.png`
-- Preview mobile: `C:\Users\RUI FRANCISCO\AppData\Local\Temp\wmg-home-redesign-mobile.png`
+- Preview desktop: `C:\Users\RUI FRANCISCO\AppData\Local\Temp\wmg-home-feedback-desktop-v2.png`
+- Preview mobile: `C:\Users\RUI FRANCISCO\AppData\Local\Temp\wmg-home-feedback-912-v2.png`
 
 ## Resultado
 
-- Cabeçalho branco com barra utilitária azul-marinho, navegação editorial e CTA de especialista.
-- Primeira dobra reorganizada em composição assimétrica: mensagem técnica à esquerda e imagem industrial real à direita.
-- Paleta reduzida a branco, azul-marinho, grafite, ciano e lime, sem gradientes decorativos.
-- Soluções apresentadas em três blocos textuais com links para equipamentos e serviços.
-- Prova institucional e CTA final mantidos com contraste e espaçamento amplos.
+- Cabeçalho branco com barra utilitária azul-marinho, navegação no vocabulário do mockup e CTA com ícone de mensagem.
+- Primeira dobra alinhada à proporção da referência: texto amplo à esquerda e composição clara de inversor, placas e cabos à direita.
+- Asset claro gerado para o projeto em `public/assets/campaign/wmg-industrial-hero-light.png`.
+- Soluções apresentadas em três blocos com ícones lineares azuis, divisórias e detalhes lime.
+- Prova institucional com ícone de escudo, linha ciano e hierarquia tipográfica mais próxima da referência.
+- Ajuste final no viewport de 912px: texto levemente mais baixo e ponto focal da imagem deslocado para enquadrar melhor os equipamentos.
 - Menu mobile, navegação, CTAs e ausência de overflow horizontal validados em navegador.
 
 ## Checagens
@@ -27,4 +28,4 @@ final result: passed
 
 ## Risco remanescente
 
-O conjunto completo do projeto ainda possui expectativas legadas fora desta alteração visual, incluindo telefone de WhatsApp divergente no conteúdo de produção e mensagens antigas no teste do formulário. Esses pontos não foram alterados porque não fazem parte da direção visual aprovada.
+O logo disponível no repositório é uma composição vertical, enquanto o mockup mostra uma versão horizontal; a implementação preserva o arquivo oficial existente para não distorcer a marca. O conjunto completo do projeto ainda possui expectativas legadas fora desta alteração visual, incluindo telefone de WhatsApp divergente no conteúdo de produção e mensagens antigas no teste do formulário.

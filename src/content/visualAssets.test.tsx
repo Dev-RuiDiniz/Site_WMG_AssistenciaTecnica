@@ -9,7 +9,8 @@ describe('visualAssets performance metadata', () => {
     assets.forEach((asset) => {
       expect(asset.width).toBeGreaterThan(0);
       expect(asset.height).toBeGreaterThan(0);
-      expect(asset.width / asset.height).toBeCloseTo(1.5, 1);
+      const expectedRatio = asset === visualAssets.hero ? 1.78 : 1.5;
+      expect(asset.width / asset.height).toBeCloseTo(expectedRatio, 1);
     });
   });
 
