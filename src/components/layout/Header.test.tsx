@@ -7,6 +7,10 @@ describe('Header', () => {
 
     expect(screen.getByRole('banner')).toBeInTheDocument();
     expect(screen.getByRole('navigation', { name: /navegação principal/i })).toBeInTheDocument();
+    expect(screen.getByText(/assistência técnica industrial/i)).toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /fale com especialista/i })).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /soluções/i })).not.toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /a wmg/i })).toHaveAttribute('href', '/sobre');
 
     const serviceLinks = screen.getAllByRole('link', { name: /serviços/i });
     const equipmentLinks = screen.getAllByRole('link', { name: /equipamentos/i });
@@ -25,5 +29,15 @@ describe('Header', () => {
 
     expect(menuButton).toHaveAttribute('aria-expanded', 'true');
     expect(screen.getByRole('navigation', { name: /navegação mobile/i })).toBeInTheDocument();
+    expect(
+      screen
+        .getByRole('navigation', { name: /navegação mobile/i })
+        .querySelector('a[href="/servicos"]'),
+    ).toBeInTheDocument();
+    expect(
+      screen
+        .getByRole('navigation', { name: /navegação mobile/i })
+        .querySelector('a[href="/servicos"]'),
+    ).not.toHaveTextContent(/soluções/i);
   });
 });

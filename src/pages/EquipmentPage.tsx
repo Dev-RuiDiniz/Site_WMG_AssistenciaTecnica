@@ -1,23 +1,20 @@
-import { equipmentContent, visualAssets } from '../content';
+import { equipmentContent } from '../content';
 import { Card } from '../components/ui/Card';
 import { Container } from '../components/ui/Container';
-import { MediaFrame } from '../components/ui/MediaFrame';
 import { RevealOnScroll } from '../components/ui/RevealOnScroll';
 import { SectionTitle } from '../components/ui/SectionTitle';
 
 export function EquipmentPage() {
   return (
     <Container className="grid gap-16 py-16 md:py-24">
-      <section
-        className="grid gap-10 md:grid-cols-[0.8fr_1fr] md:items-center"
-        aria-labelledby="equipamentos-title"
-      >
-        <MediaFrame asset={visualAssets.hero} />
-        <SectionTitle
-          eyebrow="Equipamentos atendidos"
-          title="Categorias técnicas atendidas pela WMG"
-          description="A lista ajuda a qualificar rapidamente se a demanda está dentro do escopo técnico para diagnóstico, reparo ou suporte."
-        />
+      <section className="flex justify-center text-center" aria-labelledby="equipamentos-title">
+        <div className="mx-auto max-w-4xl">
+          <SectionTitle
+            eyebrow="Equipamentos atendidos"
+            title="Categorias técnicas atendidas pela WMG"
+            description="A lista ajuda a qualificar rapidamente se a demanda está dentro do escopo técnico para diagnóstico, reparo ou suporte."
+          />
+        </div>
       </section>
 
       <section aria-label="Categorias de equipamentos" className="grid gap-10">

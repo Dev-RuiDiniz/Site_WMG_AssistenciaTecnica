@@ -16,8 +16,17 @@ describe('App routes', () => {
     renderAtRoute('/');
 
     expect(
-      screen.getByRole('heading', { name: new RegExp(homeContent.hero.title, 'i') }),
+      screen.getByRole('heading', { name: /inteligência técnica para sua operação/i }),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole('img', { name: /inversor, placas eletrônicas e cabos industriais/i }),
+    ).toHaveAttribute('src', '/assets/campaign/wmg-industrial-hero-light.png');
+    expect(screen.getByText(/equipamentos críticos/i)).toBeInTheDocument();
+    expect(screen.getByText(/inversores e drives/i)).toBeInTheDocument();
+    expect(
+      screen.queryByRole('link', { name: /conheça nossas soluções/i }),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: /solicitar atendimento/i })).not.toBeInTheDocument();
   });
 
   it('renderiza a pagina de servicos em /servicos', () => {
@@ -26,6 +35,14 @@ describe('App routes', () => {
     expect(
       screen.getByRole('heading', { name: homeContent.servicesSection.title }),
     ).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /diagnóstico técnico/i })).toBeInTheDocument();
+    expect(document.querySelector('video source')).toHaveAttribute(
+      'src',
+      '/assets/campaign/wmg-services-background.mp4',
+    );
+    expect(
+      screen.queryByRole('img', { name: /técnico industrial realizando manutenção/i }),
+    ).not.toBeInTheDocument();
   });
 
   it('renderiza a pagina de equipamentos em /equipamentos', () => {
@@ -34,6 +51,9 @@ describe('App routes', () => {
     expect(
       screen.getByRole('heading', { name: /categorias técnicas atendidas pela wmg/i }),
     ).toBeInTheDocument();
+    expect(
+      screen.queryByRole('img', { name: /inversor, placas eletrônicas e cabos industriais/i }),
+    ).not.toBeInTheDocument();
   });
 
   it('renderiza a pagina sobre em /sobre', () => {
@@ -56,7 +76,7 @@ describe('App routes', () => {
     renderAtRoute('/');
 
     expect(
-      screen.getByRole('heading', { name: /sua produção não pode esperar/i }),
+      screen.getByRole('heading', { name: /mais que reparo\. performance/i }),
     ).toBeInTheDocument();
     expect(
       screen.queryByRole('heading', { name: homeContent.benefitsSection.title }),
