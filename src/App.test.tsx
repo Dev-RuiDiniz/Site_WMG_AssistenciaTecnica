@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import App from './App';
 import { homeContent } from './content';
@@ -53,9 +53,15 @@ describe('App routes', () => {
   it('renderiza a pagina de equipamentos em /equipamentos', () => {
     renderAtRoute('/equipamentos');
 
+    const equipmentGrid = screen.getByRole('region', { name: /categorias de equipamentos/i });
+
     expect(
       screen.getByRole('heading', { name: /categorias técnicas atendidas pela wmg/i }),
     ).toBeInTheDocument();
+    expect(within(equipmentGrid).getAllByRole('heading', { level: 2 })).not.toHaveLength(0);
+    within(equipmentGrid)
+      .getAllByRole('heading', { level: 2 })
+      .forEach((heading) => expect(heading).toHaveClass('text-center'));
     expect(
       screen.queryByRole('img', { name: /inversor, placas eletrônicas e cabos industriais/i }),
     ).not.toBeInTheDocument();
@@ -64,17 +70,47 @@ describe('App routes', () => {
   it('renderiza a pagina sobre em /sobre', () => {
     renderAtRoute('/sobre');
 
+    expect(screen.getByText(homeContent.aboutSection.eyebrow, { selector: 'p' })).toHaveClass(
+      'text-center',
+      'text-base',
+    );
     expect(
       screen.getByRole('heading', { name: /assistência técnica para operações/i }),
     ).toBeInTheDocument();
+
+    expect(screen.getByText(homeContent.howItWorksSection.eyebrow, { selector: 'p' })).toHaveClass(
+      'text-center',
+      'text-base',
+    );
+    expect(screen.getByRole('heading', { name: homeContent.howItWorksSection.title })).toHaveClass(
+      'text-center',
+    );
+
+    homeContent.painSection.points.forEach((point) => {
+      expect(screen.getByRole('heading', { name: point.title })).toHaveClass('text-center');
+      expect(screen.getByText(point.description)).toHaveClass('text-center');
+    });
+
+    homeContent.howItWorksSection.steps.forEach((step) => {
+      expect(screen.getByRole('heading', { name: step.title })).toHaveClass('text-center');
+      expect(screen.getByText(step.description)).toHaveClass('text-center');
+      expect(screen.queryByText(step.step)).not.toBeInTheDocument();
+    });
   });
 
   it('renderiza a pagina de contato em /contato', () => {
     renderAtRoute('/contato');
 
+    const contactHeading = screen.getByRole('heading', {
+      level: 1,
+      name: /solicite uma avaliação técnica/i,
+    });
+
+    expect(contactHeading).toBeInTheDocument();
+    expect(contactHeading).toHaveClass('font-black', 'text-wmg-navy-950');
     expect(
-      screen.getByRole('heading', { name: /solicite uma avaliação técnica/i }),
-    ).toBeInTheDocument();
+      screen.queryByRole('img', { name: /técnico industrial realizando manutenção/i }),
+    ).not.toBeInTheDocument();
   });
 
   it('mantem provas comerciais na home e aprofunda contexto na pagina sobre', () => {

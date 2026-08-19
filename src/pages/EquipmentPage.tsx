@@ -22,7 +22,9 @@ export function EquipmentPage() {
           {equipmentContent.map((equipment, index) => (
             <RevealOnScroll key={equipment.slug} delay={index * 0.05}>
               <Card className="h-full shadow-sm transition hover:-translate-y-1 hover:scale-[1.02] hover:border-wmg-cyan-400/50 hover:shadow-wmg-card">
-                <h2 className="text-xl font-black text-wmg-navy-950">{equipment.title}</h2>
+                <h2 className="text-center text-xl font-black text-wmg-navy-950">
+                  {equipment.title}
+                </h2>
                 <p className="mt-3 leading-7 text-slate-700">{equipment.description}</p>
               </Card>
             </RevealOnScroll>

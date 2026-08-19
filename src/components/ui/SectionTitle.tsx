@@ -4,6 +4,8 @@ type SectionTitleProps = {
   description?: string;
   tone?: 'light' | 'dark';
   eyebrowClassName?: string;
+  titleClassName?: string;
+  descriptionClassName?: string;
 };
 
 export function SectionTitle({
@@ -12,6 +14,8 @@ export function SectionTitle({
   description,
   tone = 'light',
   eyebrowClassName = '',
+  titleClassName = '',
+  descriptionClassName = '',
 }: SectionTitleProps) {
   const titleClass = tone === 'dark' ? 'text-white' : 'text-wmg-navy-950';
   const descriptionClass = tone === 'dark' ? 'text-slate-100' : 'text-slate-700';
@@ -23,9 +27,15 @@ export function SectionTitle({
       >
         {eyebrow}
       </p>
-      <h2 className={`text-3xl font-black leading-tight md:text-5xl ${titleClass}`}>{title}</h2>
+      <h2
+        className={`text-3xl font-black leading-tight md:text-5xl ${titleClass} ${titleClassName}`.trim()}
+      >
+        {title}
+      </h2>
       {description ? (
-        <p className={`mt-5 text-lg leading-8 ${descriptionClass}`}>{description}</p>
+        <p className={`mt-5 text-lg leading-8 ${descriptionClass} ${descriptionClassName}`.trim()}>
+          {description}
+        </p>
       ) : null}
     </div>
   );

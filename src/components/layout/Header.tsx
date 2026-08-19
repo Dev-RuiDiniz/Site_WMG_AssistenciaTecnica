@@ -6,7 +6,7 @@ const logoSrc = '/assets/brand/logo_wmg.png';
 const headerNavigationItems = [
   { label: 'Equipamentos', href: '/equipamentos' },
   { label: 'Serviços', href: '/servicos' },
-  { label: 'A WMG', href: '/sobre' },
+  { label: 'Sobre', href: '/sobre' },
   { label: 'Contato', href: '/contato' },
 ];
 
@@ -57,7 +57,6 @@ export function Header() {
               <a
                 key={`${item.label}-${item.href}`}
                 href={item.href}
-                aria-label={item.label === 'A WMG' ? 'A WMG' : undefined}
                 className="flex items-center gap-1 border-b-2 border-transparent px-1 py-4 text-sm font-medium text-wmg-navy-900 transition hover:border-wmg-lime-500 hover:text-wmg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-wmg-cyan-400"
               >
                 {item.label}
