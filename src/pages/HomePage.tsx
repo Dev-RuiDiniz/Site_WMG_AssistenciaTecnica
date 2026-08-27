@@ -29,21 +29,21 @@ export function HomePage() {
       >
         <div
           data-hero-copy
-          className="flex items-center bg-wmg-lime-100 px-7 py-14 md:px-10 lg:px-14"
+          className="flex items-center bg-wmg-navy-800 px-7 py-14 md:px-10 lg:px-14"
         >
           <div className="max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-wmg-blue-500 md:text-sm">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-wmg-lime-400 md:text-sm">
               Automação, elétrica e eletrônica industrial
             </p>
             <h1
               id="hero-title"
-              className="mt-6 max-w-2xl text-5xl font-semibold leading-[0.98] tracking-[-0.055em] text-wmg-navy-900 md:text-[4.15rem]"
+              className="mt-6 max-w-2xl text-5xl font-semibold leading-[0.98] tracking-[-0.055em] text-white md:text-[4.15rem]"
             >
               Inteligência técnica
               <br />
-              para sua operação<span className="text-wmg-lime-500">.</span>
+              para sua operação<span className="text-wmg-lime-400">.</span>
             </h1>
-            <p className="mt-7 max-w-lg text-lg leading-8 text-wmg-graphite-700 md:text-xl">
+            <p className="mt-7 max-w-lg text-lg leading-8 text-white md:text-xl">
               Diagnóstico, reparo e manutenção para recuperar o desempenho dos seus equipamentos.
             </p>
           </div>

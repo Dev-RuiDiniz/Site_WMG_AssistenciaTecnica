@@ -23,7 +23,18 @@ describe('App routes', () => {
       screen.getByRole('heading', { name: /inteligência técnica para sua operação/i }),
     ).toBeInTheDocument();
     expect(heroSection).toHaveClass('relative', 'grid', 'w-full', 'md:grid-cols-[2fr_3fr]');
-    expect(heroSection.querySelector('[data-hero-copy]')).toHaveClass('bg-wmg-lime-100');
+    const heroCopy = heroSection.querySelector('[data-hero-copy]');
+    expect(heroCopy).toHaveClass('bg-wmg-navy-800');
+    expect(within(heroCopy as HTMLElement).getByText(/automação, elétrica e eletrônica industrial/i)).toHaveClass(
+      'text-wmg-lime-400',
+    );
+    expect(screen.getByRole('heading', { name: /inteligência técnica para sua operação/i })).toHaveClass(
+      'text-white',
+    );
+    expect(heroSection.querySelector('#hero-title span')).toHaveClass('text-wmg-lime-400');
+    expect(within(heroCopy as HTMLElement).getByText(/diagnóstico, reparo e manutenção/i)).toHaveClass(
+      'text-white',
+    );
     expect(heroSection).toHaveClass('min-h-[32rem]', 'md:min-h-[36rem]');
     const heroVideoElement = heroSection.querySelector('video');
     expect(heroVideoElement).toBeInTheDocument();
