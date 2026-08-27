@@ -144,6 +144,6 @@ Vídeo de fundo em loop com poster de fallback obrigatório. Vídeo é ocultado 
 - `src/components/ui/VideoHero.test.tsx`
 - `src/App.test.tsx`
 
-## Assets de vídeo (placeholder)
+## Assets de vídeo do hero
 
-O hero da Home usa um vídeo institucional placeholder royalty-free, definido em `src/content/visualAssets.ts` (`heroVideo`). Substituir `heroVideo.sources` por vídeo real da WMG quando disponível; o `poster` continua servindo como fallback de imagem estática.
+O hero da Home usa o vídeo institucional da WMG definido em `src/content/visualAssets.ts` (`heroVideo`), com o arquivo servido em `public/assets/campaign/wmg-industrial-highlight.mp4`. O `poster` continua servindo como fallback de imagem estática e para `prefers-reduced-motion`.

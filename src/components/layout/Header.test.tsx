@@ -2,11 +2,37 @@ import { fireEvent, render, screen, within } from '@testing-library/react';
 import { Header } from './Header';
 
 describe('Header', () => {
+  function setScrollY(value: number) {
+    Object.defineProperty(window, 'scrollY', { configurable: true, value });
+    fireEvent.scroll(window);
+  }
+
+  it('mantem o cabecalho visivel no topo e durante a rolagem', () => {
+    setScrollY(0);
+    render(<Header />);
+
+    const header = screen.getByRole('banner');
+    expect(header).toBeVisible();
+    expect(header).toHaveClass('sticky', 'top-0');
+
+    setScrollY(48);
+
+    expect(header).toBeVisible();
+    expect(header).toHaveClass('sticky', 'top-0');
+  });
+
   it('renderiza navegacao principal com links para rotas reais', () => {
+    setScrollY(48);
     render(<Header />);
 
     expect(screen.getByRole('banner')).toBeInTheDocument();
-    expect(screen.getByRole('navigation', { name: /navegação principal/i })).toBeInTheDocument();
+    const primaryNavigation = screen.getByRole('navigation', { name: /navegação principal/i });
+    expect(primaryNavigation).toBeInTheDocument();
+    expect(within(primaryNavigation).getByRole('link', { name: /^equipamentos$/i })).toHaveClass(
+      'text-base',
+      'font-extrabold',
+      'hover:text-wmg-lime-500',
+    );
     expect(screen.getByText(/assistência técnica industrial/i)).toBeInTheDocument();
     expect(screen.queryByRole('link', { name: /fale com especialista/i })).not.toBeInTheDocument();
     expect(screen.queryByRole('link', { name: /soluções/i })).not.toBeInTheDocument();
@@ -21,6 +47,7 @@ describe('Header', () => {
   });
 
   it('controla o menu mobile com estado acessivel', () => {
+    setScrollY(48);
     render(<Header />);
 
     const menuButton = screen.getByRole('button', { name: /abrir menu de navegação/i });

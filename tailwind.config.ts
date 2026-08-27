@@ -21,6 +21,7 @@ export default {
             300: '#67e8ff',
           },
           lime: {
+            100: '#eef7cf',
             500: '#97d700',
             400: '#b6f21a',
           },

@@ -76,8 +76,8 @@ export type HeroVideoAsset = {
 };
 
 /**
- * Placeholder de vídeo institucional (royalty-free) para o hero da Home.
- * Substituir `sources` por vídeo real da WMG assim que disponível, mantendo
+ * Vídeo institucional da WMG para o hero da Home.
+ * O `poster` continua servindo como fallback estático, mantendo
  * o `poster` como fallback estático para navegadores sem suporte a vídeo
  * e para `prefers-reduced-motion`.
  */
@@ -86,9 +86,9 @@ export const heroVideo: HeroVideoAsset = {
   posterAlt: visualAssets.hero.alt,
   sources: [
     {
-      src: 'https://assets.mixkit.co/videos/preview/mixkit-industrial-machine-in-a-factory-4k-33921-large.mp4',
+      src: '/assets/campaign/wmg-industrial-highlight.mp4',
       type: 'video/mp4',
     },
   ],
-  note: 'Placeholder royalty-free. Substituir por vídeo institucional real da WMG quando disponível.',
+  note: 'Vídeo institucional real da WMG.',
 };

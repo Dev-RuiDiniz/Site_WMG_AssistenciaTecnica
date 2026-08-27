@@ -1,5 +1,5 @@
 import { TbCircuitMotor, TbComponents, TbSettingsAutomation, TbShieldCheck } from 'react-icons/tb';
-import { visualAssets } from '../content';
+import { heroVideo } from '../content';
 import { Container } from '../components/ui/Container';
 
 const solutionItems = [
@@ -24,25 +24,14 @@ export function HomePage() {
   return (
     <>
       <section
-        className="relative isolate min-h-[32rem] overflow-hidden bg-white md:min-h-[36rem]"
+        className="relative isolate grid min-h-[32rem] w-full overflow-hidden bg-white md:h-[36rem] md:min-h-[36rem] md:grid-cols-[2fr_3fr]"
         aria-labelledby="hero-title"
       >
-        <img
-          src={visualAssets.hero.src}
-          alt={visualAssets.hero.alt}
-          width={visualAssets.hero.width}
-          height={visualAssets.hero.height}
-          className="absolute inset-0 z-0 h-full w-full object-cover object-center"
-          loading="eager"
-          fetchPriority="high"
-        />
         <div
-          aria-hidden="true"
-          className="absolute inset-0 z-0 bg-gradient-to-r from-white via-white/85 to-white/10"
-        />
-
-        <Container className="relative z-10 flex min-h-[32rem] items-center py-14 md:min-h-[36rem] md:py-0">
-          <div className="max-w-2xl pt-8 lg:pt-0">
+          data-hero-copy
+          className="flex items-center bg-wmg-lime-100 px-7 py-14 md:px-10 lg:px-14"
+        >
+          <div className="max-w-2xl">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-wmg-blue-500 md:text-sm">
               Automação, elétrica e eletrônica industrial
             </p>
@@ -58,12 +47,38 @@ export function HomePage() {
               Diagnóstico, reparo e manutenção para recuperar o desempenho dos seus equipamentos.
             </p>
           </div>
+        </div>
 
-          <div className="absolute right-10 top-12 hidden items-start gap-3 text-xs font-semibold leading-5 text-wmg-navy-900 md:flex lg:right-16">
-            <span className="mt-2 h-px w-14 bg-wmg-cyan-400" />
-            <span className="max-w-24">Equipamentos críticos</span>
-          </div>
-        </Container>
+        <div
+          data-hero-media
+          className="relative min-h-[20rem] overflow-hidden bg-wmg-navy-900 md:min-h-0"
+        >
+          <video
+            aria-label="Destaque audiovisual da WMG"
+              className="h-full min-h-0 w-full object-cover object-center motion-reduce:hidden"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster={heroVideo.poster}
+          >
+            {heroVideo.sources.map((source) => (
+              <source key={source.src} src={source.src} type={source.type} />
+            ))}
+            <img src={heroVideo.poster} alt="" aria-hidden="true" />
+          </video>
+          <img
+            src={heroVideo.poster}
+            alt=""
+            aria-hidden="true"
+              className="hidden h-full min-h-0 w-full object-cover object-center motion-reduce:block"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-r from-wmg-navy-900/15 via-transparent to-wmg-cyan-400/10"
+          />
+        </div>
       </section>
 
       <section className="border-y border-slate-200 bg-white" aria-label="Soluções atendidas">

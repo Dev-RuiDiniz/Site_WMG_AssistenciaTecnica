@@ -1,7 +1,7 @@
 import { render, screen, within } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import App from './App';
-import { homeContent } from './content';
+import { heroVideo, homeContent } from './content';
 
 function renderAtRoute(path: string) {
   return render(
@@ -22,11 +22,25 @@ describe('App routes', () => {
     expect(
       screen.getByRole('heading', { name: /inteligência técnica para sua operação/i }),
     ).toBeInTheDocument();
-    expect(heroSection).toHaveClass('relative');
+    expect(heroSection).toHaveClass('relative', 'grid', 'w-full', 'md:grid-cols-[2fr_3fr]');
+    expect(heroSection.querySelector('[data-hero-copy]')).toHaveClass('bg-wmg-lime-100');
+    expect(heroSection).toHaveClass('min-h-[32rem]', 'md:min-h-[36rem]');
+    const heroVideoElement = heroSection.querySelector('video');
+    expect(heroVideoElement).toBeInTheDocument();
+    expect(heroVideoElement).toHaveAttribute('poster', heroVideo.poster);
+    expect(heroVideoElement).toHaveAttribute('autoplay');
+    expect(heroVideoElement).toHaveProperty('muted', true);
+    expect(heroVideoElement).toHaveAttribute('loop');
+    expect(heroVideoElement).toHaveAttribute('playsinline');
+    expect(heroVideoElement).toHaveClass('object-cover');
+    expect(heroVideoElement?.querySelector('source')).toHaveAttribute(
+      'src',
+      heroVideo.sources[0].src,
+    );
     expect(
-      screen.getByRole('img', { name: /inversor, placas eletrônicas e cabos industriais/i }),
-    ).toHaveClass('absolute', 'inset-0', 'h-full', 'w-full', 'object-cover');
-    expect(screen.getByText(/equipamentos críticos/i)).toBeInTheDocument();
+      screen.queryByRole('img', { name: /inversor, placas eletrônicas e cabos industriais/i }),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText(/equipamentos críticos/i)).not.toBeInTheDocument();
     expect(screen.getByText(/inversores e drives/i)).toBeInTheDocument();
     expect(
       screen.queryByRole('link', { name: /conheça nossas soluções/i }),

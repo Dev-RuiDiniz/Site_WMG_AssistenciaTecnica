@@ -13,6 +13,8 @@ test.describe('navegação crítica', () => {
     for (const route of publicRoutes) {
       await test.step(`validar rota ${route.path}`, async () => {
         await page.goto(route.path);
+        await page.evaluate(() => window.scrollTo(0, 200));
+        await expect(page.getByRole('banner')).toBeVisible();
 
         await expect(page).toHaveURL(
           new RegExp(`${route.path === '/' ? '/?$' : `${route.path}$`}`),
@@ -29,6 +31,8 @@ test.describe('navegação crítica', () => {
 
   test('permite navegar pelos links principais do site', async ({ page }) => {
     await page.goto('/');
+    await page.evaluate(() => window.scrollTo(0, 200));
+    await expect(page.getByRole('banner')).toBeVisible();
 
     const routes = [
       { name: /serviços/i, url: /\/servicos$/ },
@@ -40,6 +44,8 @@ test.describe('navegação crítica', () => {
     for (const route of routes) {
       await test.step(`navegar para ${route.name}`, async () => {
         await page.goto('/');
+        await page.evaluate(() => window.scrollTo(0, 200));
+        await expect(page.getByRole('banner')).toBeVisible();
         const mobileMenuButton = page
           .getByRole('banner')
           .getByRole('button', { name: /abrir menu de navegação/i });

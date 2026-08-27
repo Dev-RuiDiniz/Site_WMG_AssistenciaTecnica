@@ -57,7 +57,7 @@ export function Header() {
               <a
                 key={`${item.label}-${item.href}`}
                 href={item.href}
-                className="flex items-center gap-1 border-b-2 border-transparent px-1 py-4 text-sm font-medium text-wmg-navy-900 transition hover:border-wmg-lime-500 hover:text-wmg-blue-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-wmg-cyan-400"
+                className="flex items-center gap-1 border-b-2 border-transparent px-1 py-4 text-base font-extrabold tracking-[-0.02em] text-wmg-navy-900 transition hover:border-wmg-lime-500 hover:text-wmg-lime-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-wmg-cyan-400"
               >
                 {item.label}
               </a>

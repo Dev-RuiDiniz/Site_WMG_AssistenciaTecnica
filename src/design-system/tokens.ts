@@ -10,6 +10,7 @@ export const wmgTokens = {
     cyan300: '#67e8ff',
     lime500: '#97d700',
     lime400: '#b6f21a',
+    lime100: '#eef7cf',
     white: '#ffffff',
     graphite900: '#101827',
     graphite700: '#243449',
