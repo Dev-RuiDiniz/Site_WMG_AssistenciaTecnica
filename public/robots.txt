@@ -1,4 +1,6 @@
+# Site público da WMG Assistência Técnica.
 User-agent: *
 Allow: /
 
+# O sitemap lista somente as rotas públicas e canônicas do site.
 Sitemap: https://www.wmgassistenciatecnica.com.br/sitemap.xml

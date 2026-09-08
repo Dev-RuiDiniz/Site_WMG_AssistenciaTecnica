@@ -30,12 +30,22 @@ Cada rota possui:
 
 O site também possui schema JSON-LD do tipo `LocalBusiness`, usando os dados versionados em `src/content/company.ts`.
 
+## Prioridade geográfica
+
+A comunicação SEO segue uma hierarquia regional:
+
+1. Vale do Paraíba e região, com Taubaté como cidade-base;
+2. estado de São Paulo;
+3. outras regiões do Brasil, sob consulta.
+
+Essa ordem aparece nos títulos, descrições, palavras-chave e no campo `areaServed` do schema JSON-LD. A intenção é reforçar relevância local sem criar páginas artificiais para cidades que ainda não possuem conteúdo ou oferta específica.
+
 ## Arquivos estáticos
 
 | Arquivo | Finalidade |
 | --- | --- |
-| `public/robots.txt` | Permite indexação e aponta para o sitemap |
-| `public/sitemap.xml` | Lista as rotas públicas principais |
+| `public/robots.txt` | Permite indexação do site público e aponta para o sitemap |
+| `public/sitemap.xml` | Lista as rotas públicas canônicas e sua última atualização |
 | `public/favicon.svg` | Ícone do site |
 | `public/og-wmg-assistencia-tecnica.svg` | Imagem padrão de compartilhamento |
 
@@ -44,7 +54,8 @@ O site também possui schema JSON-LD do tipo `LocalBusiness`, usando os dados ve
 1. Abra `src/seo/seoConfig.ts`.
 2. Atualize a entrada correspondente em `seoRoutes`.
 3. Ajuste `title`, `description` e `keywords`.
-4. Execute os testes.
+4. Se a abrangência geográfica mudar, atualize também `organizationSchema.areaServed`.
+5. Execute os testes.
 
 ```bash
 npm test

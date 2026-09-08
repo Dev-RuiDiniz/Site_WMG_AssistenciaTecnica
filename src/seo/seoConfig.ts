@@ -15,38 +15,70 @@ export const defaultOgImage = `${siteUrl}/og-wmg-assistencia-tecnica.svg`;
 export const seoRoutes: Record<SeoRouteKey, SeoMetadata> = {
   home: {
     path: '/',
-    title: 'WMG Assistência Técnica | Manutenção industrial em Taubaté - SP',
+    title: 'Assistência Técnica no Vale do Paraíba | WMG',
     description:
-      'Assistência técnica industrial em Taubaté para inversores, servo drives, IHMs, CLPs, placas eletrônicas e painéis elétricos.',
-    keywords: ['assistência técnica industrial', 'manutenção industrial', 'Taubaté', 'inversores', 'CLP'],
+      'Assistência técnica industrial em Taubaté e no Vale do Paraíba, com atendimento em São Paulo e outras regiões do Brasil sob consulta para inversores, servo drives, IHMs, CLPs e placas eletrônicas.',
+    keywords: [
+      'assistência técnica no Vale do Paraíba',
+      'manutenção industrial em Taubaté',
+      'assistência técnica em São Paulo',
+      'assistência técnica industrial no Brasil',
+      'inversores de frequência',
+      'servo drives',
+      'CLPs',
+    ],
   },
   services: {
     path: '/servicos',
-    title: 'Serviços industriais | WMG Assistência Técnica',
+    title: 'Manutenção Industrial no Vale do Paraíba | WMG',
     description:
-      'Conheça os serviços de manutenção corretiva, preventiva e suporte técnico para equipamentos industriais atendidos pela WMG.',
-    keywords: ['serviços industriais', 'manutenção corretiva', 'manutenção preventiva', 'suporte técnico industrial'],
+      'Diagnóstico, manutenção corretiva e preventiva para equipamentos industriais em Taubaté e no Vale do Paraíba, com atendimento em todo o estado de São Paulo e suporte sob consulta no Brasil.',
+    keywords: [
+      'manutenção industrial no Vale do Paraíba',
+      'manutenção industrial em Taubaté',
+      'manutenção industrial em São Paulo',
+      'manutenção corretiva',
+      'manutenção preventiva',
+      'suporte técnico industrial',
+    ],
   },
   equipment: {
     path: '/equipamentos',
-    title: 'Equipamentos atendidos | WMG Assistência Técnica',
+    title: 'Equipamentos Industriais no Vale do Paraíba | WMG',
     description:
-      'Atendimento técnico para inversores de frequência, servo drives, placas eletrônicas, IHMs, CLPs e painéis elétricos industriais.',
-    keywords: ['equipamentos industriais', 'inversores de frequência', 'servo drives', 'IHMs', 'CLPs'],
+      'Reparo e suporte técnico para inversores de frequência, servo drives, placas eletrônicas, IHMs, CLPs e painéis elétricos em Taubaté, no Vale do Paraíba e em São Paulo.',
+    keywords: [
+      'equipamentos industriais no Vale do Paraíba',
+      'reparo de inversores em Taubaté',
+      'assistência para servo drives em São Paulo',
+      'placas eletrônicas industriais',
+      'IHMs',
+      'CLPs',
+    ],
   },
   about: {
     path: '/sobre',
-    title: 'Sobre a WMG | Assistência técnica industrial',
+    title: 'Sobre a WMG | Assistência Técnica no Vale do Paraíba',
     description:
-      'Saiba mais sobre a WMG Assistência Técnica, especializada em suporte e manutenção de equipamentos industriais em Taubaté e região.',
-    keywords: ['sobre a WMG', 'assistência técnica industrial', 'manutenção industrial em Taubaté'],
+      'Conheça a WMG Assistência Técnica, especializada em suporte e manutenção de equipamentos industriais em Taubaté, no Vale do Paraíba e no estado de São Paulo.',
+    keywords: [
+      'WMG Assistência Técnica',
+      'assistência técnica no Vale do Paraíba',
+      'manutenção industrial em Taubaté',
+      'manutenção industrial em São Paulo',
+    ],
   },
   contact: {
     path: '/contato',
-    title: 'Contato | WMG Assistência Técnica',
+    title: 'Contato | Assistência Técnica no Vale do Paraíba',
     description:
-      'Solicite avaliação técnica para equipamentos industriais com a WMG Assistência Técnica por telefone, e-mail ou WhatsApp.',
-    keywords: ['contato assistência técnica', 'avaliação técnica', 'suporte industrial', 'WhatsApp WMG'],
+      'Solicite avaliação técnica para equipamentos industriais em Taubaté e no Vale do Paraíba. A WMG também atende empresas em São Paulo e outras regiões sob consulta.',
+    keywords: [
+      'contato assistência técnica no Vale do Paraíba',
+      'avaliação técnica em Taubaté',
+      'suporte industrial em São Paulo',
+      'WhatsApp WMG',
+    ],
   },
 };
 
@@ -60,7 +92,33 @@ export const organizationSchema = {
   telephone: companyContent.phone,
   email: companyContent.email,
   url: siteUrl,
-  areaServed: companyContent.location,
+  areaServed: [
+    {
+      '@type': 'AdministrativeArea',
+      name: 'Vale do Paraíba e região',
+    },
+    {
+      '@type': 'AdministrativeArea',
+      name: 'Estado de São Paulo',
+    },
+    {
+      '@type': 'Country',
+      name: 'Brasil',
+    },
+  ],
+  serviceType: [
+    'Assistência técnica industrial',
+    'Manutenção industrial',
+    'Reparo de inversores, servo drives, IHMs e CLPs',
+  ],
+  knowsAbout: [
+    'Inversores de frequência',
+    'Placas eletrônicas industriais',
+    'Servo drives',
+    'IHMs',
+    'CLPs',
+    'Painéis elétricos industriais',
+  ],
   address: {
     '@type': 'PostalAddress',
     addressLocality: 'Taubaté',

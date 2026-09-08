@@ -8,5 +8,5 @@ export const companyContent: CompanyContent = {
   location: 'Taubaté - SP',
   website: 'www.wmgassistenciatecnica.com.br',
   description:
-    'Especialistas em manutenção industrial, inversores, placas eletrônicas, servo drives, IHMs, CLPs e painéis elétricos industriais.',
+    'Assistência técnica industrial em Taubaté e no Vale do Paraíba, especializada em inversores, placas eletrônicas, servo drives, IHMs, CLPs e painéis elétricos industriais.',
 };

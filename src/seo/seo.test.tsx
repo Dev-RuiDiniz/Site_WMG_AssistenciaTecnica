@@ -1,7 +1,7 @@
 import { render, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import App from '../App';
-import { defaultOgImage, seoRoutes, siteUrl, type SeoRouteKey } from './seoConfig';
+import { defaultOgImage, organizationSchema, seoRoutes, siteUrl, type SeoRouteKey } from './seoConfig';
 
 function renderAtRoute(path: string) {
   return render(
@@ -65,5 +65,30 @@ describe('SEO técnico', () => {
     expect(parsedSchema['@type']).toBe('LocalBusiness');
     expect(parsedSchema.name).toBe('WMG Assistência Técnica');
     expect(parsedSchema.url).toBe(siteUrl);
+    expect(parsedSchema.areaServed).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ name: 'Vale do Paraíba e região' }),
+        expect.objectContaining({ name: 'Estado de São Paulo' }),
+        expect.objectContaining({ name: 'Brasil' }),
+      ]),
+    );
+    expect(parsedSchema.serviceType).toContain('Assistência técnica industrial');
+  });
+
+  it('prioriza o Vale do Paraíba antes de São Paulo e Brasil', () => {
+    const homeMetadata = seoRoutes.home;
+
+    expect(homeMetadata.title).toContain('Vale do Paraíba');
+    expect(homeMetadata.description.indexOf('Vale do Paraíba')).toBeLessThan(
+      homeMetadata.description.indexOf('São Paulo'),
+    );
+    expect(homeMetadata.description.indexOf('São Paulo')).toBeLessThan(
+      homeMetadata.description.indexOf('Brasil'),
+    );
+    expect(homeMetadata.keywords[0]).toContain('Vale do Paraíba');
+    expect(homeMetadata.keywords[1]).toContain('Taubaté');
+    expect(homeMetadata.keywords).toContain('assistência técnica em São Paulo');
+    expect(homeMetadata.keywords).toContain('assistência técnica industrial no Brasil');
+    expect(organizationSchema.areaServed).toHaveLength(3);
   });
 });
