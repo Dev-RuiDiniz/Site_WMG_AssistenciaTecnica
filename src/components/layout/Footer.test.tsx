@@ -7,6 +7,7 @@ describe('Footer', () => {
 
     expect(screen.getByRole('contentinfo')).toBeInTheDocument();
     expect(screen.getAllByText(/WMG Assistência Técnica/i).length).toBeGreaterThan(0);
+    expect(screen.getByText('© 2019–2026 WMG Assistência Técnica.')).toBeInTheDocument();
     expect(screen.queryByRole('link', { name: /falar com suporte/i })).not.toBeInTheDocument();
     expect(
       screen.getByRole('link', { name: /suporte@wmgassistenciatecnica.com.br/i }),

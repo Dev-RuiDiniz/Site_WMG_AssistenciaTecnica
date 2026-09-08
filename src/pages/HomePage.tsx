@@ -7,16 +7,19 @@ const solutionItems = [
     title: 'Inversores e drives',
     href: '/equipamentos',
     Icon: TbCircuitMotor,
+    image: '/assets/campaign/wmg-inversor-background.png',
   },
   {
     title: 'Placas eletrônicas',
     href: '/equipamentos',
     Icon: TbComponents,
+    image: '/assets/campaign/wmg-placa-background.png',
   },
   {
     title: 'CLPs, IHMs e painéis',
     href: '/servicos',
     Icon: TbSettingsAutomation,
+    image: '/assets/campaign/wmg-painel-background.png',
   },
 ];
 
@@ -82,30 +85,43 @@ export function HomePage() {
       </section>
 
       <section className="border-y border-slate-200 bg-white" aria-label="Soluções atendidas">
-        <Container className="grid md:grid-cols-3">
-          {solutionItems.map(({ title, href, Icon }, index) => (
+        <div className="grid w-full md:grid-cols-3">
+          {solutionItems.map(({ title, href, Icon, image }, index) => (
             <a
               key={title}
               href={href}
-              className={`group flex flex-col items-center justify-center gap-4 px-6 py-9 text-center transition hover:bg-slate-50 md:px-10 md:py-10 ${
+              className={`group relative isolate flex min-h-[15rem] flex-col items-center justify-center gap-4 overflow-hidden bg-wmg-navy-900 px-6 py-9 text-center transition md:px-10 md:py-10 ${
                 index > 0 ? 'border-t border-slate-200 md:border-l md:border-t-0' : ''
               }`}
             >
-              <Icon
+              <img
+                data-solution-background
+                src={image}
+                alt=""
                 aria-hidden="true"
-                className="shrink-0 text-wmg-blue-500"
-                size={58}
-                strokeWidth={1.45}
+                className="absolute inset-0 z-0 h-full w-full scale-[1.03] object-cover blur-[2px] transition-transform duration-500 group-hover:scale-105"
               />
-              <div className="flex flex-col items-center">
-                <p className="max-w-48 text-xl font-semibold leading-[1.08] tracking-[-0.04em] text-wmg-navy-900 group-hover:text-wmg-blue-700 md:text-2xl">
-                  {title}
-                </p>
-                <span className="mt-5 block h-0.5 w-9 bg-wmg-lime-500 transition-all duration-300 group-hover:w-14" />
+              <span
+                aria-hidden="true"
+                className="absolute inset-0 z-10 bg-wmg-navy-950/65 transition-colors duration-300 group-hover:bg-wmg-navy-950/50"
+              />
+              <div className="relative z-20 flex flex-col items-center justify-center gap-4">
+                <Icon
+                  aria-hidden="true"
+                  className="shrink-0 text-white transition-colors duration-300 group-hover:text-wmg-lime-400"
+                  size={58}
+                  strokeWidth={1.45}
+                />
+                <div className="flex flex-col items-center">
+                  <p className="max-w-48 text-xl font-semibold leading-[1.08] tracking-[-0.04em] text-white transition-colors duration-300 group-hover:text-wmg-lime-400 md:text-2xl">
+                    {title}
+                  </p>
+                  <span className="mt-5 block h-0.5 w-9 bg-wmg-lime-500 transition-all duration-300 group-hover:w-14" />
+                </div>
               </div>
             </a>
           ))}
-        </Container>
+        </div>
       </section>
 
       <section className="bg-white" aria-labelledby="confidence-title">

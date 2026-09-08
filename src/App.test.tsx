@@ -53,6 +53,27 @@ describe('App routes', () => {
     ).not.toBeInTheDocument();
     expect(screen.queryByText(/equipamentos críticos/i)).not.toBeInTheDocument();
     expect(screen.getByText(/inversores e drives/i)).toBeInTheDocument();
+    const solutionSection = screen.getByRole('region', { name: /soluções atendidas/i });
+    expect(solutionSection.firstElementChild).toHaveClass('w-full');
+    const solutionCards = within(solutionSection).getAllByRole('link');
+    expect(solutionCards).toHaveLength(3);
+    expect(solutionCards[0]).toHaveClass('relative', 'overflow-hidden');
+    expect(solutionCards[0].querySelector('[data-solution-background]')).toHaveAttribute(
+      'src',
+      '/assets/campaign/wmg-inversor-background.png',
+    );
+    expect(solutionCards[0].querySelector('[data-solution-background]')).toHaveClass(
+      'blur-[2px]',
+    );
+    expect(within(solutionCards[0]).getByText('Inversores e drives')).toHaveClass('text-white');
+    expect(solutionCards[1].querySelector('[data-solution-background]')).toHaveAttribute(
+      'src',
+      '/assets/campaign/wmg-placa-background.png',
+    );
+    expect(solutionCards[2].querySelector('[data-solution-background]')).toHaveAttribute(
+      'src',
+      '/assets/campaign/wmg-painel-background.png',
+    );
     expect(
       screen.queryByRole('link', { name: /conheça nossas soluções/i }),
     ).not.toBeInTheDocument();
@@ -62,6 +83,8 @@ describe('App routes', () => {
   it('renderiza a pagina de servicos em /servicos', () => {
     renderAtRoute('/servicos');
 
+    const servicesPage = screen.getByRole('region', { name: /serviços/i }).closest('[data-services-page]');
+    expect(servicesPage).toHaveClass('bg-wmg-navy-800');
     expect(
       screen.getByRole('heading', { name: homeContent.servicesSection.title }),
     ).toBeInTheDocument();
@@ -79,10 +102,13 @@ describe('App routes', () => {
     renderAtRoute('/equipamentos');
 
     const equipmentGrid = screen.getByRole('region', { name: /categorias de equipamentos/i });
+    const equipmentPage = equipmentGrid.closest('[data-equipment-page]');
+
+    expect(equipmentPage).toHaveClass('bg-wmg-navy-800');
 
     expect(
       screen.getByRole('heading', { name: /categorias técnicas atendidas pela wmg/i }),
-    ).toBeInTheDocument();
+    ).toHaveClass('text-white');
     expect(within(equipmentGrid).getAllByRole('heading', { level: 2 })).not.toHaveLength(0);
     within(equipmentGrid)
       .getAllByRole('heading', { level: 2 })

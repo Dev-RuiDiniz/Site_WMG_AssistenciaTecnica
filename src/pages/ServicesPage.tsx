@@ -14,7 +14,8 @@ export function ServicesPage() {
   const shouldReduceMotion = useReducedMotion();
 
   return (
-    <Container className="grid gap-16 py-16 md:gap-20 md:py-24">
+    <div data-services-page className="bg-wmg-navy-800">
+      <Container className="grid gap-16 py-16 md:gap-20 md:py-24">
       <section
         className="relative isolate flex min-h-[32rem] items-center overflow-hidden rounded-[2rem] bg-wmg-navy-950 px-6 py-14 md:min-h-[36rem] md:px-14 md:py-20"
         aria-labelledby="servicos-title"
@@ -88,6 +89,7 @@ export function ServicesPage() {
           })}
         </div>
       </section>
-    </Container>
+      </Container>
+    </div>
   );
 }

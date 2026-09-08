@@ -68,7 +68,9 @@ export function Footer() {
       </Container>
 
       <div className="border-t border-white/10">
-        <Container className="py-5 text-xs text-slate-400">(c) {companyContent.name}.</Container>
+        <Container className="py-5 text-xs text-slate-400">
+          © 2019–2026 {companyContent.name}.
+        </Container>
       </div>
     </footer>
   );
