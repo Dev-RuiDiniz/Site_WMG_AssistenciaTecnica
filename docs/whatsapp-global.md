@@ -7,13 +7,13 @@ A configuração global do WhatsApp centraliza o canal de conversão principal d
 Número configurado:
 
 ```text
-+55 12 99158-8460
++55 12 3426-0300
 ```
 
 Link esperado:
 
 ```text
-https://wa.me/5512991588460
+https://wa.me/551234260300
 ```
 
 ## Responsividade

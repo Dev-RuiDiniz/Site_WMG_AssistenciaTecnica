@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-const expectedPhone = '5512991588460';
+const expectedPhone = '551234260300';
 
 test.describe('WhatsApp global', () => {
   test('botao flutuante mantem numero, mensagem e icone sem texto', async ({ page }) => {

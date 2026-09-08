@@ -15,7 +15,7 @@ describe('SiteLayout', () => {
     expect(screen.getByRole('contentinfo')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /abrir conversa no whatsapp da wmg/i })).toHaveAttribute(
       'href',
-      expect.stringContaining('https://wa.me/5512991588460'),
+      expect.stringContaining('https://wa.me/551234260300'),
     );
   });
 });

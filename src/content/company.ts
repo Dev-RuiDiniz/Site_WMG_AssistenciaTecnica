@@ -4,7 +4,7 @@ export const companyContent: CompanyContent = {
   name: 'WMG Assistência Técnica',
   segment: 'Assistência técnica industrial',
   email: 'suporte@wmgassistenciatecnica.com.br',
-  phone: '+55 012 3426-0300',
+  phone: '+55 12 3426-0300',
   location: 'Taubaté - SP',
   website: 'www.wmgassistenciatecnica.com.br',
   description:

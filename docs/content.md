@@ -15,7 +15,7 @@ src/content/company.ts
 O telefone `companyContent.phone` é a fonte única para o WhatsApp global:
 
 ```text
-+55 12 99158-8460
++55 12 3426-0300
 ```
 
 Para trocar o número do WhatsApp, altere apenas esse campo e execute os testes.
